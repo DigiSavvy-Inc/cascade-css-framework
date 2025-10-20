@@ -9,11 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to project
-        env:
-          GH_TOKEN: ${{ secrets.ORG_PROJECT_TOKEN }}
-          ORG: DigiSavvy-Inc
-          PROJECT_NUMBER: 4
-        run: |
-          gh project item-add $PROJECT_NUMBER \
-            --owner $ORG \
-            --url ${{ github.event.issue.html_url }}
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/DigiSavvy-Inc/projects/4
+          github-token: ${{ secrets.ORG_PROJECT_TOKEN }}
