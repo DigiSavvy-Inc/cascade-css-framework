@@ -1,0 +1,19 @@
+name: Add Issue to Project
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to project
+        env:
+          GH_TOKEN: ${{ secrets.ORG_PROJECT_TOKEN }}
+          ORG: DigiSavvy-Inc
+          PROJECT_NUMBER: 4
+        run: |
+          gh project item-add $PROJECT_NUMBER \
+            --owner $ORG \
+            --url ${{ github.event.issue.html_url }}
