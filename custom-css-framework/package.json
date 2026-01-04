@@ -1,7 +1,7 @@
 {
-  "name": "custom-acss-framework-lite",
+  "name": "cascade-css",
   "version": "0.1.0",
-  "description": "A lightweight, variable-driven CSS framework inspired by Automatic.css philosophy",
+  "description": "A lightweight, variable-driven CSS framework focused on consistency, mathematical precision, and contextual design patterns",
   "main": "dist/framework.css",
   "scripts": {
     "build": "npm run build:expanded && npm run build:compressed && npm run build:vars && npm run build:utilities",

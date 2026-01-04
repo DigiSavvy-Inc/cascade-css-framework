@@ -1,5 +1,5 @@
-# Exclude the WordPress plugin directory
-automaticcss-plugin/
+# Exclude WordPress plugin directories
+wp-plugins/
 
 # Dependencies
 node_modules/

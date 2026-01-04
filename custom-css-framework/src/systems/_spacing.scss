@@ -81,7 +81,7 @@
   // Based on golden ratio for harmonious spacing
   --space-ratio: 1.618;
   
-  // Automatic spacing relationships
+  // Calculated spacing relationships
   --space-related-xs: calc(var(--space-xs) * var(--space-ratio));
   --space-related-s: calc(var(--space-s) * var(--space-ratio));
   --space-related-m: calc(var(--space-m) * var(--space-ratio));

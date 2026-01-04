@@ -1,6 +1,6 @@
-# Build Instructions - Custom ACSS Framework Lite
+# Build Instructions - Cascade CSS
 
-This guide explains how to build, watch, and develop the Custom ACSS Framework Lite CSS files.
+This guide explains how to build, watch, and develop the Cascade CSS framework files.
 
 ## Prerequisites
 
@@ -11,8 +11,8 @@ This guide explains how to build, watch, and develop the Custom ACSS Framework L
 
 1. Clone the repository:
 ```bash
-git clone git@github.com:DigiSavvy-Inc/acss-lite.git
-cd acss-lite
+git clone git@github.com:DigiSavvy-Inc/cascade-css.git
+cd cascade-css/custom-css-framework
 ```
 
 2. Install dependencies:

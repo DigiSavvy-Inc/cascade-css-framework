@@ -2,14 +2,13 @@
 
 ## Project Overview
 
-This is a custom CSS framework inspired by Automatic.css (ACSS) principles, built as a standalone implementation without requiring the WordPress plugin. The framework focuses on consistency, mathematical precision, and variable-first architecture.
+Cascade CSS is an independent CSS framework focused on consistency, mathematical precision, and variable-first architecture. This project is built as a standalone implementation and is NOT affiliated with or officially related to Automatic.css.
 
 ## Key Learnings & Insights
 
 ### 1. Content-Grid System Implementation
 - **Challenge**: The content-grid system wasn't initially included in the framework CSS
-- **Solution**: Implemented based on ACSS plugin source code analysis
-- **Key Discovery**: Content-grid uses 7 named grid columns with specific sizing:
+- **Solution**: Implemented a 7-column named grid system with specific sizing:
   - `--gutter: 2.4rem` (flexible gutters)
   - `--content-width: min(65ch, 100% - var(--gutter) * 2)` (readable content width)
   - `--feature-width: 50px` (feature breakout areas)
@@ -40,10 +39,10 @@ grid-template-columns:
 - Maintained examples in `examples/` directory
 - Documentation split between README.md and GETTING-STARTED.md
 
-### Attribution Strategy
-- Prominent attribution to Kevin Geary and Automatic.css team throughout documentation
-- Clear indication this is inspired by, not affiliated with, the original ACSS
-- Maintained respect for original methodology while creating standalone implementation
+### Framework Independence
+- Clear documentation that this is an independent implementation
+- No affiliation with or endorsement by any other CSS framework
+- Independent development and maintenance as open-source project
 
 ## Development Recommendations
 

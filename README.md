@@ -1,11 +1,12 @@
-# ACSS Framework Lite
+# Cascade CSS Framework
 
-A lightweight, variable-driven CSS framework inspired by [Automatic.css](https://automaticcss.com) philosophy, focusing on consistency, mathematical precision, and contextual design patterns.
+A lightweight, variable-driven CSS framework focused on consistency, mathematical precision, and contextual design patterns.
+
+> **Important Notice**: This is an independent CSS framework that is NOT affiliated with, endorsed by, or officially related to Automatic.css. While inspired by systematic CSS design concepts, Cascade CSS is a separate implementation with its own architecture and may contain differences, limitations, or bugs not present in other frameworks. This project is developed and maintained independently.
 
 ## What's Included
 
 - **custom-css-framework/** - The complete CSS framework source and build files
-- **automatic-css-llm.txt** - Comprehensive guide for AI/LLM usage with ACSS principles
 - **Examples** - Interactive demos showcasing framework features
 - **Documentation** - Complete setup and usage guides
 
@@ -17,15 +18,15 @@ Add the framework to your WordPress theme without any plugins:
 
 ```php
 // In your theme's functions.php
-function enqueue_acss_framework_lite() {
+function enqueue_cascade_css() {
     wp_enqueue_style(
-        'acss-framework-lite',
+        'cascade-css',
         get_template_directory_uri() . '/assets/css/framework.min.css',
         array(),
         '1.0.0'
     );
 }
-add_action('wp_enqueue_scripts', 'enqueue_acss_framework_lite');
+add_action('wp_enqueue_scripts', 'enqueue_cascade_css');
 ```
 
 Or use with page builders:
@@ -38,16 +39,16 @@ Or use with page builders:
 #### Quick Setup (Using CDN)
 ```html
 <!-- Add to your HTML <head> -->
-<link rel="stylesheet" href="https://unpkg.com/acss-framework-lite@latest/dist/framework.min.css">
+<link rel="stylesheet" href="https://unpkg.com/cascade-css@latest/dist/framework.min.css">
 ```
 
 #### Local Installation
 ```bash
 # Using npm
-npm install acss-framework-lite
+npm install cascade-css
 
 # Or download directly
-wget https://github.com/DigiSavvy-Inc/acss-framework-lite/raw/main/custom-css-framework/dist/framework.min.css
+wget https://github.com/DigiSavvy-Inc/cascade-css/raw/main/custom-css-framework/dist/framework.min.css
 ```
 
 Then include in your HTML:
@@ -59,8 +60,8 @@ Then include in your HTML:
 
 ```bash
 # Clone the repository
-git clone https://github.com/DigiSavvy-Inc/acss-framework-lite.git
-cd acss-framework-lite/custom-css-framework/
+git clone https://github.com/DigiSavvy-Inc/cascade-css.git
+cd cascade-css/custom-css-framework/
 
 # Install dependencies
 npm install
@@ -90,7 +91,7 @@ $framework-config: (
 );
 
 // Import the framework
-@import 'path/to/acss-framework-lite/src/main';
+@import 'path/to/cascade-css/src/main';
 ```
 
 ### Using CSS Custom Properties
@@ -125,7 +126,7 @@ Override variables in your CSS:
 
 ### Using CSS Variables
 ```css
-/* Component using ACSS variables */
+/* Component using framework variables */
 .custom-hero {
   padding-block: var(--section-space-xl);
   background: var(--primary-ultra-light);
@@ -179,15 +180,27 @@ Override variables in your CSS:
 ### Modern JavaScript Frameworks
 ```javascript
 // React/Vue/Angular
-import 'acss-framework-lite/dist/framework.min.css';
+import 'cascade-css/dist/framework.min.css';
 
 // Or import SCSS for customization
-import 'acss-framework-lite/src/main.scss';
+import 'cascade-css/src/main.scss';
 ```
 
-## Attribution
+## Inspiration & Philosophy
 
-This framework is inspired by and built upon the architectural principles pioneered by [Kevin Geary](https://geary.co/) and the [Automatic.css team](https://automaticcss.com/).
+Cascade CSS is an independent CSS framework inspired by systematic CSS design concepts and modern CSS architecture principles. This project is not affiliated with any other CSS framework or organization.
+
+**Key Design Philosophy:**
+- Consistency over flexibility
+- Variable-first architecture
+- Mathematical design systems
+- Contextual utility patterns
+
+**Important Clarifications:**
+- This is an independent implementation developed from scratch
+- Not affiliated with, endorsed by, or officially related to Automatic.css
+- May contain differences, limitations, or bugs not present in other frameworks
+- Developed and maintained as a separate open-source project
 
 ## License
 
