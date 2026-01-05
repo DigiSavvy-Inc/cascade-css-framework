@@ -17,8 +17,11 @@ A lightweight, variable-driven CSS framework focused on consistency, mathematica
 ### 1. Drop-in CSS (Simplest)
 
 ```html
-<!-- Add to your HTML head -->
-<link rel="stylesheet" href="path/to/framework.min.css">
+<!-- Full framework with all features -->
+<link rel="stylesheet" href="path/to/cascade-full.min.css">
+
+<!-- Or core framework (lighter) -->
+<link rel="stylesheet" href="path/to/cascade.min.css">
 ```
 
 ### 2. WordPress Integration (No Plugin Required)
@@ -28,9 +31,9 @@ A lightweight, variable-driven CSS framework focused on consistency, mathematica
 function enqueue_cascade_css() {
     wp_enqueue_style(
         'cascade-css',
-        get_template_directory_uri() . '/assets/css/framework.min.css',
+        get_template_directory_uri() . '/assets/css/cascade-full.min.css',
         array(),
-        '1.0.0'
+        '0.2.0'
     );
 }
 add_action('wp_enqueue_scripts', 'enqueue_cascade_css');
@@ -39,28 +42,39 @@ add_action('wp_enqueue_scripts', 'enqueue_cascade_css');
 ### 3. SCSS Customization
 
 ```scss
-// Override default settings before importing
-$framework-config: (
-  'colors': (
-    'primary': #e74c3c,
-    'secondary': #3498db,
-  ),
-  'content-width': 1200px,
-);
+// Create your own theme file that overrides CSS variables
+// See dist/theme-example.css for reference
 
-// Import framework
-@import 'path/to/framework/src/main';
+:root {
+  --primary: #e74c3c;
+  --secondary: #3498db;
+  --content-width: 1200px;
+}
+
+// Or import and extend the SCSS source
+@use 'path/to/src-lean/cascade-full' as cascade;
 ```
 
-## File Structure
+## Available Files
 
 ```
 dist/
-├── framework.css           # Complete framework (expanded)
-├── framework.min.css       # Complete framework (minified)
-├── framework-vars.css      # CSS variables only
-└── framework-utilities.css # Utility classes only
+├── cascade.css             # Core framework (expanded)
+├── cascade.min.css         # Core framework (minified)
+├── cascade-full.css        # Full framework with all features (expanded)
+├── cascade-full.min.css    # Full framework with all features (minified)
+├── theme-example.css       # Theme customization example
+└── modules/                # Individual components
+    ├── buttons.css
+    ├── cards.css
+    ├── forms.css
+    └── badges.css
 ```
+
+**Which file should I use?**
+- `cascade-full.min.css` - Recommended for most projects (all features included)
+- `cascade.min.css` - Lighter option if you only need core utilities
+- `modules/*.css` - Import individual components as needed
 
 ## Key Features
 
@@ -137,25 +151,25 @@ npm run dev
 - Safari (last 2 versions)
 - Edge (last 2 versions)
 
-## Documentation
+## Documentation & Demos
 
-- **[Getting Started Guide](../docs/GETTING-STARTED.md)** - Learn the core concepts and see examples
-- **[Build Instructions](../docs/BUILD.md)** - How to build, watch, and develop the framework
-- **[Interactive Style Guide](examples/style-guide.html)** - Live demos of all components and utilities
-- **[Examples](examples/)** - Real-world implementation examples
+- **[Content-Grid Demo](cascade-demos/content-grid.html)** - Interactive demo of the 7-column content-grid system
+- **[Style Guide](cascade-demos/style-guide.html)** - Typography, spacing, and color reference
+- **[Homepage Demo](cascade-demos/homepage.html)** - Responsive marketing page example
 
 ## Project Structure
 
 ```
-├── src/                    # Source SCSS files
-│   ├── config/            # Framework configuration
-│   ├── foundation/        # Core functions, mixins, variables
-│   ├── systems/           # Color, typography, spacing systems
-│   ├── utilities/         # Utility classes
-│   └── patterns/          # Component patterns (buttons, cards, etc.)
+├── src-lean/              # Main SCSS source (recommended)
+│   ├── core/              # Variables, reset, utilities
+│   ├── systems/           # Content-grid, smart-spacing
+│   ├── patterns/          # Buttons, cards, forms, badges
+│   ├── cascade.scss       # Core framework entry
+│   ├── cascade-full.scss  # Full framework entry
+│   └── theme.scss         # Theme customization example
 ├── dist/                  # Compiled CSS files
-├── examples/              # Usage examples and style guide
-└── docs/                  # Additional documentation
+├── cascade-demos/         # Interactive demos and examples
+└── wordpress/             # WordPress integration helpers
 ```
 
 ## Design Philosophy
