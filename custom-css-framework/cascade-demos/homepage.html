@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascade CSS - Responsive Homepage Demo</title>
+    <link rel="stylesheet" href="../dist/cascade-full.css">
+    <style>
+        :root {
+            --content-width: 65ch;
+            --wrapper-width: 1200px;
+            --gutter: clamp(1rem, 5vw, 2.5rem);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: var(--shadow-s);
+        }
+
+        .nav__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-block: var(--space-m);
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+        }
+
+        .nav__logo {
+            font-size: var(--text-l);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav__links {
+            display: flex;
+            gap: var(--space-l);
+            list-style: none;
+        }
+
+        .nav__link {
+            color: var(--text);
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+
+        .nav__link:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 600px) {
+            .nav__links {
+                display: none;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding-block: var(--section-space-l);
+        }
+
+        .hero__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero__inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        .hero__title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: var(--space-m);
+            color: var(--white);
+        }
+
+        .hero__text {
+            font-size: var(--text-l);
+            opacity: 0.9;
+            margin-bottom: var(--space-l);
+            max-width: 50ch;
+        }
+
+        @media (max-width: 768px) {
+            .hero__text {
+                margin-inline: auto;
+            }
+        }
+
+        .hero__cta {
+            display: flex;
+            gap: var(--space-m);
+        }
+
+        @media (max-width: 768px) {
+            .hero__cta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        .hero__image {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: var(--radius-l);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-l);
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 768px) {
+            .hero__image {
+                order: -1;
+                max-width: 400px;
+                margin-inline: auto;
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-s) var(--space-l);
+            border-radius: var(--radius-m);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+
+        .btn--primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn--primary:hover {
+            background: var(--neutral-ultra-light);
+        }
+
+        .btn--outline {
+            background: transparent;
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .btn--outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .btn--dark {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn--dark:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Sections */
+        .section {
+            padding-block: var(--section-space-m);
+        }
+
+        .section--alt {
+            background: var(--neutral-ultra-light);
+        }
+
+        .section__header {
+            text-align: center;
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .section__subtitle {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            max-width: 55ch;
+            margin-inline: auto;
+        }
+
+        /* Features Grid */
+        .features {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-l);
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature {
+            text-align: center;
+            padding: var(--space-l);
+        }
+
+        .feature__icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-ultra-light);
+            border-radius: var(--radius-l);
+            margin-inline: auto;
+            margin-bottom: var(--space-m);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: var(--text-xl);
+        }
+
+        .feature__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .feature__text {
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-l);
+        }
+
+        @media (max-width: 768px) {
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: var(--space-l);
+            border-radius: var(--radius-l);
+            box-shadow: var(--shadow-m);
+        }
+
+        .testimonial__quote {
+            font-size: var(--text-l);
+            font-style: italic;
+            color: var(--heading);
+            margin-bottom: var(--space-l);
+            line-height: 1.5;
+        }
+
+        .testimonial__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+        }
+
+        .testimonial__avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--neutral-light);
+            border-radius: var(--radius-full);
+        }
+
+        .testimonial__name {
+            font-weight: 600;
+        }
+
+        .testimonial__role {
+            font-size: var(--text-s);
+            color: var(--text-light);
+        }
+
+        /* Stats */
+        .stats {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-l);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat__number {
+            font-size: var(--h1);
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat__label {
+            color: var(--text-light);
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--primary);
+            color: var(--white);
+            padding-block: var(--section-space-m);
+        }
+
+        .cta__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            text-align: center;
+        }
+
+        .cta__title {
+            margin-bottom: var(--space-m);
+            color: var(--white);
+        }
+
+        .cta__text {
+            font-size: var(--text-l);
+            opacity: 0.9;
+            max-width: 50ch;
+            margin-inline: auto;
+            margin-bottom: var(--space-l);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--neutral-ultra-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .footer__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: var(--space-xl);
+        }
+
+        @media (max-width: 768px) {
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer__inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer__brand {
+            max-width: 300px;
+        }
+
+        .footer__logo {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: var(--space-m);
+        }
+
+        .footer__desc {
+            color: var(--neutral-light);
+            font-size: var(--text-s);
+        }
+
+        .footer__title {
+            font-size: var(--text-m);
+            font-weight: 600;
+            margin-bottom: var(--space-m);
+        }
+
+        .footer__links {
+            list-style: none;
+        }
+
+        .footer__links li {
+            margin-bottom: var(--space-s);
+        }
+
+        .footer__links a {
+            color: var(--neutral-light);
+            font-size: var(--text-s);
+            transition: color var(--transition-fast);
+        }
+
+        .footer__links a:hover {
+            color: var(--white);
+        }
+
+        .footer__bottom {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            padding-top: var(--space-l);
+            margin-top: var(--space-l);
+            border-top: 1px solid var(--neutral-dark);
+            text-align: center;
+            color: var(--neutral);
+            font-size: var(--text-s);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="#" class="nav__logo">Cascade</a>
+            <ul class="nav__links">
+                <li><a href="#features" class="nav__link">Features</a></li>
+                <li><a href="#testimonials" class="nav__link">Testimonials</a></li>
+                <li><a href="#pricing" class="nav__link">Pricing</a></li>
+                <li><a href="#" class="nav__link">Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__inner">
+            <div class="hero__content">
+                <h1 class="hero__title">Build faster with a smarter CSS framework</h1>
+                <p class="hero__text">
+                    Cascade CSS is a lightweight, variable-driven framework focused on consistency, mathematical precision, and contextual design patterns.
+                </p>
+                <div class="hero__cta">
+                    <a href="#" class="btn btn--primary">Get Started</a>
+                    <a href="#" class="btn btn--outline">View Docs</a>
+                </div>
+            </div>
+            <div class="hero__image">
+                Hero Image
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section__header">
+            <h2 class="section__title text--h2">Built for modern development</h2>
+            <p class="section__subtitle">
+                Everything you need to build consistent, scalable interfaces without the bloat.
+            </p>
+        </div>
+        <div class="features">
+            <div class="feature">
+                <div class="feature__icon">*</div>
+                <h3 class="feature__title text--h4">Variable-First</h3>
+                <p class="feature__text">CSS custom properties at the core. Change your entire design system by updating a few variables.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">@</div>
+                <h3 class="feature__title text--h4">T-Shirt Sizing</h3>
+                <p class="feature__text">Intuitive xs to xxl scale for spacing, typography, and more. Consistent and easy to remember.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">#</div>
+                <h3 class="feature__title text--h4">Content-Grid</h3>
+                <p class="feature__text">Sophisticated 7-column grid with semantic breakout zones for professional layouts.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">%</div>
+                <h3 class="feature__title text--h4">Fluid Typography</h3>
+                <p class="feature__text">Text that scales smoothly between breakpoints. No more jarring size jumps.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">!</div>
+                <h3 class="feature__title text--h4">Lightweight</h3>
+                <p class="feature__text">Under 30KB minified. Include only what you need with modular architecture.</p>
+            </div>
+            <div class="feature">
+                <div class="feature__icon">&</div>
+                <h3 class="feature__title text--h4">Mobile-First</h3>
+                <p class="feature__text">Responsive utilities and automatic grid stacking. Works beautifully on every device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section section--alt">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat__number">30KB</div>
+                <div class="stat__label">Minified Size</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">100+</div>
+                <div class="stat__label">Utility Classes</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">50+</div>
+                <div class="stat__label">CSS Variables</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">0</div>
+                <div class="stat__label">Dependencies</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="section__header">
+            <h2 class="section__title text--h2">Loved by developers</h2>
+            <p class="section__subtitle">
+                See what developers are saying about Cascade CSS.
+            </p>
+        </div>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p class="testimonial__quote">"Finally, a CSS framework that doesn't fight against me. The variable system is incredibly intuitive."</p>
+                <div class="testimonial__author">
+                    <div class="testimonial__avatar"></div>
+                    <div>
+                        <div class="testimonial__name">Sarah Chen</div>
+                        <div class="testimonial__role">Frontend Developer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial__quote">"The content-grid system alone is worth it. Makes complex layouts trivially simple."</p>
+                <div class="testimonial__author">
+                    <div class="testimonial__avatar"></div>
+                    <div>
+                        <div class="testimonial__name">Marcus Rodriguez</div>
+                        <div class="testimonial__role">UI Designer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial__quote">"I've tried dozens of frameworks. Cascade is the first one that matches how I actually think about CSS."</p>
+                <div class="testimonial__author">
+                    <div class="testimonial__avatar"></div>
+                    <div>
+                        <div class="testimonial__name">Alex Thompson</div>
+                        <div class="testimonial__role">Full Stack Developer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta__inner">
+            <h2 class="cta__title text--h2">Ready to get started?</h2>
+            <p class="cta__text">
+                Download Cascade CSS and start building beautiful, consistent interfaces today.
+            </p>
+            <a href="#" class="btn btn--primary">Download Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <div class="footer__logo">Cascade CSS</div>
+                <p class="footer__desc">
+                    A lightweight, variable-driven CSS framework focused on consistency and mathematical precision.
+                </p>
+            </div>
+            <div>
+                <h4 class="footer__title">Documentation</h4>
+                <ul class="footer__links">
+                    <li><a href="#">Getting Started</a></li>
+                    <li><a href="#">Variables</a></li>
+                    <li><a href="#">Utilities</a></li>
+                    <li><a href="#">Content-Grid</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer__title">Resources</h4>
+                <ul class="footer__links">
+                    <li><a href="#">Style Guide</a></li>
+                    <li><a href="#">Examples</a></li>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Changelog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer__title">Community</h4>
+                <ul class="footer__links">
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Contributing</a></li>
+                    <li><a href="#">License</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>Cascade CSS - Built with care</p>
+        </div>
+    </footer>
+
+</body>
+</html>

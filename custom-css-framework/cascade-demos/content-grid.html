@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content-Grid Demo | Cascade CSS</title>
+    <link rel="stylesheet" href="../dist/cascade-full.css">
+    <style>
+        /* Required content-grid variables */
+        :root {
+            --content-width: 65ch;
+            --gutter: clamp(1rem, 5vw, 2.5rem);
+        }
+
+        /* Demo visualization colors */
+        .zone-content { background: hsl(210, 100%, 95%); border: 2px dashed hsl(210, 70%, 60%); }
+        .zone-feature { background: hsl(150, 100%, 92%); border: 2px dashed hsl(150, 70%, 45%); }
+        .zone-feature-max { background: hsl(45, 100%, 90%); border: 2px dashed hsl(45, 80%, 45%); }
+        .zone-full { background: hsl(350, 100%, 93%); border: 2px dashed hsl(350, 70%, 55%); }
+        .zone-full-safe { background: hsl(280, 100%, 94%); border: 2px dashed hsl(280, 60%, 55%); }
+
+        .demo-box {
+            padding: var(--space-m);
+            border-radius: var(--radius-m);
+            font-family: var(--font-mono, monospace);
+            font-size: var(--text-s);
+            margin-block: var(--space-s);
+        }
+
+        /* Page sections */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding-block: var(--section-space-m);
+        }
+
+        .section {
+            padding-block: var(--section-space-s);
+        }
+
+        .section--alt {
+            background: var(--neutral-ultra-light);
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-m);
+            padding: var(--space-m);
+            background: var(--white);
+            border-radius: var(--radius-m);
+            box-shadow: var(--shadow-s);
+            margin-block: var(--space-l);
+        }
+
+        .legend__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--text-s);
+        }
+
+        .legend__swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid var(--neutral);
+        }
+
+        /* Image placeholder */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            border-radius: var(--radius-l);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Code block */
+        .code-block {
+            background: var(--neutral-ultra-dark);
+            color: var(--neutral-light);
+            padding: var(--space-l);
+            border-radius: var(--radius-m);
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: var(--text-s);
+            line-height: 1.6;
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero content-grid">
+        <div class="text--center">
+            <h1 class="text--h1 margin-bottom--s" style="color: var(--white);">Content-Grid System</h1>
+            <p class="text--l" style="opacity: 0.9; max-width: 55ch; margin-inline: auto;">
+                A powerful 7-column CSS Grid system for sophisticated content layouts with semantic breakout zones.
+            </p>
+        </div>
+    </header>
+
+    <!-- Zone Demonstration -->
+    <section class="section content-grid">
+        <h2 class="text--h2 margin-bottom--m">Grid Zones Explained</h2>
+        <p class="text--l text--light margin-bottom--l">
+            The content-grid creates five distinct zones for placing content. Each zone serves a specific purpose in your layout hierarchy.
+        </p>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend__item">
+                <span class="legend__swatch zone-content"></span>
+                <span>Content (default)</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch zone-feature"></span>
+                <span>.content--feature</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch zone-feature-max"></span>
+                <span>.content--feature-max</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch zone-full"></span>
+                <span>.content--full</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch zone-full-safe"></span>
+                <span>.content--full-safe</span>
+            </div>
+        </div>
+
+        <!-- Content Zone (default) -->
+        <div class="demo-box zone-content">
+            <strong>Content Zone (Default)</strong><br>
+            All direct children of .content-grid automatically span the content area. This is your readable content zone, typically around 65ch wide for optimal line length.
+        </div>
+
+        <!-- Feature Zone -->
+        <div class="demo-box zone-feature content--feature">
+            <strong>.content--feature</strong><br>
+            Extends beyond content width into the feature columns. Perfect for pull quotes, small callouts, or subtle emphasis without going full-width.
+        </div>
+
+        <!-- Feature-Max Zone -->
+        <div class="demo-box zone-feature-max content--feature-max">
+            <strong>.content--feature-max</strong><br>
+            Extends further into the feature-max columns. Ideal for larger images, video embeds, or content that needs more visual prominence.
+        </div>
+
+        <!-- Full Zone -->
+        <div class="demo-box zone-full content--full">
+            <strong>.content--full</strong><br>
+            Full-bleed edge to edge with no gutters. Use for hero images, immersive backgrounds, or when you want content to touch the viewport edges.
+        </div>
+
+        <!-- Full-Safe Zone -->
+        <div class="demo-box zone-full-safe content--full-safe">
+            <strong>.content--full-safe</strong><br>
+            Full-width but maintains gutter padding. Best of both worlds - spans the full width while keeping comfortable spacing from viewport edges.
+        </div>
+
+        <!-- Back to Content -->
+        <p class="margin-top--l">
+            Notice how elements automatically return to content width. The grid flows naturally between different contexts without additional markup.
+        </p>
+    </section>
+
+    <!-- Practical Example -->
+    <section class="section section--alt content-grid">
+        <h2 class="text--h2 margin-bottom--m">Practical Example: Article Layout</h2>
+        <p class="text--l text--light margin-bottom--l">
+            Here's how content-grid creates a professional article layout with mixed content widths.
+        </p>
+
+        <!-- Feature-max image -->
+        <div class="image-placeholder content--feature-max margin-bottom--l">
+            Featured Image (feature-max)
+        </div>
+
+        <p>
+            The content-grid pattern elegantly solves a common design challenge: maintaining readable line lengths for text while allowing certain elements to break out for visual impact.
+        </p>
+
+        <blockquote class="content--feature zone-feature margin-block--l" style="padding: var(--space-l); font-style: italic; font-size: var(--text-l);">
+            "The seven-column grid provides five distinct content zones, creating natural rhythm and visual interest in your layouts."
+        </blockquote>
+
+        <p>
+            Unlike traditional container approaches that require wrapper divs and negative margins, content-grid uses CSS Grid's named lines to create semantic breakout zones. Simply add a class to any element to place it in a wider zone.
+        </p>
+
+        <!-- Full-width code block -->
+        <div class="code-block content--full margin-block--l">
+<pre>&lt;article class="content-grid"&gt;
+  &lt;h1&gt;Article Title&lt;/h1&gt;
+  &lt;p&gt;Content stays readable...&lt;/p&gt;
+
+  &lt;img class="content--feature-max" src="hero.jpg"&gt;
+
+  &lt;blockquote class="content--feature"&gt;
+    Pull quote breaks out slightly...
+  &lt;/blockquote&gt;
+
+  &lt;div class="content--full"&gt;
+    Full-bleed section...
+  &lt;/div&gt;
+&lt;/article&gt;</pre>
+        </div>
+
+        <p>
+            The grid automatically handles responsive behavior. On smaller screens, the breakout columns collapse gracefully while maintaining gutter spacing. No additional media queries needed.
+        </p>
+    </section>
+
+    <!-- Responsive Behavior -->
+    <section class="section content-grid">
+        <h2 class="text--h2 margin-bottom--m">Responsive Behavior</h2>
+        <p class="margin-bottom--l">
+            Resize your browser to see how the grid adapts:
+        </p>
+
+        <ul style="list-style: disc; padding-left: var(--space-l);">
+            <li class="margin-bottom--s"><strong>Desktop (768px+):</strong> All zones display at full width</li>
+            <li class="margin-bottom--s"><strong>Tablet (600-768px):</strong> Feature-max collapses to feature width</li>
+            <li class="margin-bottom--s"><strong>Mobile (&lt;600px):</strong> Feature zones collapse to content width</li>
+            <li><strong>Small Mobile (&lt;375px):</strong> Tighter gutters for maximum content space</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section content-grid content--full" style="background: var(--neutral-ultra-dark); color: var(--white);">
+        <div class="content--full-safe text--center">
+            <p class="text--s" style="color: var(--neutral-light);">
+                Cascade CSS - A lightweight, variable-driven CSS framework
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

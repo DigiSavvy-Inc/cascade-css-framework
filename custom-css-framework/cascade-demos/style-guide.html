@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Guide | Cascade CSS</title>
+    <link rel="stylesheet" href="../dist/cascade-full.css">
+    <style>
+        :root {
+            --content-width: 900px;
+            --gutter: clamp(1rem, 5vw, 2.5rem);
+        }
+
+        /* Page layout */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding-block: var(--section-space-m);
+            margin-bottom: var(--section-space-s);
+        }
+
+        .section {
+            padding-block: var(--section-space-s);
+            border-bottom: 1px solid var(--neutral-light);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section__title {
+            margin-bottom: var(--space-l);
+            padding-bottom: var(--space-s);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Color swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-m);
+        }
+
+        .color-swatch {
+            border-radius: var(--radius-m);
+            overflow: hidden;
+            box-shadow: var(--shadow-s);
+        }
+
+        .color-swatch__preview {
+            height: 80px;
+        }
+
+        .color-swatch__info {
+            padding: var(--space-s);
+            background: var(--white);
+            font-size: var(--text-xs);
+        }
+
+        .color-swatch__name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .color-swatch__var {
+            color: var(--text-light);
+            font-family: var(--font-mono);
+        }
+
+        /* Spacing demo */
+        .spacing-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-m);
+            align-items: flex-end;
+        }
+
+        .spacing-box {
+            background: var(--primary-light);
+            border: 1px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xs);
+            font-family: var(--font-mono);
+            color: var(--primary-dark);
+        }
+
+        /* Typography samples */
+        .type-sample {
+            margin-bottom: var(--space-l);
+            padding-bottom: var(--space-l);
+            border-bottom: 1px solid var(--neutral-light);
+        }
+
+        .type-sample:last-child {
+            border-bottom: none;
+        }
+
+        .type-label {
+            font-size: var(--text-xs);
+            color: var(--text-light);
+            font-family: var(--font-mono);
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Gap demo */
+        .gap-demo {
+            display: flex;
+            flex-wrap: wrap;
+            background: var(--neutral-ultra-light);
+            padding: var(--space-m);
+            border-radius: var(--radius-m);
+        }
+
+        .gap-demo__item {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: var(--radius-s);
+        }
+
+        /* Padding demo */
+        .padding-demo {
+            background: var(--primary-ultra-light);
+            border: 2px dashed var(--primary);
+            display: inline-block;
+        }
+
+        .padding-demo__inner {
+            background: var(--white);
+            min-width: 100px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xs);
+            font-family: var(--font-mono);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="page-header content-grid">
+        <div class="text--center">
+            <h1 class="text--h1 margin-bottom--s" style="color: var(--white);">Cascade CSS Style Guide</h1>
+            <p class="text--l" style="opacity: 0.9; max-width: 55ch; margin-inline: auto;">
+                Typography, spacing, and color systems reference
+            </p>
+        </div>
+    </header>
+
+    <main class="content-grid">
+
+        <!-- Typography Section -->
+        <section class="section" id="typography">
+            <h2 class="section__title text--h2">Typography</h2>
+
+            <h3 class="text--h4 margin-bottom--m">Heading Scale</h3>
+
+            <div class="type-sample">
+                <div class="type-label">--h1 / .text--h1</div>
+                <h1 class="text--h1">Heading Level 1</h1>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--h2 / .text--h2</div>
+                <h2 class="text--h2">Heading Level 2</h2>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--h3 / .text--h3</div>
+                <h3 class="text--h3">Heading Level 3</h3>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--h4 / .text--h4</div>
+                <h4 class="text--h4">Heading Level 4</h4>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--h5 / .text--h5</div>
+                <h5 class="text--h5">Heading Level 5</h5>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--h6 / .text--h6</div>
+                <h6 class="text--h6">Heading Level 6</h6>
+            </div>
+
+            <h3 class="text--h4 margin-top--xl margin-bottom--m">Text Sizes</h3>
+
+            <div class="type-sample">
+                <div class="type-label">--text-xxl / .text--xxl</div>
+                <p class="text--xxl">Extra extra large text for hero statements</p>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--text-xl / .text--xl</div>
+                <p class="text--xl">Extra large text for lead paragraphs</p>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--text-l / .text--l</div>
+                <p class="text--l">Large text for introductions and callouts</p>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--text-m / .text--m (default)</div>
+                <p class="text--m">Medium text is the default body size, optimized for readability.</p>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--text-s / .text--s</div>
+                <p class="text--s">Small text for captions, metadata, and secondary information</p>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">--text-xs / .text--xs</div>
+                <p class="text--xs">Extra small text for legal text, footnotes, and fine print</p>
+            </div>
+
+            <h3 class="text--h4 margin-top--xl margin-bottom--m">Text Weights</h3>
+            <p class="text--300 margin-bottom--s">Light (300): The quick brown fox jumps over the lazy dog</p>
+            <p class="text--400 margin-bottom--s">Regular (400): The quick brown fox jumps over the lazy dog</p>
+            <p class="text--500 margin-bottom--s">Medium (500): The quick brown fox jumps over the lazy dog</p>
+            <p class="text--600 margin-bottom--s">Semi-bold (600): The quick brown fox jumps over the lazy dog</p>
+            <p class="text--700">Bold (700): The quick brown fox jumps over the lazy dog</p>
+        </section>
+
+        <!-- Colors Section -->
+        <section class="section" id="colors">
+            <h2 class="section__title text--h2">Color System</h2>
+
+            <h3 class="text--h4 margin-bottom--m">Primary Palette</h3>
+            <div class="color-grid margin-bottom--xl">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--primary-ultra-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Ultra Light</div>
+                        <div class="color-swatch__var">--primary-ultra-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--primary-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Light</div>
+                        <div class="color-swatch__var">--primary-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--primary"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary</div>
+                        <div class="color-swatch__var">--primary</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--primary-dark"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Primary Dark</div>
+                        <div class="color-swatch__var">--primary-dark</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text--h4 margin-bottom--m">Secondary Palette</h3>
+            <div class="color-grid margin-bottom--xl">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--secondary-ultra-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Secondary Ultra Light</div>
+                        <div class="color-swatch__var">--secondary-ultra-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--secondary-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Secondary Light</div>
+                        <div class="color-swatch__var">--secondary-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--secondary"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Secondary</div>
+                        <div class="color-swatch__var">--secondary</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--secondary-dark"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Secondary Dark</div>
+                        <div class="color-swatch__var">--secondary-dark</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text--h4 margin-bottom--m">Neutral Palette</h3>
+            <div class="color-grid margin-bottom--xl">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--white" style="border: 1px solid var(--neutral-light);"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">White</div>
+                        <div class="color-swatch__var">--white</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--neutral-ultra-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Neutral Ultra Light</div>
+                        <div class="color-swatch__var">--neutral-ultra-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--neutral-light"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Neutral Light</div>
+                        <div class="color-swatch__var">--neutral-light</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--neutral"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Neutral</div>
+                        <div class="color-swatch__var">--neutral</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--neutral-dark"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Neutral Dark</div>
+                        <div class="color-swatch__var">--neutral-dark</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--neutral-ultra-dark"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Neutral Ultra Dark</div>
+                        <div class="color-swatch__var">--neutral-ultra-dark</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text--h4 margin-bottom--m">Semantic Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--success"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Success</div>
+                        <div class="color-swatch__var">--success</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--warning"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Warning</div>
+                        <div class="color-swatch__var">--warning</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--danger"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Danger</div>
+                        <div class="color-swatch__var">--danger</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-swatch__preview bg--info"></div>
+                    <div class="color-swatch__info">
+                        <div class="color-swatch__name">Info</div>
+                        <div class="color-swatch__var">--info</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Section -->
+        <section class="section" id="spacing">
+            <h2 class="section__title text--h2">Spacing System</h2>
+
+            <h3 class="text--h4 margin-bottom--m">Space Scale (T-Shirt Sizes)</h3>
+            <p class="margin-bottom--l text--light">
+                Spacing uses a consistent t-shirt size scale from XS to XXL. Use these for margins, padding, and gaps.
+            </p>
+
+            <div class="spacing-demo margin-bottom--xl">
+                <div>
+                    <div class="spacing-box" style="width: var(--space-xs); height: var(--space-xs);"></div>
+                    <p class="text--xs text--center margin-top--xs">xs</p>
+                </div>
+                <div>
+                    <div class="spacing-box" style="width: var(--space-s); height: var(--space-s);"></div>
+                    <p class="text--xs text--center margin-top--xs">s</p>
+                </div>
+                <div>
+                    <div class="spacing-box" style="width: var(--space-m); height: var(--space-m);"></div>
+                    <p class="text--xs text--center margin-top--xs">m</p>
+                </div>
+                <div>
+                    <div class="spacing-box" style="width: var(--space-l); height: var(--space-l);"></div>
+                    <p class="text--xs text--center margin-top--xs">l</p>
+                </div>
+                <div>
+                    <div class="spacing-box" style="width: var(--space-xl); height: var(--space-xl);"></div>
+                    <p class="text--xs text--center margin-top--xs">xl</p>
+                </div>
+                <div>
+                    <div class="spacing-box" style="width: var(--space-xxl); height: var(--space-xxl);"></div>
+                    <p class="text--xs text--center margin-top--xs">xxl</p>
+                </div>
+            </div>
+
+            <h3 class="text--h4 margin-bottom--m">Gap Utilities</h3>
+            <p class="margin-bottom--l text--light">
+                Apply gap utilities to flex and grid containers.
+            </p>
+
+            <div class="grid--3 gap--l margin-bottom--xl">
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.gap--xs</p>
+                    <div class="gap-demo gap--xs">
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.gap--m</p>
+                    <div class="gap-demo gap--m">
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.gap--xl</p>
+                    <div class="gap-demo gap--xl">
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                        <div class="gap-demo__item"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text--h4 margin-bottom--m">Padding Utilities</h3>
+            <p class="margin-bottom--l text--light">
+                Padding utilities follow the same t-shirt size scale.
+            </p>
+
+            <div class="grid--4 gap--l">
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.padding--xs</p>
+                    <div class="padding-demo padding--xs">
+                        <div class="padding-demo__inner">xs</div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.padding--s</p>
+                    <div class="padding-demo padding--s">
+                        <div class="padding-demo__inner">s</div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.padding--m</p>
+                    <div class="padding-demo padding--m">
+                        <div class="padding-demo__inner">m</div>
+                    </div>
+                </div>
+                <div>
+                    <p class="text--xs text--light margin-bottom--s">.padding--l</p>
+                    <div class="padding-demo padding--l">
+                        <div class="padding-demo__inner">l</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Border Radius Section -->
+        <section class="section" id="radius">
+            <h2 class="section__title text--h2">Border Radius</h2>
+
+            <div class="grid--5 gap--l">
+                <div class="text--center">
+                    <div class="bg--primary radius--xs" style="width: 80px; height: 80px; margin-inline: auto;"></div>
+                    <p class="text--xs margin-top--s">.radius--xs</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--primary radius--s" style="width: 80px; height: 80px; margin-inline: auto;"></div>
+                    <p class="text--xs margin-top--s">.radius--s</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--primary radius--m" style="width: 80px; height: 80px; margin-inline: auto;"></div>
+                    <p class="text--xs margin-top--s">.radius--m</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--primary radius--l" style="width: 80px; height: 80px; margin-inline: auto;"></div>
+                    <p class="text--xs margin-top--s">.radius--l</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--primary radius--full" style="width: 80px; height: 80px; margin-inline: auto;"></div>
+                    <p class="text--xs margin-top--s">.radius--full</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shadows Section -->
+        <section class="section" id="shadows">
+            <h2 class="section__title text--h2">Box Shadows</h2>
+
+            <div class="grid--4 gap--xl">
+                <div class="text--center">
+                    <div class="bg--white shadow--xs radius--m" style="width: 100%; height: 100px;"></div>
+                    <p class="text--xs margin-top--m">.shadow--xs</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--white shadow--s radius--m" style="width: 100%; height: 100px;"></div>
+                    <p class="text--xs margin-top--m">.shadow--s</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--white shadow--m radius--m" style="width: 100%; height: 100px;"></div>
+                    <p class="text--xs margin-top--m">.shadow--m</p>
+                </div>
+                <div class="text--center">
+                    <div class="bg--white shadow--l radius--m" style="width: 100%; height: 100px;"></div>
+                    <p class="text--xs margin-top--m">.shadow--l</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="content-grid content--full" style="background: var(--neutral-ultra-dark); color: var(--white); padding-block: var(--space-xl); margin-top: var(--section-space-s);">
+        <div class="content--full-safe text--center">
+            <p class="text--s" style="color: var(--neutral-light);">
+                Cascade CSS Style Guide - Version 0.2.0
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
