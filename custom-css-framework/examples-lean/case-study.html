@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: TechFlow Rebrand | ACSS Lite Demo</title>
+    <link rel="stylesheet" href="../dist/acss-lite-full.css">
+    <style>
+        /* =================================================================
+           Theme Overrides - Using CSS Custom Properties
+           ================================================================= */
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: #e0e7ff;
+            --primary-ultra-light: #eef2ff;
+            --primary-dark: #3730a3;
+
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+
+            --content-width: 70ch;
+            --wrapper-width: 1400px;
+            --feature-width: 80px;
+            --feature-max-width: 160px;
+        }
+
+        /* =================================================================
+           Placeholder Images
+           ================================================================= */
+        .placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* =================================================================
+           Navigation
+           ================================================================= */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: var(--z-sticky);
+            background: var(--white);
+            border-bottom: 1px solid var(--neutral-light);
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-block: var(--space-m);
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+        }
+
+        .site-nav__logo {
+            font-size: var(--h4);
+            font-weight: 700;
+            color: var(--neutral-ultra-dark);
+        }
+
+        .site-nav__links {
+            display: flex;
+            align-items: center;
+            gap: var(--space-l);
+        }
+
+        .site-nav__link {
+            color: var(--neutral-dark);
+            font-size: var(--text-s);
+        }
+
+        .site-nav__link:hover {
+            color: var(--primary);
+        }
+
+        /* =================================================================
+           Case Study Hero - Full Bleed
+           ================================================================= */
+        .case-hero {
+            background: var(--neutral-ultra-dark);
+            color: var(--white);
+            padding-block: var(--section-space-l);
+        }
+
+        .case-hero__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+        }
+
+        .case-hero__label {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: var(--space-2xs) var(--space-s);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-m);
+        }
+
+        .case-hero__title {
+            font-size: var(--h1);
+            color: var(--white);
+            max-width: 18ch;
+            margin-bottom: var(--space-l);
+        }
+
+        .case-hero__meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xl);
+        }
+
+        .case-hero__meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2xs);
+        }
+
+        .case-hero__meta-label {
+            font-size: var(--text-xs);
+            color: var(--neutral-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .case-hero__meta-value {
+            font-size: var(--text-m);
+            font-weight: 600;
+        }
+
+        /* =================================================================
+           Case Study Content - Content Grid Layout
+           ================================================================= */
+        .case-content {
+            padding-block: var(--section-space-m);
+        }
+
+        /* Intro paragraph styling */
+        .case-intro {
+            font-size: var(--text-xl);
+            line-height: 1.5;
+            color: var(--neutral-dark);
+        }
+
+        /* Section within content */
+        .case-section {
+            margin-block: var(--space-3xl);
+        }
+
+        .case-section__title {
+            font-size: var(--h3);
+            margin-bottom: var(--space-l);
+            color: var(--neutral-ultra-dark);
+        }
+
+        /* Full-width image with caption */
+        .case-image {
+            margin-block: var(--space-2xl);
+        }
+
+        .case-image__media {
+            aspect-ratio: 16/9;
+            border-radius: var(--radius-l);
+            overflow: hidden;
+        }
+
+        .case-image__caption {
+            text-align: center;
+            font-size: var(--text-s);
+            color: var(--neutral);
+            margin-top: var(--space-s);
+        }
+
+        /* Feature-width image (breakout) */
+        .case-image--feature .case-image__media {
+            border-radius: var(--radius-xl);
+        }
+
+        /* Full-bleed image */
+        .case-image--full .case-image__media {
+            border-radius: 0;
+            aspect-ratio: 21/9;
+        }
+
+        /* Pull quote */
+        .case-quote {
+            position: relative;
+            padding: var(--space-xl);
+            background: var(--primary-ultra-light);
+            border-radius: var(--radius-xl);
+            margin-block: var(--space-2xl);
+        }
+
+        .case-quote::before {
+            content: '"';
+            position: absolute;
+            top: var(--space-m);
+            left: var(--space-l);
+            font-size: 4rem;
+            line-height: 1;
+            color: var(--primary-light);
+            font-family: Georgia, serif;
+        }
+
+        .case-quote__text {
+            font-size: var(--text-xl);
+            font-style: italic;
+            color: var(--neutral-ultra-dark);
+            margin-bottom: var(--space-m);
+            padding-left: var(--space-xl);
+        }
+
+        .case-quote__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+            padding-left: var(--space-xl);
+        }
+
+        .case-quote__avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+        }
+
+        .case-quote__name {
+            font-weight: 600;
+            color: var(--neutral-ultra-dark);
+        }
+
+        .case-quote__role {
+            font-size: var(--text-s);
+            color: var(--neutral);
+        }
+
+        /* Stats row */
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-l);
+            padding: var(--space-xl);
+            background: var(--white);
+            border: 1px solid var(--neutral-light);
+            border-radius: var(--radius-xl);
+            margin-block: var(--space-2xl);
+        }
+
+        @media (max-width: 600px) {
+            .case-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-stat {
+            text-align: center;
+            padding: var(--space-m);
+        }
+
+        .case-stat:not(:last-child) {
+            border-right: 1px solid var(--neutral-light);
+        }
+
+        @media (max-width: 600px) {
+            .case-stat:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid var(--neutral-light);
+            }
+        }
+
+        .case-stat__value {
+            font-size: var(--h2);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .case-stat__label {
+            font-size: var(--text-s);
+            color: var(--neutral);
+        }
+
+        /* Image gallery - 2 column */
+        .case-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-m);
+            margin-block: var(--space-2xl);
+        }
+
+        @media (max-width: 600px) {
+            .case-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-gallery__item {
+            aspect-ratio: 4/3;
+            border-radius: var(--radius-l);
+            overflow: hidden;
+        }
+
+        /* Process timeline */
+        .case-process {
+            margin-block: var(--space-2xl);
+        }
+
+        .case-process__item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-l);
+            padding-bottom: var(--space-xl);
+            position: relative;
+        }
+
+        .case-process__item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 48px;
+            bottom: 0;
+            width: 2px;
+            background: var(--neutral-light);
+        }
+
+        .case-process__number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: var(--text-s);
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-process__content h4 {
+            font-size: var(--h5);
+            margin-bottom: var(--space-xs);
+            color: var(--neutral-ultra-dark);
+        }
+
+        .case-process__content p {
+            color: var(--neutral);
+            font-size: var(--text-s);
+        }
+
+        /* Tech stack badges */
+        .case-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-block: var(--space-l);
+        }
+
+        .case-tech__badge {
+            background: var(--neutral-ultra-light);
+            color: var(--neutral-dark);
+            padding: var(--space-xs) var(--space-m);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: 500;
+        }
+
+        /* =================================================================
+           CTA Section
+           ================================================================= */
+        .case-cta {
+            background: var(--primary);
+            color: var(--white);
+            padding-block: var(--section-space-m);
+        }
+
+        .case-cta__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            text-align: center;
+        }
+
+        .case-cta__title {
+            font-size: var(--h2);
+            color: var(--white);
+            margin-bottom: var(--space-m);
+        }
+
+        .case-cta__text {
+            font-size: var(--text-l);
+            opacity: 0.9;
+            max-width: 50ch;
+            margin-inline: auto;
+            margin-bottom: var(--space-l);
+        }
+
+        .case-cta__buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+        }
+
+        /* =================================================================
+           Related Cases
+           ================================================================= */
+        .related-cases {
+            padding-block: var(--section-space-m);
+            background: var(--neutral-ultra-light);
+        }
+
+        .related-cases__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+        }
+
+        .related-cases__title {
+            font-size: var(--h3);
+            margin-bottom: var(--space-xl);
+            color: var(--neutral-ultra-dark);
+        }
+
+        .related-cases__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-l);
+        }
+
+        @media (max-width: 768px) {
+            .related-cases__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-card {
+            background: var(--white);
+            border-radius: var(--radius-l);
+            overflow: hidden;
+            box-shadow: var(--shadow-s);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .case-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-l);
+        }
+
+        .case-card__image {
+            aspect-ratio: 16/9;
+        }
+
+        .case-card__body {
+            padding: var(--space-l);
+        }
+
+        .case-card__label {
+            font-size: var(--text-xs);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .case-card__title {
+            font-size: var(--h4);
+            margin-bottom: var(--space-s);
+        }
+
+        .case-card__title a {
+            color: var(--neutral-ultra-dark);
+        }
+
+        .case-card__title a:hover {
+            color: var(--primary);
+        }
+
+        .case-card__excerpt {
+            font-size: var(--text-s);
+            color: var(--neutral);
+        }
+
+        /* =================================================================
+           Footer
+           ================================================================= */
+        .site-footer {
+            background: var(--neutral-ultra-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .site-footer__inner {
+            max-width: var(--wrapper-width);
+            margin-inline: auto;
+            padding-inline: var(--gutter);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-m);
+        }
+
+        .site-footer__copy {
+            font-size: var(--text-s);
+            color: var(--neutral);
+        }
+
+        .site-footer__links {
+            display: flex;
+            gap: var(--space-l);
+        }
+
+        .site-footer__link {
+            font-size: var(--text-s);
+            color: var(--neutral-light);
+        }
+
+        .site-footer__link:hover {
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="homepage.html" class="site-nav__logo">Acme Co.</a>
+            <div class="site-nav__links">
+                <a href="about.html" class="site-nav__link">About</a>
+                <a href="blog-archive.html" class="site-nav__link">Blog</a>
+                <a href="#" class="site-nav__link">Work</a>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero - Full Width -->
+    <section class="case-hero">
+        <div class="case-hero__inner">
+            <span class="case-hero__label">Case Study</span>
+            <h1 class="case-hero__title">TechFlow: A Complete Brand Transformation</h1>
+            <div class="case-hero__meta">
+                <div class="case-hero__meta-item">
+                    <span class="case-hero__meta-label">Client</span>
+                    <span class="case-hero__meta-value">TechFlow Inc.</span>
+                </div>
+                <div class="case-hero__meta-item">
+                    <span class="case-hero__meta-label">Industry</span>
+                    <span class="case-hero__meta-value">SaaS / Fintech</span>
+                </div>
+                <div class="case-hero__meta-item">
+                    <span class="case-hero__meta-label">Services</span>
+                    <span class="case-hero__meta-value">Branding, Web Design, Development</span>
+                </div>
+                <div class="case-hero__meta-item">
+                    <span class="case-hero__meta-label">Timeline</span>
+                    <span class="case-hero__meta-value">12 Weeks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content - Content Grid -->
+    <article class="case-content content-grid smart-spacing">
+
+        <!-- Full-bleed hero image -->
+        <figure class="case-image case-image--full content--full">
+            <div class="placeholder case-image__media">Hero Image - Full Bleed</div>
+        </figure>
+
+        <!-- Intro paragraph - content width -->
+        <p class="case-intro">
+            TechFlow came to us with a challenge: their decade-old brand no longer reflected
+            their position as an industry leader in financial automation. They needed a complete
+            transformation—from visual identity to digital presence—that would resonate with
+            enterprise clients while maintaining the trust they'd built over the years.
+        </p>
+
+        <!-- Challenge Section -->
+        <section class="case-section">
+            <h2 class="case-section__title">The Challenge</h2>
+            <p>
+                When TechFlow first approached us, their brand was struggling to compete in an
+                increasingly crowded fintech market. Their website felt dated, their messaging
+                was unclear, and their visual identity didn't convey the sophistication of their
+                technology platform.
+            </p>
+            <p>
+                The core challenges we identified were:
+            </p>
+            <ul>
+                <li>Outdated visual identity that didn't reflect their market position</li>
+                <li>Complex product messaging that confused potential customers</li>
+                <li>Poor conversion rates on their marketing website</li>
+                <li>Inconsistent brand application across touchpoints</li>
+            </ul>
+        </section>
+
+        <!-- Feature-width image -->
+        <figure class="case-image case-image--feature content--feature">
+            <div class="placeholder case-image__media">Brand Analysis - Feature Width</div>
+            <figcaption class="case-image__caption">
+                Our brand audit revealed significant gaps between TechFlow's capabilities and market perception.
+            </figcaption>
+        </figure>
+
+        <!-- Stats - Feature-max width -->
+        <div class="case-stats content--feature-max">
+            <div class="case-stat">
+                <div class="case-stat__value">340%</div>
+                <div class="case-stat__label">Increase in Qualified Leads</div>
+            </div>
+            <div class="case-stat">
+                <div class="case-stat__value">2.4x</div>
+                <div class="case-stat__label">Improvement in Time on Site</div>
+            </div>
+            <div class="case-stat">
+                <div class="case-stat__value">68%</div>
+                <div class="case-stat__label">Reduction in Bounce Rate</div>
+            </div>
+        </div>
+
+        <!-- Solution Section -->
+        <section class="case-section">
+            <h2 class="case-section__title">Our Approach</h2>
+            <p>
+                We developed a comprehensive strategy that addressed both the visual and strategic
+                aspects of TechFlow's brand. Our approach was grounded in research, guided by data,
+                and executed with precision.
+            </p>
+        </section>
+
+        <!-- Process Timeline -->
+        <div class="case-process">
+            <div class="case-process__item">
+                <div class="case-process__number">1</div>
+                <div class="case-process__content">
+                    <h4>Discovery & Research</h4>
+                    <p>We conducted stakeholder interviews, competitive analysis, and user research to understand TechFlow's unique position in the market.</p>
+                </div>
+            </div>
+            <div class="case-process__item">
+                <div class="case-process__number">2</div>
+                <div class="case-process__content">
+                    <h4>Brand Strategy</h4>
+                    <p>Developed a new brand positioning, messaging framework, and visual identity system that would resonate with enterprise decision-makers.</p>
+                </div>
+            </div>
+            <div class="case-process__item">
+                <div class="case-process__number">3</div>
+                <div class="case-process__content">
+                    <h4>Design & Development</h4>
+                    <p>Created a modern, conversion-focused website with clear product messaging and intuitive user journeys.</p>
+                </div>
+            </div>
+            <div class="case-process__item">
+                <div class="case-process__number">4</div>
+                <div class="case-process__content">
+                    <h4>Launch & Optimize</h4>
+                    <p>Rolled out the new brand across all touchpoints and implemented ongoing optimization based on performance data.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote - Feature width -->
+        <blockquote class="case-quote content--feature">
+            <p class="case-quote__text">
+                The transformation exceeded our expectations. Acme Co. didn't just give us a new look—they
+                helped us articulate who we are and why we matter to our customers.
+            </p>
+            <div class="case-quote__author">
+                <div class="placeholder case-quote__avatar">SM</div>
+                <div>
+                    <div class="case-quote__name">Sarah Mitchell</div>
+                    <div class="case-quote__role">CEO, TechFlow Inc.</div>
+                </div>
+            </div>
+        </blockquote>
+
+        <!-- Results Section -->
+        <section class="case-section">
+            <h2 class="case-section__title">The Results</h2>
+            <p>
+                The new brand launched in Q3 2024 and the results were immediate and significant.
+                Within the first 90 days, TechFlow saw dramatic improvements across all key metrics.
+            </p>
+            <p>
+                Beyond the numbers, TechFlow's sales team reported that prospects now entered
+                conversations with a much clearer understanding of the product's value proposition.
+                The sales cycle shortened, and close rates improved.
+            </p>
+        </section>
+
+        <!-- Gallery - Feature-max width -->
+        <div class="case-gallery content--feature-max">
+            <div class="placeholder case-gallery__item">Brand Guidelines</div>
+            <div class="placeholder case-gallery__item">Website Homepage</div>
+            <div class="placeholder case-gallery__item">Product Dashboard</div>
+            <div class="placeholder case-gallery__item">Marketing Collateral</div>
+        </div>
+
+        <!-- Tech Stack -->
+        <section class="case-section">
+            <h2 class="case-section__title">Technology & Tools</h2>
+            <p>
+                We built TechFlow's new digital presence using modern, scalable technologies
+                that would support their growth for years to come.
+            </p>
+            <div class="case-tech">
+                <span class="case-tech__badge">Next.js</span>
+                <span class="case-tech__badge">TypeScript</span>
+                <span class="case-tech__badge">Tailwind CSS</span>
+                <span class="case-tech__badge">Sanity CMS</span>
+                <span class="case-tech__badge">Vercel</span>
+                <span class="case-tech__badge">Figma</span>
+                <span class="case-tech__badge">Framer Motion</span>
+                <span class="case-tech__badge">HubSpot</span>
+            </div>
+        </section>
+
+        <!-- Final full-width image -->
+        <figure class="case-image case-image--full content--full">
+            <div class="placeholder case-image__media">Final Website Showcase - Full Bleed</div>
+            <figcaption class="case-image__caption">
+                The redesigned TechFlow website launched to overwhelmingly positive feedback.
+            </figcaption>
+        </figure>
+
+    </article>
+
+    <!-- CTA Section -->
+    <section class="case-cta">
+        <div class="case-cta__inner">
+            <h2 class="case-cta__title">Ready to transform your brand?</h2>
+            <p class="case-cta__text">
+                Let's discuss how we can help you achieve similar results for your business.
+            </p>
+            <div class="case-cta__buttons">
+                <a href="#" class="btn btn--white btn--l">Start a Project</a>
+                <a href="#" class="btn btn--outline-white btn--l">View More Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Cases -->
+    <section class="related-cases">
+        <div class="related-cases__inner">
+            <h2 class="related-cases__title">More Case Studies</h2>
+            <div class="related-cases__grid">
+                <article class="case-card">
+                    <div class="placeholder case-card__image">Case Study Image</div>
+                    <div class="case-card__body">
+                        <p class="case-card__label">E-Commerce</p>
+                        <h3 class="case-card__title">
+                            <a href="#">Meridian: Scaling a D2C Brand</a>
+                        </h3>
+                        <p class="case-card__excerpt">
+                            How we helped a sustainable fashion brand increase online revenue by 280% through strategic redesign.
+                        </p>
+                    </div>
+                </article>
+                <article class="case-card">
+                    <div class="placeholder case-card__image">Case Study Image</div>
+                    <div class="case-card__body">
+                        <p class="case-card__label">Healthcare</p>
+                        <h3 class="case-card__title">
+                            <a href="#">MedSync: Patient Portal Redesign</a>
+                        </h3>
+                        <p class="case-card__excerpt">
+                            Transforming a complex healthcare platform into an intuitive experience for patients and providers.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p class="site-footer__copy">&copy; 2024 Acme Co. All rights reserved.</p>
+            <div class="site-footer__links">
+                <a href="#" class="site-footer__link">Privacy</a>
+                <a href="#" class="site-footer__link">Terms</a>
+                <a href="#" class="site-footer__link">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

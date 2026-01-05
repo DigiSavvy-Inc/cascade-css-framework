@@ -1,0 +1,133 @@
+// =============================================================================
+// Content-Grid System
+// =============================================================================
+// A sophisticated 7-column grid system for content layout with breakout areas
+// Based on Automatic.css content-grid implementation
+//
+// Grid Structure:
+// [full-start] [feature-max-start] [feature-start] [content-start ... content-end] [feature-end] [feature-max-end] [full-end]
+//
+// Usage:
+//   <section class="content-grid">
+//     <p>Default content width</p>
+//     <div class="content--feature">Breaks out to feature columns</div>
+//     <div class="content--feature-max">Breaks out wider</div>
+//     <div class="content--full">Full bleed, edge to edge</div>
+//     <div class="content--full-safe">Full bleed with gutter padding</div>
+//   </section>
+
+// =============================================================================
+// Content-Grid SCSS Variables (compile-time defaults)
+// =============================================================================
+// These match ACSS defaults and can be overridden during compilation
+
+$content-feature: 50px !default;
+$content-feature-max: 100px !default;
+
+// =============================================================================
+// Content-Grid Mixin
+// =============================================================================
+// Follows ACSS pattern exactly
+
+@mixin content-grid {
+  --full: minmax(var(--gutter), 1fr);
+
+  padding-inline: 0;
+  column-gap: 0 !important;
+  display: grid !important;
+  grid-template-columns:
+    [full-start]
+      var(--full)
+    [feature-max-start]
+      minmax(0, var(--feature-max-width, #{$content-feature-max}))
+    [feature-start]
+      minmax(0, var(--feature-width, #{$content-feature}))
+    [content-start]
+      min(var(--content-width), 100% - var(--gutter) * 2)
+    [content-end]
+      minmax(0, var(--feature-width, #{$content-feature}))
+    [feature-end]
+      minmax(0, var(--feature-max-width, #{$content-feature-max}))
+    [feature-max-end]
+      var(--full)
+    [full-end];
+
+  // Non-breakout children get full width
+  > :not(
+    .content--feature,
+    .content--feature-max,
+    .content--full,
+    .content--full-safe
+  ) {
+    width: 100%;
+  }
+
+  // Non-breakout children go to content column
+  > :where(:not(
+    .content--feature,
+    .content--feature-max,
+    .content--full,
+    .content--full-safe
+  )) {
+    grid-column: content;
+  }
+}
+
+// =============================================================================
+// Content-Grid Classes
+// =============================================================================
+
+.content-grid {
+  @include content-grid;
+}
+
+// Breakout classes - place content in wider grid areas
+.content--feature {
+  grid-column: feature;
+}
+
+.content--feature-max {
+  grid-column: feature-max;
+}
+
+.content--full {
+  grid-column: full;
+}
+
+// Full-bleed with safe gutters (padding on edges)
+.content--full-safe {
+  grid-column: full;
+  padding-inline: var(--gutter);
+}
+
+// When content-grid itself needs full-safe behavior
+.content-grid:where(.content--full-safe) {
+  padding-inline: var(--gutter);
+}
+
+// =============================================================================
+// Breakout Width Enforcement
+// =============================================================================
+// Ensure breakout elements actually fill their grid area
+
+:is(.content--feature, .content--feature-max, .content--full, .content--full-safe):not(
+  .content-grid--off :is(.content--feature, .content--feature-max, .content--full, .content--full-safe)
+) {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+// =============================================================================
+// Collision Prevention
+// =============================================================================
+// Prevent conflicts between content-grid and padding utilities
+
+.content-grid {
+  &:is(
+    [class*="padding--"],
+    [class*="section--"],
+    [class*="header--"]
+  ) {
+    padding-inline: 0;
+  }
+}

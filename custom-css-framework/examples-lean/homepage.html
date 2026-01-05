@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage | ACSS Lite Demo</title>
+    <link rel="stylesheet" href="../dist/acss-lite-full.css">
+    <style>
+        /* Project-specific theme overrides */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-ultra-light: #eff6ff;
+            --content-width: 65ch;
+            --wrapper-width: 1200px;
+        }
+
+        /* Placeholder image styling */
+        .placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Hero specific */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+        }
+
+        .hero__content {
+            max-width: 600px;
+        }
+
+        .hero__title {
+            color: var(--white);
+        }
+
+        .hero__text {
+            font-size: var(--text-l);
+            opacity: 0.9;
+        }
+
+        /* Section styling */
+        .section {
+            padding-block: var(--section-space-m);
+        }
+
+        .section--alt {
+            background-color: var(--neutral-ultra-light);
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .section__subtitle {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            max-width: 60ch;
+            margin-inline: auto;
+        }
+
+        /* Feature icons */
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-l);
+            margin-bottom: var(--space-m);
+        }
+
+        /* Testimonial */
+        .testimonial {
+            text-align: center;
+            max-width: 700px;
+            margin-inline: auto;
+        }
+
+        .testimonial__quote {
+            font-size: var(--text-xl);
+            font-style: italic;
+            color: var(--heading);
+            margin-bottom: var(--space-l);
+        }
+
+        .testimonial__avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-full);
+            margin-inline: auto;
+            margin-bottom: var(--space-s);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding-block: var(--section-space-l);
+        }
+
+        .cta__title {
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .footer a {
+            color: var(--neutral-light);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid var(--neutral-dark);
+            padding-top: var(--space-l);
+            margin-top: var(--space-xl);
+            text-align: center;
+            color: var(--neutral);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+         ============================================================ -->
+    <header class="container padding-block--m">
+        <nav class="flex items-center justify-between">
+            <a href="#" class="text--h4 text--700 text--base">Acme Co.</a>
+            <div class="flex gap--l items-center">
+                <a href="about.html" class="text--base">About</a>
+                <a href="blog-archive.html" class="text--base">Blog</a>
+                <a href="#" class="text--base">Services</a>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         HERO SECTION
+         ============================================================ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title margin-bottom--m">Build something amazing today</h1>
+                <p class="hero__text margin-bottom--l">
+                    We help businesses transform their ideas into reality. Our team of experts delivers innovative solutions that drive growth and success.
+                </p>
+                <div class="flex gap--m flex-wrap">
+                    <a href="#" class="btn btn--white btn--l">Get Started</a>
+                    <a href="#" class="btn btn--outline-white btn--l">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURES SECTION
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Why Choose Us</h2>
+                <p class="section__subtitle">
+                    We combine expertise, innovation, and dedication to deliver exceptional results for every client.
+                </p>
+            </div>
+
+            <div class="grid--3 gap--xl">
+                <div class="text--center">
+                    <div class="feature-icon placeholder">01</div>
+                    <h3 class="text--h4 margin-bottom--s">Expert Team</h3>
+                    <p class="text--light">
+                        Our team brings years of industry experience and a passion for excellence to every project.
+                    </p>
+                </div>
+
+                <div class="text--center">
+                    <div class="feature-icon placeholder">02</div>
+                    <h3 class="text--h4 margin-bottom--s">Fast Delivery</h3>
+                    <p class="text--light">
+                        We understand time is valuable. Our streamlined process ensures quick turnaround without sacrificing quality.
+                    </p>
+                </div>
+
+                <div class="text--center">
+                    <div class="feature-icon placeholder">03</div>
+                    <h3 class="text--h4 margin-bottom--s">24/7 Support</h3>
+                    <p class="text--light">
+                        Questions? Issues? Our support team is always available to help you succeed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES SECTION
+         ============================================================ -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Our Services</h2>
+                <p class="section__subtitle">
+                    Comprehensive solutions tailored to your business needs.
+                </p>
+            </div>
+
+            <div class="grid--3 gap--l">
+                <div class="card card--elevated">
+                    <div class="placeholder card__image" style="height: 200px;">Service Image</div>
+                    <div class="card__body">
+                        <h3 class="card__title">Web Development</h3>
+                        <p class="card__text margin-bottom--m">
+                            Custom websites and web applications built with modern technologies and best practices.
+                        </p>
+                        <a href="#" class="btn btn--ghost">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="card card--elevated">
+                    <div class="placeholder card__image" style="height: 200px;">Service Image</div>
+                    <div class="card__body">
+                        <h3 class="card__title">UI/UX Design</h3>
+                        <p class="card__text margin-bottom--m">
+                            Beautiful, intuitive designs that delight users and drive engagement.
+                        </p>
+                        <a href="#" class="btn btn--ghost">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="card card--elevated">
+                    <div class="placeholder card__image" style="height: 200px;">Service Image</div>
+                    <div class="card__body">
+                        <h3 class="card__title">Digital Strategy</h3>
+                        <p class="card__text margin-bottom--m">
+                            Data-driven strategies that help you reach your target audience and achieve your goals.
+                        </p>
+                        <a href="#" class="btn btn--ghost">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIAL SECTION
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="testimonial">
+                <p class="testimonial__quote">
+                    "Working with Acme Co. transformed our business. Their team delivered beyond our expectations and the results speak for themselves."
+                </p>
+                <div class="testimonial__avatar placeholder">JD</div>
+                <p class="text--600">Jane Doe</p>
+                <p class="text--s text--light">CEO, TechStart Inc.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         STATS SECTION
+         ============================================================ -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="grid--4 gap--l text--center">
+                <div>
+                    <p class="text--h1 text--primary">500+</p>
+                    <p class="text--light">Projects Completed</p>
+                </div>
+                <div>
+                    <p class="text--h1 text--primary">98%</p>
+                    <p class="text--light">Client Satisfaction</p>
+                </div>
+                <div>
+                    <p class="text--h1 text--primary">50+</p>
+                    <p class="text--light">Team Members</p>
+                </div>
+                <div>
+                    <p class="text--h1 text--primary">10+</p>
+                    <p class="text--light">Years Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CTA SECTION
+         ============================================================ -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta__title margin-bottom--m">Ready to get started?</h2>
+            <p class="text--l margin-bottom--l" style="opacity: 0.9; max-width: 50ch; margin-inline: auto;">
+                Let's discuss how we can help bring your vision to life.
+            </p>
+            <a href="#" class="btn btn--white btn--l">Schedule a Call</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid--4 gap--xl">
+                <div>
+                    <p class="text--h4 text--700 margin-bottom--m">Acme Co.</p>
+                    <p class="text--s" style="color: var(--neutral-light);">
+                        Building innovative solutions for forward-thinking businesses since 2014.
+                    </p>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Company</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="about.html">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Services</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="#">Web Development</a>
+                        <a href="#">UI/UX Design</a>
+                        <a href="#">Digital Strategy</a>
+                        <a href="#">Consulting</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Resources</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="blog-archive.html">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="text--s">© 2024 Acme Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

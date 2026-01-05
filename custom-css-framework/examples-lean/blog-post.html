@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Scalable Web Applications | Acme Co. Blog</title>
+    <link rel="stylesheet" href="../dist/acss-lite-full.css">
+    <style>
+        /* Project-specific theme overrides */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-ultra-light: #eff6ff;
+            --content-width: 65ch;
+            --wrapper-width: 1200px;
+        }
+
+        /* Placeholder image styling */
+        .placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding-block: var(--section-space-s);
+            text-align: center;
+        }
+
+        .article-header__meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-m);
+            margin-bottom: var(--space-m);
+            color: var(--text-light);
+            font-size: var(--text-s);
+        }
+
+        .article-header__category {
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+            padding: var(--space-2xs) var(--space-s);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+        }
+
+        .article-header__title {
+            max-width: 20ch;
+            margin-inline: auto;
+            margin-bottom: var(--space-l);
+        }
+
+        .article-header__author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-s);
+        }
+
+        .article-header__avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+        }
+
+        /* Article Content - Using Content Grid */
+        .article-content {
+            padding-block: var(--section-space-s);
+        }
+
+        .article-content > * {
+            grid-column: content;
+        }
+
+        .article-content > .content--feature {
+            grid-column: feature;
+        }
+
+        .article-content > .content--full {
+            grid-column: full;
+        }
+
+        .article-content figure {
+            margin-block: var(--space-xl);
+        }
+
+        .article-content figcaption {
+            text-align: center;
+            font-size: var(--text-s);
+            color: var(--text-light);
+            margin-top: var(--space-s);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: var(--space-l);
+            font-size: var(--text-l);
+            font-style: italic;
+            color: var(--heading);
+            margin-block: var(--space-xl);
+        }
+
+        .article-content pre {
+            background: var(--base-dark);
+            color: var(--white);
+            padding: var(--space-l);
+            border-radius: var(--radius-m);
+            overflow-x: auto;
+            font-size: var(--text-s);
+            margin-block: var(--space-l);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            padding-left: var(--space-l);
+            margin-block: var(--space-m);
+        }
+
+        .article-content li {
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Featured Image */
+        .featured-image {
+            aspect-ratio: 16/9;
+            border-radius: var(--radius-l);
+            margin-bottom: var(--space-2xl);
+        }
+
+        /* Author Bio */
+        .author-bio {
+            background: var(--neutral-ultra-light);
+            padding: var(--space-xl);
+            border-radius: var(--radius-l);
+            display: flex;
+            gap: var(--space-l);
+            margin-block: var(--space-2xl);
+        }
+
+        .author-bio__avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            flex-shrink: 0;
+        }
+
+        .author-bio__name {
+            margin-bottom: var(--space-2xs);
+        }
+
+        .author-bio__role {
+            color: var(--primary);
+            font-size: var(--text-s);
+            margin-bottom: var(--space-s);
+        }
+
+        .author-bio__text {
+            color: var(--text-light);
+            font-size: var(--text-s);
+        }
+
+        @media (max-width: 600px) {
+            .author-bio {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .author-bio__avatar {
+                margin-inline: auto;
+            }
+        }
+
+        /* Related Posts */
+        .related-posts {
+            padding-block: var(--section-space-m);
+            background: var(--neutral-ultra-light);
+        }
+
+        .related-posts__title {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Post Card */
+        .post-card {
+            background: var(--white);
+            border-radius: var(--radius-l);
+            overflow: hidden;
+            box-shadow: var(--shadow-s);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-m);
+        }
+
+        .post-card__image {
+            aspect-ratio: 16/9;
+        }
+
+        .post-card__body {
+            padding: var(--space-l);
+        }
+
+        .post-card__category {
+            font-size: var(--text-xs);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .post-card__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .post-card__title a {
+            color: var(--heading);
+            text-decoration: none;
+        }
+
+        .post-card__title a:hover {
+            color: var(--primary);
+        }
+
+        .post-card__excerpt {
+            color: var(--text-light);
+            font-size: var(--text-s);
+            margin-bottom: var(--space-m);
+        }
+
+        .post-card__meta {
+            font-size: var(--text-xs);
+            color: var(--text-light);
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-block: var(--space-l);
+        }
+
+        .tag {
+            background: var(--neutral-ultra-light);
+            color: var(--text-light);
+            padding: var(--space-2xs) var(--space-s);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+        }
+
+        /* Share */
+        .share {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            padding-block: var(--space-l);
+            border-top: 1px solid var(--neutral-light);
+            margin-top: var(--space-xl);
+        }
+
+        .share__label {
+            font-weight: 600;
+            color: var(--heading);
+        }
+
+        .share__link {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: var(--neutral-ultra-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: var(--text-s);
+            transition: background 0.2s ease;
+        }
+
+        .share__link:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .footer a {
+            color: var(--neutral-light);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid var(--neutral-dark);
+            padding-top: var(--space-l);
+            margin-top: var(--space-xl);
+            text-align: center;
+            color: var(--neutral);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+         ============================================================ -->
+    <header class="container padding-block--m">
+        <nav class="flex items-center justify-between">
+            <a href="homepage.html" class="text--h4 text--700 text--base">Acme Co.</a>
+            <div class="flex gap--l items-center">
+                <a href="about.html" class="text--base">About</a>
+                <a href="blog-archive.html" class="text--primary text--600">Blog</a>
+                <a href="#" class="text--base">Services</a>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         ARTICLE HEADER
+         ============================================================ -->
+    <header class="article-header">
+        <div class="container">
+            <div class="article-header__meta">
+                <span class="article-header__category">Development</span>
+                <span>December 5, 2024</span>
+                <span>8 min read</span>
+            </div>
+            <h1 class="article-header__title">Building Scalable Web Applications: A Practical Guide</h1>
+            <div class="article-header__author">
+                <div class="placeholder article-header__avatar">MJ</div>
+                <div class="text--left">
+                    <p class="text--600">Mike Johnson</p>
+                    <p class="text--s text--light">Lead Developer</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         ARTICLE CONTENT - Showcasing Content Grid
+         ============================================================ -->
+    <article class="article-content content-grid smart-spacing">
+
+        <!-- Featured Image - Full Width -->
+        <figure class="content--full">
+            <div class="placeholder featured-image">Featured Image</div>
+        </figure>
+
+        <!-- Regular content stays in content column -->
+        <p class="text--l">
+            Building scalable web applications is both an art and a science. In this guide, we'll explore the key principles and practical strategies that can help you create applications that grow gracefully with your user base.
+        </p>
+
+        <h2>Understanding Scalability</h2>
+
+        <p>
+            Scalability isn't just about handling more users—it's about maintaining performance, reliability, and developer productivity as your application grows. A truly scalable system can accommodate growth in users, data, and features without requiring a complete architectural overhaul.
+        </p>
+
+        <p>
+            There are two main types of scalability to consider: horizontal scaling (adding more machines) and vertical scaling (adding more resources to existing machines). Modern applications typically benefit from a combination of both approaches.
+        </p>
+
+        <!-- Blockquote - Feature Width -->
+        <blockquote class="content--feature">
+            "The best time to think about scalability is before you need it. The second best time is now."
+        </blockquote>
+
+        <h2>Key Principles for Scalable Architecture</h2>
+
+        <p>
+            Before diving into specific technologies, let's establish the foundational principles that guide scalable system design:
+        </p>
+
+        <ol>
+            <li><strong>Statelessness:</strong> Design your services to be stateless whenever possible. This makes horizontal scaling straightforward.</li>
+            <li><strong>Loose Coupling:</strong> Services should be independent and communicate through well-defined interfaces.</li>
+            <li><strong>Caching:</strong> Use caching strategically to reduce database load and improve response times.</li>
+            <li><strong>Asynchronous Processing:</strong> Offload heavy tasks to background workers and message queues.</li>
+            <li><strong>Database Optimization:</strong> Choose the right database for each use case and optimize queries.</li>
+        </ol>
+
+        <!-- Code Block - Feature Width -->
+        <pre class="content--feature"><code>// Example: Implementing a simple caching layer
+const cache = new Map();
+const CACHE_TTL = 60000; // 1 minute
+
+async function getCachedData(key, fetchFn) {
+  const cached = cache.get(key);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+
+  const data = await fetchFn();
+  cache.set(key, { data, timestamp: Date.now() });
+  return data;
+}</code></pre>
+
+        <h2>Choosing the Right Technology Stack</h2>
+
+        <p>
+            Your technology choices play a crucial role in scalability. While there's no one-size-fits-all solution, certain technologies have proven track records for building scalable applications.
+        </p>
+
+        <h3>Frontend Considerations</h3>
+
+        <p>
+            Modern frontend frameworks like React, Vue, and Angular are designed with performance in mind. Key strategies include:
+        </p>
+
+        <ul>
+            <li>Code splitting and lazy loading</li>
+            <li>Server-side rendering or static generation</li>
+            <li>Efficient state management</li>
+            <li>CDN distribution for static assets</li>
+        </ul>
+
+        <!-- Image - Feature Width -->
+        <figure class="content--feature">
+            <div class="placeholder" style="aspect-ratio: 16/9; border-radius: var(--radius-l);">Architecture Diagram</div>
+            <figcaption>A typical scalable application architecture with load balancing and microservices.</figcaption>
+        </figure>
+
+        <h3>Backend Architecture</h3>
+
+        <p>
+            On the backend, microservices architecture has become the go-to approach for scalable systems. By breaking your application into smaller, focused services, you can:
+        </p>
+
+        <ul>
+            <li>Scale individual services independently</li>
+            <li>Use different technologies for different services</li>
+            <li>Deploy and update services without affecting the entire system</li>
+            <li>Improve fault isolation</li>
+        </ul>
+
+        <h2>Monitoring and Observability</h2>
+
+        <p>
+            You can't scale what you can't measure. Implementing comprehensive monitoring and observability is crucial for understanding how your system behaves under load and identifying bottlenecks before they become problems.
+        </p>
+
+        <p>
+            Key metrics to track include response times, error rates, throughput, and resource utilization. Tools like Prometheus, Grafana, and distributed tracing systems can provide valuable insights into your system's performance.
+        </p>
+
+        <h2>Conclusion</h2>
+
+        <p>
+            Building scalable web applications requires thoughtful planning, the right architectural decisions, and continuous monitoring and optimization. By following the principles outlined in this guide, you'll be well-equipped to create applications that can grow with your business.
+        </p>
+
+        <p>
+            Remember that scalability is a journey, not a destination. Start with a solid foundation, measure everything, and iterate based on real-world performance data.
+        </p>
+
+        <!-- Tags -->
+        <div class="tags">
+            <a href="#" class="tag">Web Development</a>
+            <a href="#" class="tag">Architecture</a>
+            <a href="#" class="tag">Scalability</a>
+            <a href="#" class="tag">Best Practices</a>
+            <a href="#" class="tag">Performance</a>
+        </div>
+
+        <!-- Share -->
+        <div class="share">
+            <span class="share__label">Share:</span>
+            <a href="#" class="share__link">X</a>
+            <a href="#" class="share__link">in</a>
+            <a href="#" class="share__link">f</a>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+            <div class="placeholder author-bio__avatar">MJ</div>
+            <div>
+                <h3 class="text--h5 author-bio__name">Mike Johnson</h3>
+                <p class="author-bio__role">Lead Developer at Acme Co.</p>
+                <p class="author-bio__text">
+                    Mike is a full-stack developer with over 10 years of experience building scalable web applications. He specializes in React, Node.js, and cloud architecture. When he's not coding, you'll find him contributing to open-source projects.
+                </p>
+            </div>
+        </div>
+
+    </article>
+
+    <!-- ============================================================
+         RELATED POSTS
+         ============================================================ -->
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="related-posts__title">Related Articles</h2>
+
+            <div class="grid--3 gap--l">
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Development</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="#">Mastering CSS Grid: A Complete Guide</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Learn how to create complex layouts with CSS Grid, from basic concepts to advanced techniques.
+                        </p>
+                        <p class="post-card__meta">Nov 28, 2024 &bull; 6 min read</p>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Strategy</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="#">API Design Best Practices</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Design APIs that developers love. Tips for RESTful design, versioning, and documentation.
+                        </p>
+                        <p class="post-card__meta">Nov 21, 2024 &bull; 10 min read</p>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Performance</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="#">Database Optimization Strategies</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Improve your application's performance with these proven database optimization techniques.
+                        </p>
+                        <p class="post-card__meta">Nov 14, 2024 &bull; 7 min read</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid--4 gap--xl">
+                <div>
+                    <p class="text--h4 text--700 margin-bottom--m">Acme Co.</p>
+                    <p class="text--s" style="color: var(--neutral-light);">
+                        Building innovative solutions for forward-thinking businesses since 2014.
+                    </p>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Company</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="about.html">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Services</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="#">Web Development</a>
+                        <a href="#">UI/UX Design</a>
+                        <a href="#">Digital Strategy</a>
+                        <a href="#">Consulting</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Resources</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="blog-archive.html">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="text--s">&copy; 2024 Acme Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

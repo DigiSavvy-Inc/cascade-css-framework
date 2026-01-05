@@ -1,0 +1,21 @@
+// =============================================================================
+// ACSS Lite - Core Framework
+// =============================================================================
+// A lightweight CSS framework inspired by Automatic.css
+// This is the CORE build - no pattern components
+//
+// Includes:
+// - CSS Custom Properties (variables)
+// - Modern Reset
+// - Essential Utilities
+// - Content Grid System
+// - Smart Spacing System
+//
+// For patterns (buttons, cards, forms, badges), use acss-lite-full.scss
+// or import individual pattern files
+
+@use 'core/variables';
+@use 'core/reset';
+@use 'core/utilities';
+@use 'systems/content-grid';
+@use 'systems/smart-spacing';

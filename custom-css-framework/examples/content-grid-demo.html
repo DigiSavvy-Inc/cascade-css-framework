@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content-Grid Demo | ACSS Framework Lite</title>
+    <link rel="stylesheet" href="../dist/framework.css">
+    <style>
+        /* Required content-grid variables */
+        :root {
+            --content-width: 65ch;
+            --gutter: clamp(1rem, 5vw, 2.5rem);
+
+            /* Demo-specific styles for visualization */
+            --demo-content: hsl(210, 100%, 95%);
+            --demo-feature: hsl(150, 100%, 90%);
+            --demo-feature-max: hsl(45, 100%, 90%);
+            --demo-full: hsl(350, 100%, 92%);
+            --demo-full-safe: hsl(280, 100%, 92%);
+        }
+
+        /* Visual indicator for grid columns */
+        .content-grid--visualize {
+            position: relative;
+        }
+        .content-grid--visualize::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent calc((100% - var(--content-width)) / 2 - var(--feature-width) - var(--feature-max-width)),
+                hsla(350, 100%, 70%, 0.1) calc((100% - var(--content-width)) / 2 - var(--feature-width) - var(--feature-max-width)),
+                hsla(350, 100%, 70%, 0.1) calc((100% - var(--content-width)) / 2 - var(--feature-width)),
+                hsla(45, 100%, 70%, 0.15) calc((100% - var(--content-width)) / 2 - var(--feature-width)),
+                hsla(45, 100%, 70%, 0.15) calc((100% - var(--content-width)) / 2),
+                hsla(150, 100%, 70%, 0.1) calc((100% - var(--content-width)) / 2),
+                hsla(150, 100%, 70%, 0.1) calc(50% - var(--content-width) / 2 + var(--feature-width)),
+                hsla(210, 100%, 70%, 0.15) calc(50% - var(--content-width) / 2 + var(--feature-width)),
+                hsla(210, 100%, 70%, 0.15) calc(50% + var(--content-width) / 2 - var(--feature-width))
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Demo box styling */
+        .demo-box {
+            padding: var(--space-m);
+            border-radius: var(--radius-m);
+            font-family: var(--font-mono, monospace);
+            font-size: var(--text-s);
+        }
+        .demo-box--content {
+            background: var(--demo-content);
+            border: 2px dashed hsl(210, 70%, 60%);
+        }
+        .demo-box--feature {
+            background: var(--demo-feature);
+            border: 2px dashed hsl(150, 70%, 40%);
+        }
+        .demo-box--feature-max {
+            background: var(--demo-feature-max);
+            border: 2px dashed hsl(45, 80%, 45%);
+        }
+        .demo-box--full {
+            background: var(--demo-full);
+            border: 2px dashed hsl(350, 70%, 50%);
+        }
+        .demo-box--full-safe {
+            background: var(--demo-full-safe);
+            border: 2px dashed hsl(280, 70%, 50%);
+        }
+
+        /* Hero styling */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding-block: var(--space-xxl);
+        }
+        .hero__content {
+            text-align: center;
+        }
+        .hero__title {
+            font-size: var(--h1);
+            margin-bottom: var(--space-m);
+        }
+        .hero__subtitle {
+            font-size: var(--text-l);
+            opacity: 0.9;
+            max-width: 60ch;
+            margin-inline: auto;
+        }
+
+        /* Section styling */
+        .section {
+            padding-block: var(--space-xl);
+        }
+        .section--alt {
+            background: var(--neutral-ultra-light);
+        }
+        .section__title {
+            font-size: var(--h2);
+            margin-bottom: var(--space-l);
+            color: var(--heading);
+        }
+        .section__intro {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            margin-bottom: var(--space-l);
+            max-width: 65ch;
+        }
+
+        /* Card styling */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-l);
+            padding: var(--space-l);
+            box-shadow: var(--shadow-m);
+        }
+        .card__title {
+            font-size: var(--h4);
+            margin-bottom: var(--space-s);
+            color: var(--heading);
+        }
+        .card__text {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Feature image placeholder */
+        .feature-image {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            border-radius: var(--radius-l);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: var(--text-l);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding-block: var(--space-xxl);
+        }
+        .cta__title {
+            font-size: var(--h2);
+            margin-bottom: var(--space-m);
+        }
+        .cta__text {
+            font-size: var(--text-l);
+            opacity: 0.9;
+            margin-bottom: var(--space-l);
+            max-width: 50ch;
+            margin-inline: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--space-xl);
+        }
+        .footer__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-l);
+        }
+        .footer__title {
+            font-size: var(--text-m);
+            font-weight: 600;
+            margin-bottom: var(--space-s);
+        }
+        .footer__links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer__links li {
+            margin-bottom: var(--space-xs);
+        }
+        .footer__links a {
+            color: var(--neutral-light);
+            text-decoration: none;
+        }
+        .footer__links a:hover {
+            color: var(--white);
+        }
+        .footer__bottom {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-l);
+            border-top: 1px solid var(--neutral-dark);
+            text-align: center;
+            color: var(--neutral);
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-m);
+            padding: var(--space-m);
+            background: var(--white);
+            border-radius: var(--radius-m);
+            box-shadow: var(--shadow-s);
+            margin-bottom: var(--space-l);
+        }
+        .legend__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--text-s);
+        }
+        .legend__swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HERO SECTION - Full bleed background with content-width text
+         ============================================================ -->
+    <section class="hero content-grid">
+        <div class="hero__content">
+            <h1 class="hero__title">Content-Grid System</h1>
+            <p class="hero__subtitle">A powerful 7-column grid system for sophisticated content layouts with breakout areas. Part of ACSS Framework Lite.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DEMO SECTION - Visual demonstration of all grid contexts
+         ============================================================ -->
+    <section class="section content-grid">
+        <h2 class="section__title">Grid Context Visualization</h2>
+        <p class="section__intro">Each colored box demonstrates a different content-grid context. Resize your browser to see how the grid responds.</p>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend__item">
+                <span class="legend__swatch" style="background: var(--demo-content);"></span>
+                <span>Content (default)</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch" style="background: var(--demo-feature);"></span>
+                <span>.content--feature</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch" style="background: var(--demo-feature-max);"></span>
+                <span>.content--feature-max</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch" style="background: var(--demo-full);"></span>
+                <span>.content--full</span>
+            </div>
+            <div class="legend__item">
+                <span class="legend__swatch" style="background: var(--demo-full-safe);"></span>
+                <span>.content--full-safe</span>
+            </div>
+        </div>
+
+        <!-- Content (default) -->
+        <div class="demo-box demo-box--content">
+            <strong>Default Content Width</strong><br>
+            All direct children of .content-grid automatically span the content area. This is the readable content zone, typically around 65ch wide.
+        </div>
+
+        <!-- Feature breakout -->
+        <div class="demo-box demo-box--feature content--feature">
+            <strong>.content--feature</strong><br>
+            Breaks out into the feature columns (default: 50px on each side). Great for pull quotes, small images, or emphasis.
+        </div>
+
+        <!-- Feature-max breakout -->
+        <div class="demo-box demo-box--feature-max content--feature-max">
+            <strong>.content--feature-max</strong><br>
+            Breaks out further into the feature-max columns (default: additional 100px on each side). Ideal for larger images or highlighted content.
+        </div>
+
+        <!-- Full bleed -->
+        <div class="demo-box demo-box--full content--full">
+            <strong>.content--full</strong><br>
+            Full-bleed from edge to edge. Perfect for hero images, full-width backgrounds, or immersive media. Note: no padding - goes right to the viewport edge.
+        </div>
+
+        <!-- Full-safe -->
+        <div class="demo-box demo-box--full-safe content--full-safe">
+            <strong>.content--full-safe</strong><br>
+            Full-width but with safe gutters. Spans the full width while maintaining comfortable padding from viewport edges. Best of both worlds.
+        </div>
+
+        <!-- Back to content -->
+        <div class="demo-box demo-box--content">
+            <strong>Back to Content Width</strong><br>
+            Elements automatically return to content width. The grid flows naturally between different contexts.
+        </div>
+    </section>
+
+    <!-- ============================================================
+         REAL-WORLD EXAMPLE - Services section with feature image
+         ============================================================ -->
+    <section class="section section--alt content-grid">
+        <h2 class="section__title">Real-World Example: Services</h2>
+        <p class="section__intro">Here's how content-grid works in a typical homepage layout with mixed content widths.</p>
+
+        <!-- Feature-max image -->
+        <div class="feature-image content--feature-max">
+            Featured Image (feature-max width)
+        </div>
+
+        <!-- Cards at content width -->
+        <div class="grid--3 gap--l margin-top--l">
+            <div class="card">
+                <h3 class="card__title">Web Design</h3>
+                <p class="card__text">Beautiful, responsive websites that work on every device and load lightning fast.</p>
+            </div>
+            <div class="card">
+                <h3 class="card__title">Development</h3>
+                <p class="card__text">Custom solutions built with modern technologies and best practices.</p>
+            </div>
+            <div class="card">
+                <h3 class="card__title">Strategy</h3>
+                <p class="card__text">Data-driven approaches to help you achieve your business goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FULL-BLEED CTA - Demonstrates full-width colored section
+         ============================================================ -->
+    <section class="cta content-grid content--full-safe">
+        <h2 class="cta__title">Ready to Get Started?</h2>
+        <p class="cta__text">Join thousands of developers using ACSS Framework Lite to build beautiful, consistent interfaces.</p>
+        <button class="btn btn--secondary btn--l">Download Now</button>
+    </section>
+
+    <!-- ============================================================
+         ANOTHER CONTENT SECTION - Demonstrating flow
+         ============================================================ -->
+    <section class="section content-grid">
+        <h2 class="section__title">The Power of Content-Grid</h2>
+
+        <p>Content-grid gives you precise control over how content breaks out of the standard reading width. Unlike traditional containers, it uses CSS Grid's named lines to create semantic breakout zones.</p>
+
+        <blockquote class="content--feature" style="font-size: var(--text-l); font-style: italic; padding: var(--space-l); background: var(--primary-ultra-light); border-left: 4px solid var(--primary); margin-block: var(--space-l);">
+            "The content-grid pattern is one of the most elegant solutions for long-form content with breakout elements."
+        </blockquote>
+
+        <p>The seven columns provide five distinct content zones: full-bleed, feature-max, feature, content, and their mirrored counterparts on the right side. This creates natural rhythm and visual interest in your layouts.</p>
+
+        <!-- Full-width code example -->
+        <pre class="content--full" style="background: var(--base-dark); color: var(--neutral-light); padding: var(--space-l); overflow-x: auto; font-size: var(--text-s);"><code>&lt;section class="content-grid"&gt;
+    &lt;h1&gt;Default content width&lt;/h1&gt;
+    &lt;p&gt;Paragraphs stay readable.&lt;/p&gt;
+
+    &lt;img class="content--feature-max" src="hero.jpg" alt="Breaks out wider"&gt;
+
+    &lt;div class="content--full"&gt;
+        Full-bleed element
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+        <p>The grid automatically handles responsive behavior. On smaller screens, the breakout columns collapse gracefully while maintaining the gutter spacing.</p>
+    </section>
+
+    <!-- ============================================================
+         FOOTER - Full-width with content inside
+         ============================================================ -->
+    <footer class="footer content-grid content--full">
+        <div class="content--full-safe">
+            <div class="footer__grid">
+                <div>
+                    <h4 class="footer__title">ACSS Framework Lite</h4>
+                    <p style="color: var(--neutral-light); font-size: var(--text-s);">A lightweight, variable-driven CSS framework inspired by Automatic.css philosophy.</p>
+                </div>
+                <div>
+                    <h4 class="footer__title">Documentation</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">Variables</a></li>
+                        <li><a href="#">Utilities</a></li>
+                        <li><a href="#">Content-Grid</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__title">Resources</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Style Guide</a></li>
+                        <li><a href="#">Examples</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__title">Community</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Contributing</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>Inspired by <a href="https://automaticcss.com" style="color: var(--primary-light);">Automatic.css</a> by Kevin Geary</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

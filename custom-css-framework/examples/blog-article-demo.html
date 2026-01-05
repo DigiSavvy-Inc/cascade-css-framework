@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Content Layout | Blog Demo</title>
+    <link rel="stylesheet" href="../dist/framework.css">
+    <style>
+        /* Required content-grid variables */
+        :root {
+            --content-width: 70ch;
+            --gutter: clamp(1rem, 5vw, 3rem);
+        }
+
+        /* Article-specific typography refinements */
+        .article {
+            font-size: clamp(1rem, 1vw + 0.75rem, 1.25rem);
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* Heading styles (no margins - handled by .smart-spacing on parent) */
+        .article h2 {
+            font-size: var(--h3);
+            color: var(--heading);
+        }
+
+        .article h3 {
+            font-size: var(--h4);
+            color: var(--heading);
+        }
+
+        /* Hero image */
+        .article__hero {
+            aspect-ratio: 21/9;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* Article header */
+        .article__header {
+            text-align: center;
+            padding-block: var(--space-xl);
+        }
+
+        .article__category {
+            display: inline-block;
+            font-size: var(--text-s);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: var(--space-s);
+        }
+
+        .article__title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            color: var(--heading);
+            margin-bottom: var(--space-m);
+            max-width: 20ch;
+            margin-inline: auto;
+        }
+
+        .article__meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-m);
+            flex-wrap: wrap;
+            color: var(--text-light);
+            font-size: var(--text-s);
+        }
+
+        .article__author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .article__author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .article__author-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Lead paragraph */
+        .article__lead {
+            font-size: 1.25em;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Images */
+        .article__image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .article__image--portrait {
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .article__image--landscape {
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .article__image--wide {
+            aspect-ratio: 21/9;
+            object-fit: cover;
+        }
+
+        /* Figure with caption */
+        .article__figure {
+            margin: 0;
+        }
+
+        .article__figure figcaption {
+            font-size: var(--text-s);
+            color: var(--text-light);
+            text-align: center;
+            padding-top: var(--space-s);
+            font-style: italic;
+        }
+
+        /* Pull quote / blockquote */
+        .article__quote {
+            font-size: 1.5em;
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--heading);
+            padding: var(--space-l);
+            position: relative;
+            text-align: center;
+        }
+
+        .article__quote::before {
+            content: '"';
+            position: absolute;
+            top: -0.2em;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6em;
+            line-height: 1;
+            color: var(--primary-ultra-light);
+            font-family: Georgia, serif;
+            z-index: -1;
+        }
+
+        .article__quote cite {
+            display: block;
+            font-size: 0.5em;
+            font-style: normal;
+            color: var(--text-light);
+            margin-top: var(--space-s);
+        }
+
+        /* Side note / aside */
+        .article__aside {
+            background: var(--neutral-ultra-light);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-m);
+            font-size: 0.9em;
+        }
+
+        .article__aside-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: var(--space-xs);
+            font-size: var(--text-s);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Image grid */
+        .article__gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-s);
+        }
+
+        .article__gallery img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: var(--radius-s);
+        }
+
+        /* Code block */
+        .article__code {
+            background: var(--base-dark);
+            color: var(--neutral-light);
+            padding: var(--space-l);
+            border-radius: var(--radius-m);
+            overflow-x: auto;
+            font-family: var(--font-mono, 'SF Mono', Consolas, monospace);
+            font-size: 0.875em;
+            line-height: 1.6;
+        }
+
+        /* Divider */
+        .article__divider {
+            border: none;
+            text-align: center;
+        }
+
+        .article__divider::before {
+            content: '• • •';
+            color: var(--neutral);
+            letter-spacing: 1em;
+        }
+
+        /* Image placeholder styling */
+        .placeholder-image {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: var(--text-m);
+            font-weight: 500;
+        }
+
+        /* Related articles */
+        .related {
+            background: var(--neutral-ultra-light);
+            padding-block: var(--space-xl);
+            margin-top: var(--space-xxl);
+        }
+
+        .related__title {
+            font-size: var(--h3);
+            color: var(--heading);
+            margin-bottom: var(--space-l);
+        }
+
+        .related__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-l);
+        }
+
+        .related__card {
+            background: var(--white);
+            border-radius: var(--radius-l);
+            overflow: hidden;
+            box-shadow: var(--shadow-s);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .related__card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-m);
+        }
+
+        .related__card-image {
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .related__card-content {
+            padding: var(--space-m);
+        }
+
+        .related__card-title {
+            font-size: var(--text-l);
+            color: var(--heading);
+            margin-bottom: var(--space-xs);
+            line-height: 1.3;
+        }
+
+        .related__card-meta {
+            font-size: var(--text-s);
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--space-xl);
+            text-align: center;
+        }
+
+        .site-footer p {
+            color: var(--neutral);
+            font-size: var(--text-s);
+        }
+
+        .site-footer a {
+            color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+
+    <article class="article content-grid smart-spacing">
+
+        <!-- ============================================================
+             HERO IMAGE - Full bleed
+             ============================================================ -->
+        <div class="content--full placeholder-image article__hero">
+            Hero Image (Full Bleed - 21:9)
+        </div>
+
+        <!-- ============================================================
+             ARTICLE HEADER - Content width, centered
+             ============================================================ -->
+        <header class="article__header">
+            <span class="article__category">Design Systems</span>
+            <h1 class="article__title">The Art of Content Layout in Modern Web Design</h1>
+            <div class="article__meta">
+                <div class="article__author">
+                    <div class="article__author-avatar"></div>
+                    <div>
+                        <span class="article__author-name">Sarah Chen</span>
+                    </div>
+                </div>
+                <span>December 15, 2024</span>
+                <span>8 min read</span>
+            </div>
+        </header>
+
+        <!-- ============================================================
+             LEAD PARAGRAPH - Content width
+             ============================================================ -->
+        <p class="article__lead">
+            Great typography and thoughtful content layout are the foundation of exceptional reading experiences. When we give content room to breathe and use strategic breakouts, we create rhythm and visual interest that keeps readers engaged.
+        </p>
+
+        <hr class="article__divider">
+
+        <!-- ============================================================
+             BODY CONTENT - Mixed widths
+             ============================================================ -->
+
+        <p>
+            The web has evolved far beyond simple single-column text layouts. Today's content creators have powerful tools at their disposal to craft immersive reading experiences that rival—and often surpass—the best of print design.
+        </p>
+
+        <p>
+            At the heart of modern content layout is the concept of the <em>content grid</em>: a flexible system that allows elements to break out of the standard reading width while maintaining visual harmony and structural integrity.
+        </p>
+
+        <h2>Understanding Content Width</h2>
+
+        <p>
+            The optimal line length for reading comfort is generally accepted to be between 45-75 characters. This creates a comfortable rhythm for the eye, reducing fatigue and improving comprehension. Our content column is set to 70ch by default—right in the sweet spot.
+        </p>
+
+        <!-- Feature breakout - aside/note -->
+        <aside class="article__aside content--feature">
+            <p class="article__aside-title">Typography Note</p>
+            <p>The 'ch' unit in CSS represents the width of the '0' character in the current font. Using ch for content width ensures consistent line lengths regardless of font size.</p>
+        </aside>
+
+        <p>
+            But reading isn't just about text. Images, quotes, and other media elements benefit from different treatments. Sometimes they should stay within the content width; other times, they need room to make an impact.
+        </p>
+
+        <!-- Feature-max image -->
+        <figure class="article__figure content--feature-max">
+            <div class="placeholder-image article__image--landscape" style="border-radius: var(--radius-m);">
+                Feature-Max Width Image (16:9)
+            </div>
+            <figcaption>A landscape image at feature-max width provides visual impact while maintaining connection to the text.</figcaption>
+        </figure>
+
+        <h2>The Power of Breakouts</h2>
+
+        <p>
+            Strategic use of breakout widths creates rhythm and emphasis. When everything is the same width, nothing stands out. But when a dramatic photograph suddenly spans the full viewport, it commands attention.
+        </p>
+
+        <p>
+            Consider how magazines use full-bleed images to create impact. The same technique translates beautifully to the web, but with even more flexibility—we can have multiple breakout levels, each serving a different purpose.
+        </p>
+
+        <!-- Pull quote at feature width -->
+        <blockquote class="article__quote content--feature">
+            When everything is the same width, nothing stands out. Strategic breakouts create rhythm and visual hierarchy.
+            <cite>— Design Principles</cite>
+        </blockquote>
+
+        <p>
+            The feature width is perfect for pull quotes, small images, or content that needs slight emphasis without overwhelming the reading flow. It's a subtle expansion that says "pay attention here" without shouting.
+        </p>
+
+        <!-- Full bleed dramatic image -->
+        <figure class="article__figure content--full">
+            <div class="placeholder-image article__image--wide">
+                Full-Bleed Image (21:9) — Maximum Visual Impact
+            </div>
+        </figure>
+
+        <p>
+            Full-bleed images create moments of drama. They interrupt the reading flow intentionally, giving readers a visual break and emphasizing the importance of what they're seeing. Use them sparingly for maximum effect.
+        </p>
+
+        <h2>Balancing Text and Image</h2>
+
+        <p>
+            The relationship between text and images in long-form content is delicate. Too many images and the writing feels interrupted; too few and the page becomes a wall of text.
+        </p>
+
+        <!-- Two-column image gallery at feature-max -->
+        <div class="article__gallery content--feature-max">
+            <div class="placeholder-image" style="aspect-ratio: 4/3; border-radius: var(--radius-s);">Image 1</div>
+            <div class="placeholder-image" style="aspect-ratio: 4/3; border-radius: var(--radius-s);">Image 2</div>
+            <div class="placeholder-image" style="aspect-ratio: 4/3; border-radius: var(--radius-s);">Image 3</div>
+            <div class="placeholder-image" style="aspect-ratio: 4/3; border-radius: var(--radius-s);">Image 4</div>
+        </div>
+
+        <p>
+            Image galleries work well at feature-max width—wide enough to show multiple images effectively, but not so wide that they overwhelm the content. The grid layout keeps them organized and easy to scan.
+        </p>
+
+        <h3>Practical Implementation</h3>
+
+        <p>
+            Implementing a content grid system is straightforward with modern CSS Grid. The key insight is using named grid lines to define semantic breakout zones:
+        </p>
+
+        <!-- Code block at full width for better readability -->
+        <pre class="article__code content--full-safe"><code>&lt;article class="content-grid"&gt;
+  &lt;p&gt;Regular paragraph at content width.&lt;/p&gt;
+
+  &lt;blockquote class="content--feature"&gt;
+    A pull quote that breaks out slightly.
+  &lt;/blockquote&gt;
+
+  &lt;img class="content--feature-max" src="photo.jpg"&gt;
+
+  &lt;figure class="content--full"&gt;
+    &lt;img src="hero.jpg" alt="Full bleed hero"&gt;
+  &lt;/figure&gt;
+
+  &lt;div class="content--full-safe"&gt;
+    Full width with safe gutters.
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+        <p>
+            The beauty of this approach is that it's purely CSS—no JavaScript required. Children automatically receive the content width, and you opt specific elements into wider treatments with simple utility classes.
+        </p>
+
+        <!-- Feature image -->
+        <figure class="article__figure content--feature">
+            <div class="placeholder-image article__image--portrait" style="border-radius: var(--radius-m); max-width: var(--content-width-s); margin-inline: auto;">
+                Portrait Image (3:4)
+            </div>
+            <figcaption>Portrait images work beautifully at feature width, adding visual variety without breaking the reading rhythm.</figcaption>
+        </figure>
+
+        <h2>Creating Visual Rhythm</h2>
+
+        <p>
+            The best long-form content has rhythm—a pattern of expansion and contraction that guides readers through the piece. Think of it like breathing: moments of intensity followed by periods of calm.
+        </p>
+
+        <p>
+            Start with your content width as the baseline. It's where most of your text lives. Then use feature width for supporting elements—quotes, asides, smaller images. Reserve feature-max for important visuals that deserve more space. And save full-bleed for your most impactful moments.
+        </p>
+
+        <!-- Another dramatic full-bleed -->
+        <figure class="article__figure content--full">
+            <div class="placeholder-image" style="aspect-ratio: 2.5/1;">
+                Panoramic Full-Bleed Image — Creating Dramatic Pauses
+            </div>
+        </figure>
+
+        <p>
+            This hierarchy isn't arbitrary—it's based on how readers naturally consume content. Important information gets more space; supporting details stay compact. The grid system makes implementing this hierarchy effortless.
+        </p>
+
+        <hr class="article__divider">
+
+        <h2>Conclusion</h2>
+
+        <p>
+            Content layout is both an art and a science. The technical implementation—CSS Grid, named lines, utility classes—provides the foundation. But the real skill lies in knowing when to use each tool.
+        </p>
+
+        <p>
+            Start conservative. Let your content breathe at comfortable widths. Then strategically expand for emphasis. The result is a reading experience that feels intentional, professional, and engaging—exactly what great content deserves.
+        </p>
+
+        <!-- Final feature-max image -->
+        <figure class="article__figure content--feature-max">
+            <div class="placeholder-image article__image--landscape" style="border-radius: var(--radius-m);">
+                Closing Image (Feature-Max)
+            </div>
+        </figure>
+
+    </article>
+
+    <!-- ============================================================
+         RELATED ARTICLES
+         ============================================================ -->
+    <section class="related content-grid">
+        <h2 class="related__title">Related Articles</h2>
+        <div class="related__grid">
+            <article class="related__card">
+                <div class="placeholder-image related__card-image">Thumbnail</div>
+                <div class="related__card-content">
+                    <h3 class="related__card-title">Building Responsive Typography Systems</h3>
+                    <p class="related__card-meta">Design Systems • 6 min read</p>
+                </div>
+            </article>
+            <article class="related__card">
+                <div class="placeholder-image related__card-image">Thumbnail</div>
+                <div class="related__card-content">
+                    <h3 class="related__card-title">CSS Grid: Beyond the Basics</h3>
+                    <p class="related__card-meta">CSS • 10 min read</p>
+                </div>
+            </article>
+            <article class="related__card">
+                <div class="placeholder-image related__card-image">Thumbnail</div>
+                <div class="related__card-content">
+                    <h3 class="related__card-title">The Future of Web Layout</h3>
+                    <p class="related__card-meta">Trends • 5 min read</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="site-footer content-grid">
+        <p>Built with <a href="#">ACSS Framework Lite</a> — Inspired by <a href="https://automaticcss.com">Automatic.css</a></p>
+    </footer>
+
+</body>
+</html>

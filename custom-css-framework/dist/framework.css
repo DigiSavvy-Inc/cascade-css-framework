@@ -1057,6 +1057,96 @@
 }
 
 :root {
+  --heading-spacing: 1.5em;
+  --paragraph-spacing: 1em;
+  --list-spacing: 1em;
+  --list-item-spacing: 0.5em;
+  --figure-spacing: 1em;
+  --figcaption-spacing: 0.5em;
+  --blockquote-spacing: 1em;
+}
+
+body :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li) {
+  margin-block: 0;
+}
+
+.smart-spacing-normalize :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li) {
+  margin-block: 0;
+}
+
+.smart-spacing.smart-spacing > * + * {
+  margin-block-start: var(--flow-spacing, initial);
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > * + :where(h1, h2, h3, h4, h5, h6) {
+  margin-block-start: var(--heading-spacing, var(--flow-spacing, initial));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :where(* + h2) {
+  margin-block-start: var(--h2-spacing, var(--heading-spacing));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :where(* + h3) {
+  margin-block-start: var(--h3-spacing, var(--heading-spacing));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :where(* + h4) {
+  margin-block-start: var(--h4-spacing, var(--heading-spacing));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :where(* + h5) {
+  margin-block-start: var(--h5-spacing, var(--heading-spacing));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :where(* + h6) {
+  margin-block-start: var(--h6-spacing, var(--heading-spacing));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > * + p {
+  margin-block-start: var(--paragraph-spacing, var(--flow-spacing, initial));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > :is(* + ul, * + ol) {
+  margin-block: var(--list-spacing, var(--flow-spacing, initial));
+}
+.smart-spacing.smart-spacing > :is(ul, ol) {
+  padding-inline-start: var(--list-indent-spacing, var(--flow-spacing, initial));
+}
+.smart-spacing.smart-spacing > ul * + li,
+.smart-spacing.smart-spacing > ol * + li {
+  margin-block-start: var(--list-item-spacing, var(--flow-spacing, initial));
+  margin-block-end: 0;
+}
+.smart-spacing.smart-spacing > ul ul,
+.smart-spacing.smart-spacing > ol ol,
+.smart-spacing.smart-spacing > ul ol,
+.smart-spacing.smart-spacing > ol ul {
+  margin-block: var(--nested-list-spacing, var(--list-item-spacing, initial));
+  padding-inline-start: var(--nested-list-indent-spacing, initial);
+}
+.smart-spacing.smart-spacing > :is(ul, ol) :is(ul, ol) li {
+  margin-block-start: var(--nested-list-item-spacing, var(--list-item-spacing, initial));
+}
+.smart-spacing.smart-spacing > * + figure,
+.smart-spacing.smart-spacing > * + picture {
+  margin-block: var(--figure-spacing, var(--flow-spacing, initial));
+}
+.smart-spacing.smart-spacing figcaption {
+  margin-block: var(--figcaption-spacing, var(--flow-spacing, initial));
+}
+.smart-spacing.smart-spacing > * + blockquote:where(:not(figure > blockquote)) {
+  margin-block: var(--blockquote-spacing, var(--flow-spacing, initial));
+}
+.smart-spacing.smart-spacing > blockquote * + * {
+  margin-block-start: var(--paragraph-spacing, var(--flow-spacing, initial));
+  margin-block-end: 0;
+}
+
+.smart-spacing--off.smart-spacing--off :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li) {
+  margin-block: 0;
+}
+
+:root {
   --content-width-xs: 100%;
   --content-width-s: 540px;
   --content-width-m: 720px;
@@ -1151,6 +1241,58 @@
   --scroll-auto: auto;
   --scrollbar-width: thin;
   --scrollbar-color: var(--neutral) var(--neutral-ultra-light);
+}
+
+.content-grid {
+  --full: minmax(var(--gutter), 1fr);
+  padding-inline: 0;
+  column-gap: 0 !important;
+  display: grid !important;
+  grid-template-columns: [full-start] var(--full) [feature-max-start] minmax(0, var(--feature-max-width, 100px)) [feature-start] minmax(0, var(--feature-width, 50px)) [content-start] min(var(--content-width), 100% - var(--gutter) * 2) [content-end] minmax(0, var(--feature-width, 50px)) [feature-end] minmax(0, var(--feature-max-width, 100px)) [feature-max-end] var(--full) [full-end];
+}
+.content-grid > :not(.content--feature,
+.content--feature-max,
+.content--full,
+.content--full-safe) {
+  width: 100%;
+}
+.content-grid > :where(:not(.content--feature,
+.content--feature-max,
+.content--full,
+.content--full-safe)) {
+  grid-column: content;
+}
+
+.content--feature {
+  grid-column: feature;
+}
+
+.content--feature-max {
+  grid-column: feature-max;
+}
+
+.content--full {
+  grid-column: full;
+}
+
+.content--full-safe {
+  grid-column: full;
+  padding-inline: var(--gutter);
+}
+
+.content-grid:where(.content--full-safe) {
+  padding-inline: var(--gutter);
+}
+
+:is(.content--feature, .content--feature-max, .content--full, .content--full-safe):not(.content-grid--off :is(.content--feature, .content--feature-max, .content--full, .content--full-safe)) {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.content-grid:is([class*=padding--],
+[class*=section--],
+[class*=header--]) {
+  padding-inline: 0;
 }
 
 :root {

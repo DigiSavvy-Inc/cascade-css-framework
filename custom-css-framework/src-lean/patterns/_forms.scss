@@ -1,0 +1,249 @@
+// =============================================================================
+// ACSS Lite - Form Patterns
+// =============================================================================
+// Optional module - include if you need form styling
+// Uses CSS custom properties for easy theming
+
+// =============================================================================
+// Form Variables
+// =============================================================================
+
+:root {
+  --input-padding-y: 0.625em;
+  --input-padding-x: 0.875em;
+  --input-font-size: var(--text-m);
+  --input-line-height: 1.5;
+  --input-border-width: 1px;
+  --input-border-color: var(--border);
+  --input-border-radius: var(--radius-m);
+  --input-bg: var(--white);
+  --input-focus-border-color: var(--primary);
+  --input-focus-ring: 0 0 0 3px var(--primary-trans-20);
+  --input-placeholder-color: var(--neutral);
+  --input-disabled-bg: var(--neutral-ultra-light);
+}
+
+// =============================================================================
+// Form Layout
+// =============================================================================
+
+.form-group {
+  margin-bottom: var(--space-m);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+
+  > * {
+    flex: 1;
+  }
+}
+
+// =============================================================================
+// Labels
+// =============================================================================
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-2xs);
+  font-size: var(--text-s);
+  font-weight: 500;
+  color: var(--base);
+}
+
+.form-label--required::after {
+  content: " *";
+  color: var(--danger);
+}
+
+// =============================================================================
+// Base Input Styles
+// =============================================================================
+
+.form-input,
+.form-select,
+.form-textarea {
+  display: block;
+  width: 100%;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-family: inherit;
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  color: var(--text);
+  background-color: var(--input-bg);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  &::placeholder {
+    color: var(--input-placeholder-color);
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--input-focus-border-color);
+    box-shadow: var(--input-focus-ring);
+  }
+
+  &:disabled {
+    background-color: var(--input-disabled-bg);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+// =============================================================================
+// Textarea
+// =============================================================================
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+// =============================================================================
+// Select
+// =============================================================================
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75em center;
+  background-size: 1em;
+  padding-right: 2.5em;
+  cursor: pointer;
+}
+
+// =============================================================================
+// Checkbox & Radio
+// =============================================================================
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.form-check-input {
+  width: 1.125em;
+  height: 1.125em;
+  margin-top: 0.125em;
+  flex-shrink: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: var(--text-m);
+  color: var(--text);
+  cursor: pointer;
+}
+
+// =============================================================================
+// Input Sizes
+// =============================================================================
+
+.form-input--s,
+.form-select--s {
+  --input-padding-y: 0.5em;
+  --input-padding-x: 0.75em;
+  --input-font-size: var(--text-s);
+}
+
+.form-input--l,
+.form-select--l {
+  --input-padding-y: 0.75em;
+  --input-padding-x: 1em;
+  --input-font-size: var(--text-l);
+}
+
+// =============================================================================
+// Validation States
+// =============================================================================
+
+.form-input--error,
+.form-select--error,
+.form-textarea--error {
+  border-color: var(--danger);
+
+  &:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  }
+}
+
+.form-input--success,
+.form-select--success,
+.form-textarea--success {
+  border-color: var(--success);
+
+  &:focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  }
+}
+
+// =============================================================================
+// Help Text & Errors
+// =============================================================================
+
+.form-help {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-size: var(--text-s);
+  color: var(--text-light);
+}
+
+.form-error {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-size: var(--text-s);
+  color: var(--danger);
+}
+
+// =============================================================================
+// Input Group (with addons)
+// =============================================================================
+
+.input-group {
+  display: flex;
+
+  .form-input {
+    flex: 1;
+    border-radius: 0;
+
+    &:first-child {
+      border-radius: var(--input-border-radius) 0 0 var(--input-border-radius);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+    }
+  }
+}
+
+.input-group__addon {
+  display: flex;
+  align-items: center;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-size: var(--input-font-size);
+  color: var(--text-light);
+  background-color: var(--neutral-ultra-light);
+  border: var(--input-border-width) solid var(--input-border-color);
+  white-space: nowrap;
+
+  &:first-child {
+    border-right: 0;
+    border-radius: var(--input-border-radius) 0 0 var(--input-border-radius);
+  }
+
+  &:last-child {
+    border-left: 0;
+    border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+  }
+}

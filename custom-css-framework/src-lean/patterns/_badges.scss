@@ -1,0 +1,238 @@
+// =============================================================================
+// ACSS Lite - Badge Patterns
+// =============================================================================
+// Optional module - include if you need badges/tags
+// Uses CSS custom properties for easy theming
+
+// =============================================================================
+// Badge Variables
+// =============================================================================
+
+:root {
+  --badge-padding-y: 0.25em;
+  --badge-padding-x: 0.625em;
+  --badge-font-size: var(--text-xs);
+  --badge-font-weight: 500;
+  --badge-border-radius: var(--radius-s);
+}
+
+// =============================================================================
+// Base Badge
+// =============================================================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375em;
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  line-height: 1.4;
+  white-space: nowrap;
+  border-radius: var(--badge-border-radius);
+  vertical-align: middle;
+}
+
+// =============================================================================
+// Badge Colors
+// =============================================================================
+
+// Primary
+.badge--primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.badge--primary-light {
+  background-color: var(--primary-ultra-light);
+  color: var(--primary-dark);
+}
+
+// Secondary
+.badge--secondary {
+  background-color: var(--secondary);
+  color: var(--base);
+}
+
+// Accent
+.badge--accent {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.badge--accent-light {
+  background-color: var(--accent-ultra-light);
+  color: var(--accent-dark);
+}
+
+// Neutral
+.badge--neutral {
+  background-color: var(--neutral);
+  color: var(--white);
+}
+
+.badge--neutral-light {
+  background-color: var(--neutral-ultra-light);
+  color: var(--neutral-dark);
+}
+
+// Base/Dark
+.badge--base {
+  background-color: var(--base);
+  color: var(--white);
+}
+
+// Success
+.badge--success {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.badge--success-light {
+  background-color: var(--success-light);
+  color: hsl(160, 80%, 20%);
+}
+
+// Warning
+.badge--warning {
+  background-color: var(--warning);
+  color: var(--base);
+}
+
+.badge--warning-light {
+  background-color: var(--warning-light);
+  color: hsl(40, 80%, 25%);
+}
+
+// Danger
+.badge--danger {
+  background-color: var(--danger);
+  color: var(--white);
+}
+
+.badge--danger-light {
+  background-color: var(--danger-light);
+  color: hsl(0, 70%, 30%);
+}
+
+// Info
+.badge--info {
+  background-color: var(--info);
+  color: var(--white);
+}
+
+.badge--info-light {
+  background-color: var(--info-light);
+  color: hsl(217, 80%, 30%);
+}
+
+// =============================================================================
+// Badge Outline Variants
+// =============================================================================
+
+.badge--outline-primary {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.badge--outline-secondary {
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--base);
+}
+
+.badge--outline-success {
+  background-color: transparent;
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+
+.badge--outline-warning {
+  background-color: transparent;
+  border: 1px solid var(--warning);
+  color: hsl(40, 80%, 35%);
+}
+
+.badge--outline-danger {
+  background-color: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+// =============================================================================
+// Badge Sizes
+// =============================================================================
+
+.badge--s {
+  --badge-padding-y: 0.125em;
+  --badge-padding-x: 0.5em;
+  font-size: 0.625rem;
+}
+
+.badge--l {
+  --badge-padding-y: 0.375em;
+  --badge-padding-x: 0.875em;
+  --badge-font-size: var(--text-s);
+}
+
+// =============================================================================
+// Badge Shapes
+// =============================================================================
+
+// Pill shape
+.badge--pill {
+  --badge-border-radius: var(--radius-full);
+}
+
+// Dot indicator (no text)
+.badge--dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+// =============================================================================
+// Badge with Icon
+// =============================================================================
+
+.badge__icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+// Close/remove button in badge
+.badge__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.25em;
+  margin-right: -0.25em;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1;
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+// Badge Group
+// =============================================================================
+
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}

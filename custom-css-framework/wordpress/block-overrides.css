@@ -1,0 +1,309 @@
+/**
+ * ACSS Lite - Block Overrides
+ *
+ * Makes WordPress blocks work harmoniously with the framework.
+ * Loaded AFTER both acss-lite and wp-block-library.
+ */
+
+/* =================================================================
+   Content Width & Alignment
+   ================================================================= */
+
+/* Use framework variables for content width */
+.wp-block {
+    max-width: var(--content-width);
+}
+
+.wp-block[data-align="wide"] {
+    max-width: var(--wrapper-width);
+}
+
+.wp-block[data-align="full"] {
+    max-width: none;
+}
+
+/* Entry content uses content-grid */
+.entry-content,
+.wp-block-post-content {
+    display: grid !important;
+    grid-template-columns:
+        [full-start] minmax(var(--gutter), 1fr)
+        [feature-max-start] minmax(0, var(--feature-max-width, 100px))
+        [feature-start] minmax(0, var(--feature-width, 50px))
+        [content-start] min(var(--content-width), 100% - var(--gutter) * 2)
+        [content-end] minmax(0, var(--feature-width, 50px))
+        [feature-end] minmax(0, var(--feature-max-width, 100px))
+        [feature-max-end] minmax(var(--gutter), 1fr)
+        [full-end];
+}
+
+.entry-content > *,
+.wp-block-post-content > * {
+    grid-column: content;
+}
+
+.entry-content > .alignwide,
+.wp-block-post-content > .alignwide {
+    grid-column: feature-max;
+}
+
+.entry-content > .alignfull,
+.wp-block-post-content > .alignfull {
+    grid-column: full;
+    width: 100%;
+}
+
+/* =================================================================
+   Typography Blocks
+   ================================================================= */
+
+/* Headings use framework scale */
+.wp-block-heading {
+    font-family: var(--font-primary);
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--heading-letter-spacing);
+    color: var(--neutral-ultra-dark);
+}
+
+h1.wp-block-heading { font-size: var(--h1); }
+h2.wp-block-heading { font-size: var(--h2); }
+h3.wp-block-heading { font-size: var(--h3); }
+h4.wp-block-heading { font-size: var(--h4); }
+h5.wp-block-heading { font-size: var(--h5); }
+h6.wp-block-heading { font-size: var(--h6); }
+
+/* Paragraphs */
+.wp-block-paragraph {
+    font-size: var(--text-m);
+    line-height: var(--text-line-height);
+}
+
+/* List blocks */
+.wp-block-list {
+    padding-inline-start: var(--space-l);
+}
+
+.wp-block-list li {
+    margin-block-end: var(--list-item-spacing);
+}
+
+/* Quote block */
+.wp-block-quote {
+    border-left: 4px solid var(--primary);
+    padding-left: var(--space-l);
+    margin-inline: 0;
+    font-size: var(--text-l);
+    font-style: italic;
+}
+
+.wp-block-quote cite {
+    font-size: var(--text-s);
+    font-style: normal;
+    color: var(--neutral);
+}
+
+/* Pullquote */
+.wp-block-pullquote {
+    border-top: 4px solid var(--primary);
+    border-bottom: 4px solid var(--primary);
+    padding: var(--space-xl) 0;
+    text-align: center;
+}
+
+.wp-block-pullquote blockquote {
+    margin: 0;
+}
+
+.wp-block-pullquote p {
+    font-size: var(--text-xl);
+}
+
+/* Code block */
+.wp-block-code {
+    background: var(--neutral-ultra-dark);
+    color: var(--white);
+    padding: var(--space-l);
+    border-radius: var(--radius-m);
+    font-family: var(--font-mono);
+    font-size: var(--text-s);
+}
+
+/* Preformatted */
+.wp-block-preformatted {
+    font-family: var(--font-mono);
+    font-size: var(--text-s);
+}
+
+/* =================================================================
+   Media Blocks
+   ================================================================= */
+
+/* Image block */
+.wp-block-image img {
+    border-radius: var(--radius-m);
+}
+
+.wp-block-image figcaption {
+    font-size: var(--text-s);
+    color: var(--neutral);
+    text-align: center;
+    margin-top: var(--space-s);
+}
+
+/* Cover block */
+.wp-block-cover {
+    border-radius: var(--radius-l);
+    overflow: hidden;
+}
+
+.wp-block-cover.alignfull {
+    border-radius: 0;
+}
+
+/* Gallery */
+.wp-block-gallery {
+    gap: var(--space-m) !important;
+}
+
+.wp-block-gallery .wp-block-image {
+    margin: 0 !important;
+}
+
+/* =================================================================
+   Layout Blocks
+   ================================================================= */
+
+/* Group block */
+.wp-block-group {
+    padding: var(--space-l);
+}
+
+.wp-block-group.has-background {
+    border-radius: var(--radius-l);
+}
+
+.wp-block-group.alignfull.has-background {
+    border-radius: 0;
+    padding-inline: var(--gutter);
+}
+
+/* Columns */
+.wp-block-columns {
+    gap: var(--space-l) !important;
+}
+
+/* Separator */
+.wp-block-separator {
+    border-color: var(--neutral-light);
+    margin-block: var(--space-xl);
+}
+
+.wp-block-separator.is-style-wide {
+    border-width: 1px;
+}
+
+.wp-block-separator.is-style-dots::before {
+    color: var(--neutral);
+}
+
+/* Spacer - use framework spacing */
+.wp-block-spacer {
+    /* Default spacer heights can be overridden via block settings */
+}
+
+/* =================================================================
+   Interactive Blocks
+   ================================================================= */
+
+/* Buttons */
+.wp-block-button__link {
+    font-family: var(--font-primary);
+    font-size: var(--text-s);
+    font-weight: 600;
+    padding: var(--space-s) var(--space-l);
+    border-radius: var(--radius-m);
+    transition: all var(--transition-fast);
+}
+
+.wp-block-button__link:not(.has-background) {
+    background-color: var(--primary);
+}
+
+.wp-block-button__link:not(.has-text-color) {
+    color: var(--white);
+}
+
+.wp-block-button__link:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Outline style */
+.wp-block-button.is-style-outline .wp-block-button__link {
+    background: transparent;
+    border: 2px solid currentColor;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color) {
+    color: var(--primary);
+}
+
+/* Button group */
+.wp-block-buttons {
+    gap: var(--space-m);
+}
+
+/* Table */
+.wp-block-table table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wp-block-table td,
+.wp-block-table th {
+    padding: var(--space-s) var(--space-m);
+    border: 1px solid var(--neutral-light);
+}
+
+.wp-block-table th {
+    background: var(--neutral-ultra-light);
+    font-weight: 600;
+}
+
+.wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
+    background: var(--neutral-ultra-light);
+}
+
+/* =================================================================
+   Spacing / Flow
+   ================================================================= */
+
+/* Apply smart-spacing flow to entry content */
+.entry-content > * + *,
+.wp-block-post-content > * + * {
+    margin-block-start: var(--flow-spacing, 1em);
+}
+
+.entry-content > * + :is(h1, h2, h3, h4, h5, h6),
+.wp-block-post-content > * + :is(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: var(--heading-spacing, 1.5em);
+}
+
+/* Reset block default margins - we control spacing */
+.wp-block-paragraph,
+.wp-block-heading,
+.wp-block-list,
+.wp-block-quote,
+.wp-block-image,
+.wp-block-gallery,
+.wp-block-cover,
+.wp-block-group,
+.wp-block-columns,
+.wp-block-table,
+.wp-block-code,
+.wp-block-preformatted,
+.wp-block-pullquote,
+.wp-block-separator,
+.wp-block-buttons {
+    margin-block: 0;
+}

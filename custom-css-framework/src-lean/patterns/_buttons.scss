@@ -1,0 +1,296 @@
+// =============================================================================
+// ACSS Lite - Button Patterns
+// =============================================================================
+// Optional module - include if you need buttons
+// Uses CSS custom properties for easy theming
+
+// =============================================================================
+// Button Variables
+// =============================================================================
+
+:root {
+  --btn-padding-y: 0.625em;
+  --btn-padding-x: 1.25em;
+  --btn-font-size: var(--text-m);
+  --btn-font-weight: 500;
+  --btn-line-height: 1.5;
+  --btn-border-width: 2px;
+  --btn-border-radius: var(--radius-m);
+  --btn-transition: all var(--transition-fast);
+}
+
+// =============================================================================
+// Base Button
+// =============================================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  font-family: inherit;
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  line-height: var(--btn-line-height);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+
+  border: var(--btn-border-width) solid transparent;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+  transition: var(--btn-transition);
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// Button Colors
+// =============================================================================
+
+// Primary (filled)
+.btn--primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+  }
+}
+
+// Secondary (filled)
+.btn--secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--base);
+
+  &:hover {
+    background-color: var(--secondary-hover);
+    border-color: var(--secondary-hover);
+  }
+}
+
+// Accent (filled)
+.btn--accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+}
+
+// Neutral (filled)
+.btn--neutral {
+  background-color: var(--neutral);
+  border-color: var(--neutral);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--neutral-dark);
+    border-color: var(--neutral-dark);
+  }
+}
+
+// Base/Dark (filled)
+.btn--base {
+  background-color: var(--base);
+  border-color: var(--base);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--base-dark);
+    border-color: var(--base-dark);
+  }
+}
+
+// White (filled)
+.btn--white {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--base);
+
+  &:hover {
+    background-color: var(--neutral-ultra-light);
+    border-color: var(--neutral-ultra-light);
+  }
+}
+
+// Contextual colors
+.btn--success {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: var(--white);
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.btn--warning {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  color: var(--base);
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.btn--danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--white);
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+// =============================================================================
+// Button Outline Variants
+// =============================================================================
+
+.btn--outline-primary {
+  background-color: transparent;
+  border-color: var(--primary);
+  color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+}
+
+.btn--outline-secondary {
+  background-color: transparent;
+  border-color: var(--secondary);
+  color: var(--base);
+
+  &:hover {
+    background-color: var(--secondary);
+  }
+}
+
+.btn--outline-base {
+  background-color: transparent;
+  border-color: var(--base);
+  color: var(--base);
+
+  &:hover {
+    background-color: var(--base);
+    color: var(--white);
+  }
+}
+
+.btn--outline-white {
+  background-color: transparent;
+  border-color: var(--white);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--white);
+    color: var(--base);
+  }
+}
+
+// =============================================================================
+// Button Ghost (no border)
+// =============================================================================
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary-ultra-light);
+  }
+}
+
+.btn--ghost-base {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--base);
+
+  &:hover {
+    background-color: var(--neutral-ultra-light);
+  }
+}
+
+// =============================================================================
+// Button Sizes
+// =============================================================================
+
+.btn--xs {
+  --btn-padding-y: 0.375em;
+  --btn-padding-x: 0.75em;
+  --btn-font-size: var(--text-xs);
+}
+
+.btn--s {
+  --btn-padding-y: 0.5em;
+  --btn-padding-x: 1em;
+  --btn-font-size: var(--text-s);
+}
+
+.btn--l {
+  --btn-padding-y: 0.75em;
+  --btn-padding-x: 1.5em;
+  --btn-font-size: var(--text-l);
+}
+
+.btn--xl {
+  --btn-padding-y: 1em;
+  --btn-padding-x: 2em;
+  --btn-font-size: var(--text-xl);
+}
+
+// =============================================================================
+// Button Block (full width)
+// =============================================================================
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+// =============================================================================
+// Button Group
+// =============================================================================
+
+.btn-group {
+  display: inline-flex;
+
+  > .btn {
+    border-radius: 0;
+
+    &:first-child {
+      border-radius: var(--btn-border-radius) 0 0 var(--btn-border-radius);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0;
+    }
+
+    &:not(:last-child) {
+      border-right-width: 0;
+    }
+  }
+}

@@ -1,0 +1,168 @@
+// =============================================================================
+// ACSS Lite - Card Patterns
+// =============================================================================
+// Optional module - include if you need cards
+// Uses CSS custom properties for easy theming
+
+// =============================================================================
+// Card Variables
+// =============================================================================
+
+:root {
+  --card-padding: var(--space-l);
+  --card-radius: var(--radius-l);
+  --card-shadow: var(--shadow-m);
+  --card-border: 1px solid var(--border);
+  --card-bg: var(--white);
+}
+
+// =============================================================================
+// Base Card
+// =============================================================================
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+// Card with shadow (default look)
+.card--elevated {
+  box-shadow: var(--card-shadow);
+}
+
+// Card with border
+.card--bordered {
+  border: var(--card-border);
+}
+
+// =============================================================================
+// Card Parts
+// =============================================================================
+
+.card__header {
+  padding: var(--card-padding);
+  border-bottom: var(--card-border);
+}
+
+.card__body {
+  padding: var(--card-padding);
+  flex: 1;
+}
+
+.card__footer {
+  padding: var(--card-padding);
+  border-top: var(--card-border);
+}
+
+.card__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card__title {
+  font-size: var(--h4);
+  font-weight: 600;
+  color: var(--heading);
+  margin: 0;
+}
+
+.card__subtitle {
+  font-size: var(--text-s);
+  color: var(--text-light);
+  margin-top: var(--space-2xs);
+}
+
+.card__text {
+  color: var(--text);
+  line-height: var(--text-line-height);
+}
+
+// =============================================================================
+// Card Variants
+// =============================================================================
+
+// Clickable card (link wrapper)
+a.card,
+.card--clickable {
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-l);
+  }
+}
+
+// Horizontal card
+.card--horizontal {
+  flex-direction: row;
+
+  .card__image {
+    width: 40%;
+    min-width: 200px;
+    object-fit: cover;
+  }
+
+  .card__body {
+    flex: 1;
+  }
+}
+
+// Compact card (less padding)
+.card--compact {
+  --card-padding: var(--space-m);
+}
+
+// =============================================================================
+// Card Colors
+// =============================================================================
+
+.card--primary {
+  background-color: var(--primary);
+  color: var(--white);
+
+  .card__title { color: var(--white); }
+  .card__text { color: rgba(255, 255, 255, 0.9); }
+  .card__header,
+  .card__footer { border-color: rgba(255, 255, 255, 0.2); }
+}
+
+.card--base {
+  background-color: var(--base);
+  color: var(--white);
+
+  .card__title { color: var(--white); }
+  .card__text { color: rgba(255, 255, 255, 0.9); }
+  .card__header,
+  .card__footer { border-color: rgba(255, 255, 255, 0.2); }
+}
+
+.card--light {
+  background-color: var(--neutral-ultra-light);
+
+  .card__header,
+  .card__footer { border-color: var(--neutral-light); }
+}
+
+// =============================================================================
+// Card Grid
+// =============================================================================
+
+.card-grid {
+  display: grid;
+  gap: var(--grid-gap);
+
+  &.card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  &.card-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  &.card-grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+// Auto-fit card grid
+.card-grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}

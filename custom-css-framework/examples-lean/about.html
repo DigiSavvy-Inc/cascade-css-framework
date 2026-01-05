@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | ACSS Lite Demo</title>
+    <link rel="stylesheet" href="../dist/acss-lite-full.css">
+    <style>
+        /* Project-specific theme overrides */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-ultra-light: #eff6ff;
+            --content-width: 65ch;
+            --wrapper-width: 1200px;
+        }
+
+        /* Placeholder image styling */
+        .placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Page header */
+        .page-header {
+            background: var(--neutral-ultra-light);
+            padding-block: var(--section-space-s);
+            text-align: center;
+        }
+
+        .page-header__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .page-header__subtitle {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            max-width: 50ch;
+            margin-inline: auto;
+        }
+
+        /* Section styling */
+        .section {
+            padding-block: var(--section-space-m);
+        }
+
+        .section--alt {
+            background-color: var(--neutral-ultra-light);
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .section__subtitle {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            max-width: 60ch;
+            margin-inline: auto;
+        }
+
+        /* Story section */
+        .story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .story {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .story__image {
+            aspect-ratio: 4/3;
+            border-radius: var(--radius-l);
+        }
+
+        .story__content {
+            max-width: 55ch;
+        }
+
+        /* Team member cards */
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member__photo {
+            width: 160px;
+            height: 160px;
+            border-radius: var(--radius-full);
+            margin-inline: auto;
+            margin-bottom: var(--space-m);
+        }
+
+        .team-member__name {
+            margin-bottom: var(--space-2xs);
+        }
+
+        .team-member__role {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: var(--space-s);
+        }
+
+        .team-member__bio {
+            color: var(--text-light);
+            font-size: var(--text-s);
+        }
+
+        /* Values */
+        .value {
+            text-align: center;
+            padding: var(--space-l);
+        }
+
+        .value__icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-full);
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-inline: auto;
+            margin-bottom: var(--space-m);
+            font-size: var(--text-xl);
+        }
+
+        .value__title {
+            margin-bottom: var(--space-s);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin-inline: auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--neutral-light);
+        }
+
+        .timeline__item {
+            display: flex;
+            gap: var(--space-l);
+            margin-bottom: var(--space-xl);
+            position: relative;
+        }
+
+        .timeline__item:nth-child(odd) {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .timeline__year {
+            flex: 1;
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .timeline__content {
+            flex: 1;
+        }
+
+        .timeline__dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+            border: 3px solid var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline__item,
+            .timeline__item:nth-child(odd) {
+                flex-direction: column;
+                text-align: left;
+                padding-left: var(--space-l);
+            }
+
+            .timeline__dot {
+                left: 0;
+            }
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding-block: var(--section-space-l);
+        }
+
+        .cta__title {
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .footer a {
+            color: var(--neutral-light);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid var(--neutral-dark);
+            padding-top: var(--space-l);
+            margin-top: var(--space-xl);
+            text-align: center;
+            color: var(--neutral);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+         ============================================================ -->
+    <header class="container padding-block--m">
+        <nav class="flex items-center justify-between">
+            <a href="homepage.html" class="text--h4 text--700 text--base">Acme Co.</a>
+            <div class="flex gap--l items-center">
+                <a href="about.html" class="text--primary text--600">About</a>
+                <a href="blog-archive.html" class="text--base">Blog</a>
+                <a href="#" class="text--base">Services</a>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-header__title">About Us</h1>
+            <p class="page-header__subtitle">
+                We're a team of passionate creators, builders, and problem-solvers dedicated to helping businesses thrive.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         OUR STORY
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="story">
+                <div class="placeholder story__image">Office Photo</div>
+                <div class="story__content smart-spacing">
+                    <h2>Our Story</h2>
+                    <p>
+                        Founded in 2014, Acme Co. started with a simple mission: make exceptional digital services accessible to businesses of all sizes.
+                    </p>
+                    <p>
+                        What began as a two-person operation in a small office has grown into a team of over 50 talented professionals, serving clients across the globe.
+                    </p>
+                    <p>
+                        Through the years, we've stayed true to our core belief that great work comes from understanding our clients' unique challenges and crafting solutions that truly make a difference.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         OUR VALUES
+         ============================================================ -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Our Values</h2>
+                <p class="section__subtitle">
+                    These principles guide everything we do.
+                </p>
+            </div>
+
+            <div class="grid--4 gap--l">
+                <div class="value">
+                    <div class="value__icon">01</div>
+                    <h3 class="text--h5 value__title">Excellence</h3>
+                    <p class="text--light text--s">
+                        We hold ourselves to the highest standards in every project we undertake.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <div class="value__icon">02</div>
+                    <h3 class="text--h5 value__title">Integrity</h3>
+                    <p class="text--light text--s">
+                        We believe in honest communication and transparent partnerships.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <div class="value__icon">03</div>
+                    <h3 class="text--h5 value__title">Innovation</h3>
+                    <p class="text--light text--s">
+                        We continuously explore new technologies and approaches to deliver better results.
+                    </p>
+                </div>
+
+                <div class="value">
+                    <div class="value__icon">04</div>
+                    <h3 class="text--h5 value__title">Collaboration</h3>
+                    <p class="text--light text--s">
+                        We work as partners with our clients, not just service providers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         TEAM SECTION
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Meet Our Team</h2>
+                <p class="section__subtitle">
+                    The talented people behind our success.
+                </p>
+            </div>
+
+            <div class="grid--4 gap--xl">
+                <div class="team-member">
+                    <div class="placeholder team-member__photo">JD</div>
+                    <h3 class="text--h5 team-member__name">John Doe</h3>
+                    <p class="team-member__role">CEO & Founder</p>
+                    <p class="team-member__bio">
+                        15+ years experience leading digital agencies and building high-performing teams.
+                    </p>
+                </div>
+
+                <div class="team-member">
+                    <div class="placeholder team-member__photo">JS</div>
+                    <h3 class="text--h5 team-member__name">Jane Smith</h3>
+                    <p class="team-member__role">Creative Director</p>
+                    <p class="team-member__bio">
+                        Award-winning designer with a passion for creating memorable brand experiences.
+                    </p>
+                </div>
+
+                <div class="team-member">
+                    <div class="placeholder team-member__photo">MJ</div>
+                    <h3 class="text--h5 team-member__name">Mike Johnson</h3>
+                    <p class="team-member__role">Lead Developer</p>
+                    <p class="team-member__bio">
+                        Full-stack expert specializing in scalable web applications and modern frameworks.
+                    </p>
+                </div>
+
+                <div class="team-member">
+                    <div class="placeholder team-member__photo">EW</div>
+                    <h3 class="text--h5 team-member__name">Emily Wilson</h3>
+                    <p class="team-member__role">Strategy Director</p>
+                    <p class="team-member__bio">
+                        Data-driven strategist helping clients achieve measurable business outcomes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         TIMELINE
+         ============================================================ -->
+    <section class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Our Journey</h2>
+                <p class="section__subtitle">
+                    Key milestones in our growth story.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline__item">
+                    <div class="timeline__year">2014</div>
+                    <div class="timeline__content">
+                        <h3 class="text--h5 margin-bottom--xs">Company Founded</h3>
+                        <p class="text--light text--s">Started with two co-founders and a big vision.</p>
+                    </div>
+                    <div class="timeline__dot"></div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__year">2016</div>
+                    <div class="timeline__content">
+                        <h3 class="text--h5 margin-bottom--xs">First Major Client</h3>
+                        <p class="text--light text--s">Landed our first Fortune 500 engagement.</p>
+                    </div>
+                    <div class="timeline__dot"></div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__year">2019</div>
+                    <div class="timeline__content">
+                        <h3 class="text--h5 margin-bottom--xs">Team of 25</h3>
+                        <p class="text--light text--s">Expanded to a full-service digital agency.</p>
+                    </div>
+                    <div class="timeline__dot"></div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__year">2022</div>
+                    <div class="timeline__content">
+                        <h3 class="text--h5 margin-bottom--xs">Global Expansion</h3>
+                        <p class="text--light text--s">Opened offices in Europe and Asia.</p>
+                    </div>
+                    <div class="timeline__dot"></div>
+                </div>
+
+                <div class="timeline__item">
+                    <div class="timeline__year">2024</div>
+                    <div class="timeline__content">
+                        <h3 class="text--h5 margin-bottom--xs">500+ Projects</h3>
+                        <p class="text--light text--s">Celebrating a decade of successful deliveries.</p>
+                    </div>
+                    <div class="timeline__dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CTA SECTION
+         ============================================================ -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta__title margin-bottom--m">Want to work with us?</h2>
+            <p class="text--l margin-bottom--l" style="opacity: 0.9; max-width: 50ch; margin-inline: auto;">
+                We're always looking for talented people and exciting projects.
+            </p>
+            <div class="flex gap--m justify-center flex-wrap">
+                <a href="#" class="btn btn--white btn--l">View Careers</a>
+                <a href="#" class="btn btn--outline-white btn--l">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid--4 gap--xl">
+                <div>
+                    <p class="text--h4 text--700 margin-bottom--m">Acme Co.</p>
+                    <p class="text--s" style="color: var(--neutral-light);">
+                        Building innovative solutions for forward-thinking businesses since 2014.
+                    </p>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Company</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="about.html">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Services</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="#">Web Development</a>
+                        <a href="#">UI/UX Design</a>
+                        <a href="#">Digital Strategy</a>
+                        <a href="#">Consulting</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Resources</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="blog-archive.html">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="text--s">&copy; 2024 Acme Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

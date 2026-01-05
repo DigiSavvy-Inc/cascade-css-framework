@@ -1,0 +1,153 @@
+/**
+ * ACSS Lite - Editor Specific Styles
+ *
+ * Tweaks for the block editor to make editing experience match frontend.
+ * These styles handle editor-specific elements that don't exist on frontend.
+ */
+
+/* =================================================================
+   Editor Canvas
+   ================================================================= */
+
+/* Match editor background to frontend */
+.editor-styles-wrapper {
+    background-color: var(--white);
+    color: var(--neutral-ultra-dark);
+    font-family: var(--font-primary);
+    font-size: var(--text-m);
+    line-height: var(--text-line-height);
+}
+
+/* Editor content area width */
+.editor-styles-wrapper .wp-block {
+    max-width: var(--content-width);
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+    max-width: var(--wrapper-width);
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+    max-width: none;
+}
+
+/* =================================================================
+   Block Selection States
+   ================================================================= */
+
+/* Selected block outline */
+.editor-styles-wrapper .wp-block:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Hover state */
+.editor-styles-wrapper .wp-block:hover::after {
+    border-color: var(--primary-light);
+}
+
+/* =================================================================
+   Placeholder Text
+   ================================================================= */
+
+/* Empty block placeholders */
+.editor-styles-wrapper .wp-block-paragraph.is-selected:empty::before,
+.editor-styles-wrapper .wp-block-heading.is-selected:empty::before {
+    color: var(--neutral-light);
+}
+
+/* =================================================================
+   Typography in Editor
+   ================================================================= */
+
+/* Ensure headings use our styles */
+.editor-styles-wrapper h1 { font-size: var(--h1); }
+.editor-styles-wrapper h2 { font-size: var(--h2); }
+.editor-styles-wrapper h3 { font-size: var(--h3); }
+.editor-styles-wrapper h4 { font-size: var(--h4); }
+.editor-styles-wrapper h5 { font-size: var(--h5); }
+.editor-styles-wrapper h6 { font-size: var(--h6); }
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--heading-letter-spacing);
+    font-weight: 700;
+    color: var(--neutral-ultra-dark);
+}
+
+/* Links in editor */
+.editor-styles-wrapper a {
+    color: var(--primary);
+}
+
+/* =================================================================
+   Block Spacing in Editor
+   ================================================================= */
+
+/* Consistent spacing between blocks while editing */
+.editor-styles-wrapper .wp-block + .wp-block {
+    margin-block-start: var(--flow-spacing, 1em);
+}
+
+.editor-styles-wrapper .wp-block + .wp-block-heading {
+    margin-block-start: var(--heading-spacing, 1.5em);
+}
+
+/* =================================================================
+   Specific Block Tweaks
+   ================================================================= */
+
+/* Button block in editor */
+.editor-styles-wrapper .wp-block-button__link {
+    font-family: var(--font-primary);
+}
+
+/* Code block in editor */
+.editor-styles-wrapper .wp-block-code {
+    background: var(--neutral-ultra-dark);
+    color: var(--white);
+    font-family: var(--font-mono);
+}
+
+/* Quote block */
+.editor-styles-wrapper .wp-block-quote {
+    border-left-color: var(--primary);
+}
+
+/* Cover block text */
+.editor-styles-wrapper .wp-block-cover p,
+.editor-styles-wrapper .wp-block-cover h1,
+.editor-styles-wrapper .wp-block-cover h2,
+.editor-styles-wrapper .wp-block-cover h3,
+.editor-styles-wrapper .wp-block-cover h4 {
+    color: inherit;
+}
+
+/* =================================================================
+   Sidebar / Inspector Panel
+   ================================================================= */
+
+/* These styles are outside the iframe, for editor UI consistency */
+
+/* Make color picker swatches show our theme colors */
+.components-circular-option-picker__option {
+    border-radius: var(--radius-s);
+}
+
+/* =================================================================
+   Post Title
+   ================================================================= */
+
+/* Style the post title input */
+.editor-post-title__input {
+    font-size: var(--h1) !important;
+    font-family: var(--font-primary) !important;
+    line-height: var(--heading-line-height) !important;
+    letter-spacing: var(--heading-letter-spacing) !important;
+    font-weight: 700 !important;
+}

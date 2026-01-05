@@ -1,0 +1,296 @@
+// =============================================================================
+// ACSS Lite - Core Variables
+// =============================================================================
+// All CSS custom properties in one place
+// Users override these in their theme.css file
+//
+// Based on Automatic.css variable system
+
+@use 'sass:math';
+@use 'sass:color';
+
+// =============================================================================
+// Configuration (SCSS compile-time)
+// =============================================================================
+
+// Base settings
+$base-font-size: 16px !default;
+$base-line-height: 1.5 !default;
+
+// Typography scale (fluid min/max)
+$type-scale-min: 1.2 !default;    // Minor third
+$type-scale-max: 1.25 !default;   // Major third
+
+// Spacing scale ratio
+$space-ratio: 1.5 !default;       // Perfect fifth
+
+// Viewport clamp values
+$viewport-min: 320 !default;
+$viewport-max: 1440 !default;
+
+// Colors (defaults - override in theme.css)
+// ACSS core colors: primary, secondary, accent, action, neutral
+$color-primary: #0066cc !default;
+$color-secondary: #64748b !default;
+$color-accent: #8b5cf6 !default;
+$color-action: #10b981 !default;    // For CTAs, important actions
+$color-neutral: #6b7280 !default;   // Shades of gray/black
+
+// Contextual colors (optional)
+$color-success: #10b981 !default;
+$color-warning: #f59e0b !default;
+$color-danger: #ef4444 !default;
+$color-info: #3b82f6 !default;
+
+// =============================================================================
+// Functions
+// =============================================================================
+
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+@function fluid($min-px, $max-px, $min-vw: $viewport-min, $max-vw: $viewport-max) {
+  $min-rem: math.div($min-px, 16);
+  $max-rem: math.div($max-px, 16);
+  $slope: math.div($max-rem - $min-rem, $max-vw - $min-vw) * 100;
+  $intercept: $min-rem - (math.div($slope, 100) * $min-vw);
+  @return clamp(#{$min-rem}rem, #{$intercept}rem + #{$slope}vw, #{$max-rem}rem);
+}
+
+@function color-variant($color, $lightness) {
+  @return hsl(color.hue($color), color.saturation($color), $lightness);
+}
+
+// =============================================================================
+// Root Variables
+// =============================================================================
+
+:root {
+  // ---------------------------------------------------------------------------
+  // Base
+  // ---------------------------------------------------------------------------
+  --base-font-size: #{$base-font-size};
+  --base-line-height: #{$base-line-height};
+
+  // ---------------------------------------------------------------------------
+  // Layout
+  // ---------------------------------------------------------------------------
+  --content-width: 65ch;
+  --content-width-narrow: 45ch;
+  --content-width-wide: 85ch;
+  --wrapper-width: 1200px;
+  --wrapper-width-wide: 1400px;
+  --gutter: clamp(1rem, 5vw, 3rem);
+
+  // ---------------------------------------------------------------------------
+  // Colors - Primary
+  // ---------------------------------------------------------------------------
+  --primary: #{$color-primary};
+  --primary-hover: #{color.scale($color-primary, $lightness: -10%)};
+  --primary-light: #{color-variant($color-primary, 85%)};
+  --primary-ultra-light: #{color-variant($color-primary, 95%)};
+  --primary-dark: #{color-variant($color-primary, 25%)};
+  --primary-ultra-dark: #{color-variant($color-primary, 15%)};
+  --primary-trans-10: #{color.change($color-primary, $alpha: 0.1)};
+  --primary-trans-20: #{color.change($color-primary, $alpha: 0.2)};
+  --primary-trans-50: #{color.change($color-primary, $alpha: 0.5)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Secondary
+  // ---------------------------------------------------------------------------
+  --secondary: #{$color-secondary};
+  --secondary-hover: #{color.scale($color-secondary, $lightness: -10%)};
+  --secondary-light: #{color-variant($color-secondary, 85%)};
+  --secondary-ultra-light: #{color-variant($color-secondary, 95%)};
+  --secondary-dark: #{color-variant($color-secondary, 25%)};
+  --secondary-ultra-dark: #{color-variant($color-secondary, 15%)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Accent
+  // ---------------------------------------------------------------------------
+  --accent: #{$color-accent};
+  --accent-hover: #{color.scale($color-accent, $lightness: -10%)};
+  --accent-light: #{color-variant($color-accent, 85%)};
+  --accent-ultra-light: #{color-variant($color-accent, 95%)};
+  --accent-dark: #{color-variant($color-accent, 25%)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Action (for CTAs, important actions)
+  // ---------------------------------------------------------------------------
+  --action: #{$color-action};
+  --action-hover: #{color.scale($color-action, $lightness: -10%)};
+  --action-light: #{color-variant($color-action, 85%)};
+  --action-ultra-light: #{color-variant($color-action, 95%)};
+  --action-dark: #{color-variant($color-action, 25%)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Neutral (grays/blacks)
+  // ---------------------------------------------------------------------------
+  --neutral: #{$color-neutral};
+  --neutral-light: #{color-variant($color-neutral, 85%)};
+  --neutral-ultra-light: #{color-variant($color-neutral, 95%)};
+  --neutral-dark: #{color-variant($color-neutral, 30%)};
+  --neutral-ultra-dark: #{color-variant($color-neutral, 10%)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Contextual (optional status colors)
+  // ---------------------------------------------------------------------------
+  --success: #{$color-success};
+  --success-light: #{color-variant($color-success, 90%)};
+  --warning: #{$color-warning};
+  --warning-light: #{color-variant($color-warning, 90%)};
+  --danger: #{$color-danger};
+  --danger-light: #{color-variant($color-danger, 90%)};
+  --info: #{$color-info};
+  --info-light: #{color-variant($color-info, 90%)};
+
+  // ---------------------------------------------------------------------------
+  // Colors - Core
+  // ---------------------------------------------------------------------------
+  --white: #ffffff;
+  --black: #000000;
+
+  // ---------------------------------------------------------------------------
+  // Semantic Aliases (convenience mappings to neutral scale)
+  // ---------------------------------------------------------------------------
+  // These provide semantic meaning while using the core color system
+  --base: var(--neutral-ultra-dark);
+  --base-light: var(--neutral-dark);
+  --base-dark: var(--neutral-ultra-dark);
+  --text-light: var(--neutral);
+  --heading: var(--neutral-ultra-dark);
+
+  // ---------------------------------------------------------------------------
+  // Typography - Headings (fluid)
+  // ---------------------------------------------------------------------------
+  --h1: #{fluid(36, 64)};
+  --h2: #{fluid(30, 48)};
+  --h3: #{fluid(24, 36)};
+  --h4: #{fluid(20, 28)};
+  --h5: #{fluid(18, 22)};
+  --h6: #{fluid(16, 18)};
+
+  // ---------------------------------------------------------------------------
+  // Typography - Text Sizes (fluid)
+  // ---------------------------------------------------------------------------
+  --text-xs: #{fluid(12, 14)};
+  --text-s: #{fluid(14, 16)};
+  --text-m: #{fluid(16, 18)};
+  --text-l: #{fluid(18, 22)};
+  --text-xl: #{fluid(20, 26)};
+  --text-xxl: #{fluid(24, 32)};
+
+  // ---------------------------------------------------------------------------
+  // Typography - Properties
+  // ---------------------------------------------------------------------------
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: var(--font-primary);
+  --font-mono: ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --text-line-height: 1.6;
+  --heading-line-height: 1.2;
+  --text-letter-spacing: normal;
+  --heading-letter-spacing: -0.02em;
+
+  // ---------------------------------------------------------------------------
+  // Spacing - T-shirt Scale
+  // ---------------------------------------------------------------------------
+  --space-3xs: #{fluid(4, 6)};
+  --space-2xs: #{fluid(6, 8)};
+  --space-xs: #{fluid(8, 12)};
+  --space-s: #{fluid(12, 16)};
+  --space-m: #{fluid(16, 24)};
+  --space-l: #{fluid(24, 36)};
+  --space-xl: #{fluid(36, 48)};
+  --space-2xl: #{fluid(48, 64)};
+  --space-3xl: #{fluid(64, 96)};
+
+  // ---------------------------------------------------------------------------
+  // Spacing - Section (larger scale for page sections)
+  // ---------------------------------------------------------------------------
+  --section-space-xs: #{fluid(24, 40)};
+  --section-space-s: #{fluid(40, 64)};
+  --section-space-m: #{fluid(64, 96)};
+  --section-space-l: #{fluid(96, 128)};
+  --section-space-xl: #{fluid(128, 192)};
+
+  // ---------------------------------------------------------------------------
+  // Spacing - Contextual Gaps
+  // ---------------------------------------------------------------------------
+  --container-gap: var(--space-xl);
+  --content-gap: var(--space-m);
+  --grid-gap: var(--space-l);
+
+  // ---------------------------------------------------------------------------
+  // Grid
+  // ---------------------------------------------------------------------------
+  --grid-1: repeat(1, 1fr);
+  --grid-2: repeat(2, 1fr);
+  --grid-3: repeat(3, 1fr);
+  --grid-4: repeat(4, 1fr);
+  --grid-5: repeat(5, 1fr);
+  --grid-6: repeat(6, 1fr);
+
+  // Unbalanced grids
+  --grid-1-2: 1fr 2fr;
+  --grid-2-1: 2fr 1fr;
+  --grid-1-3: 1fr 3fr;
+  --grid-3-1: 3fr 1fr;
+
+  // ---------------------------------------------------------------------------
+  // Border Radius
+  // ---------------------------------------------------------------------------
+  --radius-xs: 0.125rem;
+  --radius-s: 0.25rem;
+  --radius-m: 0.5rem;
+  --radius-l: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  // ---------------------------------------------------------------------------
+  // Shadows
+  // ---------------------------------------------------------------------------
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-m: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-l: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+  // ---------------------------------------------------------------------------
+  // Transitions
+  // ---------------------------------------------------------------------------
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  // ---------------------------------------------------------------------------
+  // Z-Index Scale
+  // ---------------------------------------------------------------------------
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+
+  // ---------------------------------------------------------------------------
+  // Smart Spacing (for content flow)
+  // ---------------------------------------------------------------------------
+  --flow-spacing: 1em;              // Base flow spacing between elements
+  --heading-spacing: 1.5em;         // Extra space before headings
+  --paragraph-spacing: 1em;         // Space between paragraphs
+  --list-spacing: 1em;
+  --list-item-spacing: 0.5em;
+  --figure-spacing: 1em;
+  --figcaption-spacing: 0.5em;
+  --blockquote-spacing: 1em;
+
+  // ---------------------------------------------------------------------------
+  // Content Grid
+  // ---------------------------------------------------------------------------
+  --feature-width: 50px;
+  --feature-max-width: 100px;
+}

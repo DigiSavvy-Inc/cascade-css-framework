@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | ACSS Lite Demo</title>
+    <link rel="stylesheet" href="../dist/acss-lite-full.css">
+    <style>
+        /* Project-specific theme overrides */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-ultra-light: #eff6ff;
+            --content-width: 65ch;
+            --wrapper-width: 1200px;
+        }
+
+        /* Placeholder image styling */
+        .placeholder {
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Page header */
+        .page-header {
+            background: var(--neutral-ultra-light);
+            padding-block: var(--section-space-s);
+        }
+
+        .page-header__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .page-header__subtitle {
+            font-size: var(--text-l);
+            color: var(--text-light);
+            max-width: 50ch;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            padding-block: var(--space-l);
+            border-bottom: 1px solid var(--neutral-light);
+            margin-bottom: var(--space-xl);
+        }
+
+        .category-filter__btn {
+            padding: var(--space-xs) var(--space-m);
+            border: none;
+            background: none;
+            color: var(--text-light);
+            font-size: var(--text-s);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+            transition: all 0.2s ease;
+        }
+
+        .category-filter__btn:hover {
+            color: var(--primary);
+            background: var(--primary-ultra-light);
+        }
+
+        .category-filter__btn--active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .category-filter__btn--active:hover {
+            background: var(--primary-hover);
+            color: var(--white);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            padding-block: var(--section-space-s);
+        }
+
+        /* Post Card */
+        .post-card {
+            background: var(--white);
+            border-radius: var(--radius-l);
+            overflow: hidden;
+            box-shadow: var(--shadow-s);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-m);
+        }
+
+        .post-card__image {
+            aspect-ratio: 16/9;
+        }
+
+        .post-card__body {
+            padding: var(--space-l);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card__category {
+            font-size: var(--text-xs);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .post-card__title {
+            margin-bottom: var(--space-s);
+        }
+
+        .post-card__title a {
+            color: var(--heading);
+            text-decoration: none;
+        }
+
+        .post-card__title a:hover {
+            color: var(--primary);
+        }
+
+        .post-card__excerpt {
+            color: var(--text-light);
+            font-size: var(--text-s);
+            margin-bottom: var(--space-m);
+            flex: 1;
+        }
+
+        .post-card__meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+            font-size: var(--text-xs);
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        .post-card__avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-full);
+        }
+
+        /* Featured Post */
+        .featured-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            padding: var(--space-xl);
+            background: var(--white);
+            border-radius: var(--radius-l);
+            box-shadow: var(--shadow-m);
+            margin-bottom: var(--space-2xl);
+        }
+
+        @media (max-width: 768px) {
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-post__image {
+            aspect-ratio: 16/10;
+            border-radius: var(--radius-m);
+        }
+
+        .featured-post__category {
+            display: inline-block;
+            background: var(--primary-ultra-light);
+            color: var(--primary);
+            padding: var(--space-2xs) var(--space-s);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-m);
+        }
+
+        .featured-post__title {
+            margin-bottom: var(--space-m);
+        }
+
+        .featured-post__title a {
+            color: var(--heading);
+            text-decoration: none;
+        }
+
+        .featured-post__title a:hover {
+            color: var(--primary);
+        }
+
+        .featured-post__excerpt {
+            color: var(--text-light);
+            margin-bottom: var(--space-l);
+        }
+
+        .featured-post__meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-s);
+            font-size: var(--text-s);
+            color: var(--text-light);
+        }
+
+        .featured-post__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-xs);
+            padding-block: var(--space-2xl);
+        }
+
+        .pagination__btn {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-inline: var(--space-s);
+            border: 1px solid var(--neutral-light);
+            background: var(--white);
+            color: var(--text);
+            font-size: var(--text-s);
+            font-weight: 500;
+            border-radius: var(--radius-m);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .pagination__btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pagination__btn--active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .pagination__btn--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--primary);
+            color: var(--white);
+            padding-block: var(--section-space-m);
+        }
+
+        .newsletter__content {
+            max-width: 600px;
+            margin-inline: auto;
+            text-align: center;
+        }
+
+        .newsletter__title {
+            color: var(--white);
+            margin-bottom: var(--space-s);
+        }
+
+        .newsletter__text {
+            opacity: 0.9;
+            margin-bottom: var(--space-l);
+        }
+
+        .newsletter__form {
+            display: flex;
+            gap: var(--space-s);
+            max-width: 450px;
+            margin-inline: auto;
+        }
+
+        @media (max-width: 500px) {
+            .newsletter__form {
+                flex-direction: column;
+            }
+        }
+
+        .newsletter__input {
+            flex: 1;
+            padding: var(--space-s) var(--space-m);
+            border: none;
+            border-radius: var(--radius-m);
+            font-size: var(--text-m);
+        }
+
+        .newsletter__input::placeholder {
+            color: var(--neutral);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--base-dark);
+            color: var(--white);
+            padding-block: var(--section-space-s);
+        }
+
+        .footer a {
+            color: var(--neutral-light);
+        }
+
+        .footer a:hover {
+            color: var(--white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid var(--neutral-dark);
+            padding-top: var(--space-l);
+            margin-top: var(--space-xl);
+            text-align: center;
+            color: var(--neutral);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+         ============================================================ -->
+    <header class="container padding-block--m">
+        <nav class="flex items-center justify-between">
+            <a href="homepage.html" class="text--h4 text--700 text--base">Acme Co.</a>
+            <div class="flex gap--l items-center">
+                <a href="about.html" class="text--base">About</a>
+                <a href="blog-archive.html" class="text--primary text--600">Blog</a>
+                <a href="#" class="text--base">Services</a>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-header__title">Blog</h1>
+            <p class="page-header__subtitle">
+                Insights, tutorials, and news from our team of experts.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CATEGORY FILTER
+         ============================================================ -->
+    <div class="container">
+        <div class="category-filter">
+            <button class="category-filter__btn category-filter__btn--active">All Posts</button>
+            <button class="category-filter__btn">Development</button>
+            <button class="category-filter__btn">Design</button>
+            <button class="category-filter__btn">Strategy</button>
+            <button class="category-filter__btn">Performance</button>
+            <button class="category-filter__btn">Case Studies</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         BLOG GRID
+         ============================================================ -->
+    <section class="blog-grid">
+        <div class="container">
+
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <div class="placeholder featured-post__image">Featured Image</div>
+                <div>
+                    <span class="featured-post__category">Featured</span>
+                    <h2 class="featured-post__title">
+                        <a href="blog-post.html">Building Scalable Web Applications: A Practical Guide</a>
+                    </h2>
+                    <p class="featured-post__excerpt">
+                        Learn the key principles and practical strategies that can help you create applications that grow gracefully with your user base.
+                    </p>
+                    <div class="featured-post__meta">
+                        <div class="placeholder featured-post__avatar">MJ</div>
+                        <div>
+                            <p class="text--600 text--base">Mike Johnson</p>
+                            <p>Dec 5, 2024 &bull; 8 min read</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post Grid -->
+            <div class="grid--3 gap--l">
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Development</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Mastering CSS Grid: A Complete Guide</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Learn how to create complex layouts with CSS Grid, from basic concepts to advanced techniques.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">JS</div>
+                            <span>Jane Smith &bull; Nov 28, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Strategy</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">API Design Best Practices</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Design APIs that developers love. Tips for RESTful design, versioning, and documentation.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">MJ</div>
+                            <span>Mike Johnson &bull; Nov 21, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Performance</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Database Optimization Strategies</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Improve your application's performance with these proven database optimization techniques.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">JD</div>
+                            <span>John Doe &bull; Nov 14, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Design</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Design Systems That Scale</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            How to build and maintain design systems that grow with your product and team.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">EW</div>
+                            <span>Emily Wilson &bull; Nov 7, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Case Studies</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">How We Reduced Load Time by 60%</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            A deep dive into the performance optimizations that transformed our client's website.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">MJ</div>
+                            <span>Mike Johnson &bull; Oct 30, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Development</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Introduction to Web Components</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Build reusable, encapsulated components using native web platform features.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">JS</div>
+                            <span>Jane Smith &bull; Oct 23, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Strategy</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Migrating to TypeScript: Lessons Learned</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Our experience migrating a 100k+ LOC JavaScript codebase to TypeScript.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">JD</div>
+                            <span>John Doe &bull; Oct 16, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Design</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Accessibility in Modern Web Design</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            Making your websites accessible to everyone isn't just ethical—it's good business.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">EW</div>
+                            <span>Emily Wilson &bull; Oct 9, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="placeholder post-card__image">Post Image</div>
+                    <div class="post-card__body">
+                        <p class="post-card__category">Performance</p>
+                        <h3 class="text--h5 post-card__title">
+                            <a href="blog-post.html">Understanding Core Web Vitals</a>
+                        </h3>
+                        <p class="post-card__excerpt">
+                            What Google's Core Web Vitals mean for your website and how to optimize them.
+                        </p>
+                        <div class="post-card__meta">
+                            <div class="placeholder post-card__avatar">MJ</div>
+                            <span>Mike Johnson &bull; Oct 2, 2024</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination">
+                <a href="#" class="pagination__btn pagination__btn--disabled">&larr; Previous</a>
+                <a href="#" class="pagination__btn pagination__btn--active">1</a>
+                <a href="#" class="pagination__btn">2</a>
+                <a href="#" class="pagination__btn">3</a>
+                <a href="#" class="pagination__btn">4</a>
+                <span class="pagination__btn" style="border: none;">...</span>
+                <a href="#" class="pagination__btn">12</a>
+                <a href="#" class="pagination__btn">Next &rarr;</a>
+            </nav>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         NEWSLETTER
+         ============================================================ -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter__content">
+                <h2 class="newsletter__title">Stay Updated</h2>
+                <p class="newsletter__text">
+                    Get the latest articles, tutorials, and news delivered straight to your inbox.
+                </p>
+                <form class="newsletter__form">
+                    <input type="email" class="newsletter__input" placeholder="Enter your email">
+                    <button type="submit" class="btn btn--white">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid--4 gap--xl">
+                <div>
+                    <p class="text--h4 text--700 margin-bottom--m">Acme Co.</p>
+                    <p class="text--s" style="color: var(--neutral-light);">
+                        Building innovative solutions for forward-thinking businesses since 2014.
+                    </p>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Company</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="about.html">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Services</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="#">Web Development</a>
+                        <a href="#">UI/UX Design</a>
+                        <a href="#">Digital Strategy</a>
+                        <a href="#">Consulting</a>
+                    </nav>
+                </div>
+                <div>
+                    <p class="text--600 margin-bottom--m">Resources</p>
+                    <nav class="flex flex-col gap--xs">
+                        <a href="blog-archive.html">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Privacy Policy</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="text--s">&copy; 2024 Acme Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

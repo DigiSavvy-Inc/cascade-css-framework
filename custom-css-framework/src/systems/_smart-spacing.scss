@@ -1,0 +1,203 @@
+// =============================================================================
+// Smart Spacing System
+// =============================================================================
+// Automatic content spacing using CSS variables
+// Parent container controls all spacing - no margins on individual elements
+// Based on Automatic.css smart-spacing implementation
+//
+// Usage:
+//   <article class="smart-spacing">
+//     <h1>Title</h1>
+//     <p>First paragraph...</p>
+//     <figure><img src="..."><figcaption>Caption</figcaption></figure>
+//     <h2>Subheading</h2>
+//     <p>More content...</p>
+//   </article>
+
+// =============================================================================
+// Smart Spacing Variables (CSS Custom Properties)
+// =============================================================================
+// These variables can be overridden per-project in :root or per-element
+// Defaults use em units to match ACSS behavior
+
+:root {
+  // Base flow spacing (fallback for all elements)
+  // Set this to control general spacing, or leave unset to use element defaults
+  // --flow-spacing: 1em;
+
+  // Heading spacing (space BEFORE headings)
+  --heading-spacing: 1.5em;
+  // Per-heading overrides (null in ACSS, inherits from --heading-spacing)
+  // --h2-spacing: var(--heading-spacing);
+  // --h3-spacing: var(--heading-spacing);
+  // --h4-spacing: var(--heading-spacing);
+  // --h5-spacing: var(--heading-spacing);
+  // --h6-spacing: var(--heading-spacing);
+
+  // Paragraph spacing
+  --paragraph-spacing: 1em;
+
+  // List spacing
+  --list-spacing: 1em;
+  --list-item-spacing: 0.5em;
+  // Optional overrides (null in ACSS)
+  // --list-indent-spacing: var(--flow-spacing);
+  // --nested-list-spacing: var(--list-item-spacing);
+  // --nested-list-indent-spacing: inherit;
+  // --nested-list-item-spacing: var(--list-item-spacing);
+
+  // Figure/media spacing
+  --figure-spacing: 1em;
+  --figcaption-spacing: 0.5em;
+
+  // Blockquote spacing
+  --blockquote-spacing: 1em;
+}
+
+// =============================================================================
+// Smart Spacing Normalize
+// =============================================================================
+// Reset default margins on block elements - spacing is handled by parent
+// ACSS only normalizes: p, h1, h2, h3, h4, h5, h6, ul, ol, li
+
+@mixin smart-spacing-normalize {
+  :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li) {
+    margin-block: 0;
+  }
+}
+
+// Apply normalize to body by default
+body {
+  @include smart-spacing-normalize;
+}
+
+// Utility class for scoped normalization
+.smart-spacing-normalize {
+  @include smart-spacing-normalize;
+}
+
+// =============================================================================
+// Smart Spacing Mixin
+// =============================================================================
+// Follows ACSS pattern exactly: parent controls all vertical rhythm
+
+@mixin smart-spacing {
+  // -------------------------------------------------------------------------
+  // Base Flow Spacing
+  // -------------------------------------------------------------------------
+  // All consecutive elements get flow spacing by default
+  > * + * {
+    margin-block-start: var(--flow-spacing, initial);
+    margin-block-end: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  // Headings
+  // -------------------------------------------------------------------------
+  // Larger space before headings for visual hierarchy
+  > * + :where(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: var(--heading-spacing, var(--flow-spacing, initial));
+    margin-block-end: 0;
+  }
+
+  // Per-heading-level overrides
+  > :where(* + h2) {
+    margin-block-start: var(--h2-spacing, var(--heading-spacing));
+    margin-block-end: 0;
+  }
+  > :where(* + h3) {
+    margin-block-start: var(--h3-spacing, var(--heading-spacing));
+    margin-block-end: 0;
+  }
+  > :where(* + h4) {
+    margin-block-start: var(--h4-spacing, var(--heading-spacing));
+    margin-block-end: 0;
+  }
+  > :where(* + h5) {
+    margin-block-start: var(--h5-spacing, var(--heading-spacing));
+    margin-block-end: 0;
+  }
+  > :where(* + h6) {
+    margin-block-start: var(--h6-spacing, var(--heading-spacing));
+    margin-block-end: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  // Paragraphs
+  // -------------------------------------------------------------------------
+  > * + p {
+    margin-block-start: var(--paragraph-spacing, var(--flow-spacing, initial));
+    margin-block-end: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  // Lists
+  // -------------------------------------------------------------------------
+  > :is(* + ul, * + ol) {
+    margin-block: var(--list-spacing, var(--flow-spacing, initial));
+  }
+
+  > :is(ul, ol) {
+    padding-inline-start: var(--list-indent-spacing, var(--flow-spacing, initial));
+  }
+
+  // List items
+  > ul * + li,
+  > ol * + li {
+    margin-block-start: var(--list-item-spacing, var(--flow-spacing, initial));
+    margin-block-end: 0;
+  }
+
+  // Nested lists
+  > ul ul,
+  > ol ol,
+  > ul ol,
+  > ol ul {
+    margin-block: var(--nested-list-spacing, var(--list-item-spacing, initial));
+    padding-inline-start: var(--nested-list-indent-spacing, initial);
+  }
+
+  // Nested list items
+  > :is(ul, ol) :is(ul, ol) li {
+    margin-block-start: var(--nested-list-item-spacing, var(--list-item-spacing, initial));
+  }
+
+  // -------------------------------------------------------------------------
+  // Figures and Pictures
+  // -------------------------------------------------------------------------
+  > * + figure,
+  > * + picture {
+    margin-block: var(--figure-spacing, var(--flow-spacing, initial));
+  }
+
+  figcaption {
+    margin-block: var(--figcaption-spacing, var(--flow-spacing, initial));
+  }
+
+  // -------------------------------------------------------------------------
+  // Blockquotes
+  // -------------------------------------------------------------------------
+  > * + blockquote:where(:not(figure > blockquote)) {
+    margin-block: var(--blockquote-spacing, var(--flow-spacing, initial));
+  }
+
+  > blockquote * + * {
+    margin-block-start: var(--paragraph-spacing, var(--flow-spacing, initial));
+    margin-block-end: 0;
+  }
+}
+
+// =============================================================================
+// Smart Spacing Classes
+// =============================================================================
+// Using doubled specificity like ACSS for consistent override behavior
+
+// Main smart-spacing class (doubled specificity)
+.smart-spacing.smart-spacing {
+  @include smart-spacing;
+}
+
+// Turn off smart spacing (doubled specificity)
+.smart-spacing--off.smart-spacing--off {
+  @include smart-spacing-normalize;
+}

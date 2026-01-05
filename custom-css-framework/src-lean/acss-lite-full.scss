@@ -1,0 +1,25 @@
+// =============================================================================
+// ACSS Lite - Full Framework
+// =============================================================================
+// A lightweight CSS framework inspired by Automatic.css
+// This build includes CORE + PATTERN components
+//
+// Includes:
+// - Everything in acss-lite.scss (core)
+// - Buttons
+// - Cards
+// - Forms
+// - Badges
+
+// Core
+@use 'core/variables';
+@use 'core/reset';
+@use 'core/utilities';
+@use 'systems/content-grid';
+@use 'systems/smart-spacing';
+
+// Patterns (optional components)
+@use 'patterns/buttons';
+@use 'patterns/cards';
+@use 'patterns/forms';
+@use 'patterns/badges';

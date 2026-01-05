@@ -1,0 +1,85 @@
+// =============================================================================
+// ACSS Lite - Theme Customization Example
+// =============================================================================
+// Copy this file to your project and customize the values
+// Include AFTER the main framework CSS
+//
+// Usage:
+//   <link rel="stylesheet" href="acss-lite.min.css">
+//   <link rel="stylesheet" href="my-theme.css">
+//
+// Or import in your own SCSS:
+//   @use 'acss-lite';
+//   @use 'my-theme';
+
+:root {
+  // ---------------------------------------------------------------------------
+  // Brand Colors
+  // ---------------------------------------------------------------------------
+  // Uncomment and customize these to match your brand
+
+  // --primary: #2563eb;
+  // --primary-hover: #1d4ed8;
+  // --primary-light: #dbeafe;
+  // --primary-ultra-light: #eff6ff;
+  // --primary-dark: #1e3a8a;
+
+  // --secondary: #64748b;
+  // --accent: #8b5cf6;
+
+  // ---------------------------------------------------------------------------
+  // Typography
+  // ---------------------------------------------------------------------------
+
+  // Custom font stack
+  // --font-primary: 'Inter', system-ui, sans-serif;
+  // --font-secondary: 'Playfair Display', Georgia, serif;
+
+  // Adjust base text size
+  // --base-font-size: 18px;
+
+  // ---------------------------------------------------------------------------
+  // Layout
+  // ---------------------------------------------------------------------------
+
+  // Content width (reading length)
+  // --content-width: 70ch;
+
+  // Wrapper/container max width
+  // --wrapper-width: 1280px;
+
+  // Page gutter
+  // --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  // ---------------------------------------------------------------------------
+  // Spacing
+  // ---------------------------------------------------------------------------
+
+  // Override specific spacing values
+  // --space-m: 1.5rem;
+  // --space-l: 2.5rem;
+
+  // Contextual gaps
+  // --container-gap: var(--space-2xl);
+  // --content-gap: var(--space-l);
+  // --grid-gap: var(--space-xl);
+
+  // ---------------------------------------------------------------------------
+  // Content Grid
+  // ---------------------------------------------------------------------------
+
+  // Breakout widths
+  // --feature-width: 75px;
+  // --feature-max-width: 150px;
+
+  // ---------------------------------------------------------------------------
+  // Effects
+  // ---------------------------------------------------------------------------
+
+  // Custom border radius
+  // --radius-m: 0.375rem;
+  // --radius-l: 0.75rem;
+
+  // Custom shadows
+  // --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
