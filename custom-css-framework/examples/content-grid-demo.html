@@ -348,14 +348,14 @@
 
         <p>Content-grid gives you precise control over how content breaks out of the standard reading width. Unlike traditional containers, it uses CSS Grid's named lines to create semantic breakout zones.</p>
 
-        <blockquote class="content--feature" style="font-size: var(--text-l); font-style: italic; padding: var(--space-l); background: var(--primary-ultra-light); border-left: 4px solid var(--primary); margin-block: var(--space-l);">
+        <blockquote class="content--feature" style="font-size: var(--text-l); font-style: italic; padding: var(--space-l); background: var(--primary-ultra-light); border-left: 4px solid var(--primary); margin-block: var(--space-l); max-width: 100%; box-sizing: border-box;">
             "The content-grid pattern is one of the most elegant solutions for long-form content with breakout elements."
         </blockquote>
 
         <p>The seven columns provide five distinct content zones: full-bleed, feature-max, feature, content, and their mirrored counterparts on the right side. This creates natural rhythm and visual interest in your layouts.</p>
 
         <!-- Full-width code example -->
-        <pre class="content--full" style="background: var(--base-dark); color: var(--neutral-light); padding: var(--space-l); overflow-x: auto; font-size: var(--text-s);"><code>&lt;section class="content-grid"&gt;
+        <pre class="content--full" style="background: var(--base-dark); color: var(--neutral-light); padding: var(--space-l); overflow-x: auto; font-size: var(--text-s); max-width: 100vw; box-sizing: border-box;"><code>&lt;section class="content-grid"&gt;
     &lt;h1&gt;Default content width&lt;/h1&gt;
     &lt;p&gt;Paragraphs stay readable.&lt;/p&gt;
 

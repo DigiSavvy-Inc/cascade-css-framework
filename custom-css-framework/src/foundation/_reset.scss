@@ -1,4 +1,188 @@
 // =============================================================================
-// Reset
+// Cascade CSS Framework - Reset
 // =============================================================================
-// Placeholder for CSS reset - will be implemented next
+// A sensible modern reset that prevents overflow issues
+// Based on modern-normalize and best practices
+
+// =============================================================================
+// Box Sizing
+// =============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// =============================================================================
+// Root & Body - Overflow Prevention
+// =============================================================================
+
+html {
+  font-size: var(--base-font-size, 16px);
+  line-height: var(--base-line-height, 1.5);
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  // CRITICAL: Prevent horizontal scroll from full-width content
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary, system-ui, -apple-system, sans-serif);
+  font-size: var(--text-m, 1rem);
+  line-height: var(--text-line-height, 1.6);
+  color: var(--text, #1e293b);
+  background-color: var(--bg-color, #ffffff);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // Additional overflow protection
+  overflow-x: hidden;
+}
+
+// =============================================================================
+// Typography
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+  line-height: var(--heading-line-height, 1.2);
+  color: var(--heading, currentColor);
+  // Prevent long headings from causing overflow
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+p {
+  margin: 0;
+  // Prevent long words from causing overflow
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+// =============================================================================
+// Links
+// =============================================================================
+
+a {
+  color: var(--link, var(--primary, #2563eb));
+  text-decoration: none;
+}
+
+// =============================================================================
+// Lists
+// =============================================================================
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+// =============================================================================
+// Media - Prevent Overflow
+// =============================================================================
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// =============================================================================
+// Code & Pre - Prevent Overflow
+// =============================================================================
+
+code, kbd, samp {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.875em;
+  // Prevent inline code from causing overflow
+  word-break: break-word;
+}
+
+pre {
+  margin: 0;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.875em;
+  // CRITICAL: Allow horizontal scroll for code blocks
+  overflow-x: auto;
+  max-width: 100%;
+  // Prevent code from overflowing container
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+// Pre inside code blocks should not wrap
+pre code {
+  word-break: normal;
+  white-space: pre;
+}
+
+// =============================================================================
+// Tables - Prevent Overflow
+// =============================================================================
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  // Allow tables to scroll horizontally
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+// =============================================================================
+// Forms
+// =============================================================================
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  margin: 0;
+  // Prevent inputs from overflowing
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+// =============================================================================
+// Misc
+// =============================================================================
+
+hr {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+// =============================================================================
+// Reduced Motion
+// =============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

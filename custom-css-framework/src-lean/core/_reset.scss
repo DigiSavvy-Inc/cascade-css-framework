@@ -36,6 +36,8 @@ body {
   background-color: var(--background, #ffffff);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // Additional overflow protection for mobile
+  overflow-x: hidden;
 }
 
 // =============================================================================

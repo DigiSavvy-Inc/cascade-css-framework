@@ -131,3 +131,42 @@ $content-feature-max: 100px !default;
     padding-inline: 0;
   }
 }
+
+// =============================================================================
+// Mobile Responsive - Collapse Feature Columns
+// =============================================================================
+// On small screens, collapse feature columns to prevent overflow
+
+@media (max-width: 768px) {
+  // Feature-max collapses to feature on tablet
+  .content--feature-max {
+    grid-column: feature;
+  }
+}
+
+@media (max-width: 600px) {
+  .content-grid {
+    // Collapse feature columns on mobile
+    grid-template-columns:
+      [full-start]
+        var(--full)
+      [feature-max-start feature-start content-start]
+        min(var(--content-width), 100% - var(--gutter) * 2)
+      [content-end feature-end feature-max-end]
+        var(--full)
+      [full-end];
+  }
+
+  // Feature breakouts collapse to content width on mobile
+  .content--feature,
+  .content--feature-max {
+    grid-column: content;
+  }
+}
+
+// Extra small screens - tighter gutter
+@media (max-width: 375px) {
+  .content-grid {
+    --gutter: 1rem;
+  }
+}

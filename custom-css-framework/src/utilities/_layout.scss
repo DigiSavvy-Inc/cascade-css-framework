@@ -536,3 +536,62 @@ $grid-patterns: (
     }
   }
 }
+
+// =============================================================================
+// Mobile Responsive - Overflow Prevention
+// =============================================================================
+// Automatic stacking of grids on small screens to prevent horizontal overflow
+
+@media (max-width: 768px) {
+  // Stack 3+ column grids on tablet
+  .grid--3,
+  .grid--4,
+  .grid--5,
+  .grid--6 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  // Unbalanced grids stack on tablet
+  .grid--1-3,
+  .grid--3-1,
+  .grid--1-1-2,
+  .grid--2-1-1,
+  .grid--1-2-1 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  // Stack all multi-column grids on mobile
+  .grid--2,
+  .grid--3,
+  .grid--4,
+  .grid--5,
+  .grid--6,
+  .grid--1-2,
+  .grid--2-1,
+  .grid--1-3,
+  .grid--3-1,
+  .grid--2-3,
+  .grid--3-2,
+  .grid--1-1-2,
+  .grid--2-1-1,
+  .grid--1-2-1 {
+    grid-template-columns: 1fr !important;
+  }
+
+  // Flex wrapping on mobile
+  .flex--row {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 375px) {
+  // Reduce gaps on very small screens
+  .gap--l,
+  .gap--xl,
+  [class*="gap--l"],
+  [class*="gap--xl"] {
+    gap: var(--space-m) !important;
+  }
+}

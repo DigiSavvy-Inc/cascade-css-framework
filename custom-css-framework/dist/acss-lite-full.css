@@ -156,6 +156,7 @@ body {
   background-color: var(--background, #ffffff);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1379,6 +1380,43 @@ sup {
   max-width: var(--content-width);
 }
 
+@media (max-width: 768px) {
+  .grid--3,
+  .grid--4,
+  .grid--5,
+  .grid--6 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .grid--1-3,
+  .grid--3-1 {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  .grid--2,
+  .grid--3,
+  .grid--4,
+  .grid--5,
+  .grid--6,
+  .grid--1-2,
+  .grid--2-1,
+  .grid--1-3,
+  .grid--3-1 {
+    grid-template-columns: 1fr !important;
+  }
+  .flex-row {
+    flex-wrap: wrap !important;
+  }
+}
+@media (max-width: 375px) {
+  .gap--l,
+  .gap--xl {
+    gap: var(--space-m) !important;
+  }
+  [class*=section-space] {
+    padding-block: var(--section-space-s) !important;
+  }
+}
 .content-grid {
   --full: minmax(var(--gutter), 1fr);
   padding-inline: 0;
@@ -1431,6 +1469,25 @@ sup {
   padding-inline: 0;
 }
 
+@media (max-width: 768px) {
+  .content--feature-max {
+    grid-column: feature;
+  }
+}
+@media (max-width: 600px) {
+  .content-grid {
+    grid-template-columns: [full-start] var(--full) [feature-max-start feature-start content-start] min(var(--content-width), 100% - var(--gutter) * 2) [content-end feature-end feature-max-end] var(--full) [full-end];
+  }
+  .content--feature,
+  .content--feature-max {
+    grid-column: content;
+  }
+}
+@media (max-width: 375px) {
+  .content-grid {
+    --gutter: 1rem;
+  }
+}
 body :where(p, h1, h2, h3, h4, h5, h6, ul, ol, li) {
   margin-block: 0;
 }
