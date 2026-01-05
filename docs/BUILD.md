@@ -12,7 +12,7 @@ This guide explains how to build, watch, and develop the Cascade CSS framework f
 1. Clone the repository:
 ```bash
 git clone git@github.com:DigiSavvy-Inc/cascade-css.git
-cd cascade-css/custom-css-framework
+cd cascade-css/cascade-css-framework
 ```
 
 2. Install dependencies:

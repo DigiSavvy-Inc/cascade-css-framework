@@ -4,7 +4,7 @@ A lightweight, variable-driven CSS framework focused on consistency, mathematica
 
 ## What's Included
 
-- **custom-css-framework/** - The complete CSS framework source and build files
+- **cascade-css-framework/** - The complete CSS framework source and build files
 - **Examples** - Interactive demos showcasing framework features
 - **Documentation** - Complete setup and usage guides
 
@@ -46,7 +46,7 @@ Or use with page builders:
 npm install cascade-css
 
 # Or download directly
-wget https://github.com/DigiSavvy-Inc/cascade-css/raw/main/custom-css-framework/dist/framework.min.css
+wget https://github.com/DigiSavvy-Inc/cascade-css/raw/main/cascade-css-framework/dist/framework.min.css
 ```
 
 Then include in your HTML:
@@ -59,7 +59,7 @@ Then include in your HTML:
 ```bash
 # Clone the repository
 git clone https://github.com/DigiSavvy-Inc/cascade-css.git
-cd cascade-css/custom-css-framework/
+cd cascade-css/cascade-css-framework/
 
 # Install dependencies
 npm install
@@ -156,10 +156,10 @@ Override variables in your CSS:
 
 ## Documentation
 
-- **[Framework Documentation](custom-css-framework/README.md)** - Detailed framework features
+- **[Framework Documentation](cascade-css-framework/README.md)** - Detailed framework features
 - **[Getting Started Guide](docs/GETTING-STARTED.md)** - Usage examples and patterns
 - **[Build Instructions](docs/BUILD.md)** - Development setup
-- **[Interactive Examples](custom-css-framework/examples/style-guide.html)** - Live demos
+- **[Interactive Examples](cascade-css-framework/examples/style-guide.html)** - Live demos
 
 ## Common Use Cases
 
