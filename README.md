@@ -2,8 +2,6 @@
 
 A lightweight, variable-driven CSS framework focused on consistency, mathematical precision, and contextual design patterns.
 
-> **Important Notice**: This is an independent CSS framework that is NOT affiliated with, endorsed by, or officially related to Automatic.css. While inspired by systematic CSS design concepts, Cascade CSS is a separate implementation with its own architecture and may contain differences, limitations, or bugs not present in other frameworks. This project is developed and maintained independently.
-
 ## What's Included
 
 - **custom-css-framework/** - The complete CSS framework source and build files
@@ -188,7 +186,7 @@ import 'cascade-css/src/main.scss';
 
 ## Inspiration & Philosophy
 
-Cascade CSS is an independent CSS framework inspired by systematic CSS design concepts and modern CSS architecture principles. This project is not affiliated with any other CSS framework or organization.
+Cascade CSS is an independent CSS framework inspired by and heavily borrows systematic CSS design concepts and modern CSS architecture principles from popular frameworks such as Tailwind and Automatic.css. This project is not affiliated with any other CSS framework or organization.
 
 **Key Design Philosophy:**
 - Consistency over flexibility
@@ -196,11 +194,7 @@ Cascade CSS is an independent CSS framework inspired by systematic CSS design co
 - Mathematical design systems
 - Contextual utility patterns
 
-**Important Clarifications:**
-- This is an independent implementation developed from scratch
-- Not affiliated with, endorsed by, or officially related to Automatic.css
-- May contain differences, limitations, or bugs not present in other frameworks
-- Developed and maintained as a separate open-source project
+> **Important Notice**: This is an independent CSS framework that is NOT affiliated with, endorsed by, or officially related to Automatic.css or the Tailwind project. While inspired by systematic CSS design concepts, Cascade CSS is a separate implementation with its own architecture and may contain differences, limitations, or bugs not present in other frameworks. This project is developed and maintained independently. This project is not affiliated with, endorsed by, or officially related to Automatic.css. May contain differences, limitations, or bugs not present in other frameworks. Developed and maintained as a separate open-source project
 
 ## License
 
