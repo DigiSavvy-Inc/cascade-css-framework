@@ -13,7 +13,6 @@
     "build:cards": "sass src-lean/patterns/_cards.scss dist/modules/cards.css --style=compressed",
     "build:forms": "sass src-lean/patterns/_forms.scss dist/modules/forms.css --style=compressed",
     "build:badges": "sass src-lean/patterns/_badges.scss dist/modules/badges.css --style=compressed",
-    "build:old": "sass src/main.scss dist/framework.css --style=expanded && sass src/main.scss dist/framework.min.css --style=compressed",
     "watch": "sass src-lean/cascade-full.scss dist/cascade-full.css --watch --style=expanded",
     "dev": "npm run watch"
   },
@@ -28,6 +27,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "puppeteer": "^24.34.0",
     "sass": "^1.69.5"
   }
 }
