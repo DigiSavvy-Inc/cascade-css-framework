@@ -1,0 +1,461 @@
+Cascade CSS Framework Guide for LLMs
+
+Table of Contents
+1. Introduction & Core Philosophy
+2. Framework Architecture
+3. Naming Conventions
+4. Variable System
+5. Utility Classes
+6. When to Use Variables vs Utilities
+7. Contextual Utilities
+8. Component Development
+9. Best Practices
+10. Advanced Techniques
+11. SCSS Functions & Mixins
+12. Performance Optimization
+
+---
+
+Introduction & Core Philosophy
+
+Cascade CSS is an independent, lightweight CSS framework focused on consistency, mathematical precision, and contextual design patterns. It emphasizes:
+
+1. Structural Consistency Over Unlimited Flexibility: Intentionally limits customization options to ensure consistency across projects
+2. Complete Framework: Everything you need is included out-of-the-box
+3. Mathematical Precision: All values follow perfect mathematical scales
+4. Contextual Design: Utilities are designed for specific contexts (grid gaps, content gaps, etc.)
+5. Framework Agnostic: Works with any web project, not tied to specific platforms
+
+IMPORTANT: Cascade CSS is an independent implementation. It is NOT affiliated with, endorsed by, or officially related to Automatic.css or any other CSS framework. This is a separate project with its own architecture and may contain differences, limitations, or bugs.
+
+Key Principles
+
+- Consistency is King: Same utility names, same relationships, same logic across all projects
+- T-Shirt Sizing: Limited options (xs, s, m, l, xl, xxl) encourage consistency
+- Responsive by Default: Built-in responsive behavior without complex media queries
+- Low Specificity: Framework styles can be easily overridden
+- Best Practices by Default: Accessibility, performance, and maintainability built-in
+
+---
+
+Framework Architecture
+
+Cascade CSS is organized into several core systems:
+
+1. Color System: Comprehensive color palette with automatic variations
+2. Typography System: Mathematical type scale with responsive sizing
+3. Spacing System: Golden ratio-based spacing with contextual utilities
+4. Layout System: Grid, flexbox, and container utilities
+5. Component System: Pre-styled components with customization via variables
+6. Effects System: Shadows, borders, transitions, etc.
+
+---
+
+Naming Conventions
+
+Cascade CSS uses consistent, predictable naming patterns:
+
+Variables
+```css
+/* Colors */
+--primary           /* Base color */
+--primary-hover     /* Hover state */
+--primary-light     /* Light variation */
+--primary-dark      /* Dark variation */
+
+/* Typography */
+--h1, --h2, --h3    /* Heading sizes */
+--text-s, --text-m  /* Text sizes */
+
+/* Spacing */
+--space-s           /* Component spacing */
+--section-space-m   /* Section spacing */
+
+/* Layout */
+--grid-3            /* 3-column grid */
+--content-width     /* Max content width */
+```
+
+Utility Classes
+```css
+/* Double dash syntax */
+.text--xl           /* Text size XL */
+.text--primary      /* Primary color text */
+.text--center       /* Center alignment */
+
+/* Spacing utilities */
+.padding--m         /* Medium padding */
+.margin--l          /* Large margin */
+.gap--s            /* Small gap */
+
+/* Grid utilities */
+.grid--3           /* 3-column grid */
+.grid--auto-3      /* Auto-responsive 3-column */
+```
+
+---
+
+Variable System
+
+Color Variables
+
+Cascade CSS generates comprehensive color variations automatically:
+
+```css
+/* For each color (primary, secondary, accent, etc.) */
+--{color}                    /* Base color */
+--{color}-hover              /* Hover state (+10% darkness) */
+--{color}-light              /* Light variation */
+--{color}-dark               /* Dark variation */
+--{color}-ultra-light        /* Very light variation */
+--{color}-ultra-dark         /* Very dark variation */
+
+/* Transparency variants */
+--{color}-trans-10           /* 10% opacity */
+--{color}-trans-20           /* 20% opacity */
+--{color}-trans-30           /* 30% opacity */
+```
+
+Typography Variables
+
+```css
+/* Heading scale */
+--h1, --h2, --h3, --h4, --h5, --h6
+
+/* Text sizes (T-shirt sizing) */
+--text-xs, --text-s, --text-m, --text-l, --text-xl, --text-xxl
+
+/* Line heights */
+--text-line-height           /* Body text (1.6) */
+--heading-line-height        /* Headings (1.2) */
+
+/* Font weights */
+--font-weight-normal         /* 400 */
+--font-weight-medium         /* 500 */
+--font-weight-semibold       /* 600 */
+--font-weight-bold           /* 700 */
+```
+
+Spacing Variables
+
+Cascade CSS uses a golden ratio (1.618) based spacing scale:
+
+```css
+/* Component spacing */
+--space-xs    /* 0.5rem */
+--space-s     /* 0.75rem */
+--space-m     /* 1rem */
+--space-l     /* 1.5rem */
+--space-xl    /* 2.25rem */
+--space-xxl   /* 3.5rem */
+
+/* Section spacing (4x component spacing) */
+--section-space-xs, --section-space-s, etc.
+
+/* Contextual gaps */
+--content-gap-m     /* Gap between content elements */
+--grid-gap-m        /* Gap between grid items */
+--container-gap-m   /* Gap between major containers */
+```
+
+Layout Variables
+
+```css
+--content-width          /* Max content width (1200px default) */
+--gutter                 /* Container gutter (2.4rem default) */
+
+/* Grid templates */
+--grid-2, --grid-3, --grid-4  /* Column counts */
+```
+
+---
+
+Utility Classes
+
+Color Utilities
+
+```css
+/* Text colors */
+.text--primary
+.text--secondary
+.text--base          /* Default text color */
+.text--base-light    /* Lighter text */
+
+/* Background colors */
+.bg--primary
+.bg--white
+.bg--neutral-ultra-light
+```
+
+Typography Utilities
+
+```css
+/* Sizes */
+.text--xs, .text--s, .text--m, .text--l, .text--xl, .text--xxl
+
+/* Headings */
+.text--h1, .text--h2, .text--h3, .text--h4, .text--h5, .text--h6
+
+/* Alignment */
+.text--left, .text--center, .text--right
+
+/* Weight */
+.text--normal, .text--medium, .text--semibold, .text--bold
+
+/* Transform */
+.text--uppercase, .text--lowercase, .text--capitalize
+```
+
+Spacing Utilities
+
+```css
+/* Padding */
+.padding--{xs|s|m|l|xl|xxl}
+.padding-top--m
+.padding-right--l
+.padding-bottom--s
+.padding-left--xs
+
+/* Margin */
+.margin--{xs|s|m|l|xl|xxl}
+.margin-top--m
+.margin-bottom--l
+```
+
+Layout Utilities
+
+```css
+/* Grid */
+.grid--2              /* 2 equal columns */
+.grid--3              /* 3 equal columns */
+.grid--auto-3         /* Auto-responsive 3 columns */
+.grid--2-1            /* Unbalanced: 2fr 1fr */
+
+/* Flexbox */
+.flex
+.flex--col            /* Flex direction column */
+.flex--justify-center
+.flex--items-center
+.flex--wrap
+
+/* Container */
+.container            /* Max-width container with gutters */
+```
+
+---
+
+When to Use Variables vs Utilities
+
+Use CSS Variables When:
+- Creating custom components
+- Need dynamic values
+- Building reusable patterns
+- Want calc() operations
+
+```css
+.custom-hero {
+  padding-block: var(--section-space-xl);
+  background: var(--primary-ultra-light);
+  color: var(--primary-dark);
+}
+```
+
+Use Utility Classes When:
+- Rapid prototyping
+- One-off adjustments
+- Simple layouts
+- Consistent spacing
+
+```html
+<section class="padding--xl bg--primary-light">
+  <h1 class="text--h1 text--primary margin-bottom--l">Title</h1>
+</section>
+```
+
+---
+
+Contextual Utilities
+
+Cascade CSS provides context-specific utilities:
+
+Content Gaps
+For spacing between content elements (paragraphs, headings, lists):
+```css
+--content-gap-m
+.content-gap--m
+```
+
+Grid Gaps
+For spacing between grid items (1.5x component spacing):
+```css
+--grid-gap-m
+.gap--m
+```
+
+Container Gaps
+For spacing between major sections (2.5x component spacing):
+```css
+--container-gap-m
+.container-gap--m
+```
+
+---
+
+Component Development
+
+Button Example
+
+```html
+<button class="btn btn--primary">Click Me</button>
+<button class="btn btn--secondary btn--outline">Outline</button>
+```
+
+Card Example
+
+```html
+<div class="card padding--l radius--m shadow--m">
+  <h3 class="text--h4 margin-bottom--s">Card Title</h3>
+  <p class="text--m text--base-light">Card content here</p>
+</div>
+```
+
+Alert Example
+
+```html
+<div class="alert alert--success">
+  <strong class="alert__title">Success!</strong>
+  <p class="alert__content">Operation completed successfully.</p>
+</div>
+```
+
+---
+
+Best Practices
+
+1. Use T-Shirt Sizing Consistently
+   - Stick to the 6 sizes (xs, s, m, l, xl, xxl)
+   - Don't create custom sizes
+
+2. Leverage Contextual Utilities
+   - Use grid-gap for grids
+   - Use content-gap for content
+   - Use container-gap for sections
+
+3. Combine Variables and Utilities
+   - Use utilities for structure
+   - Use variables for theming
+
+4. Follow the Double-Dash Convention
+   - All utilities use `--` separator
+   - Consistent with framework naming
+
+5. Avoid Over-Customization
+   - Framework consistency > flexibility
+   - Custom values should be rare
+
+---
+
+Advanced Techniques
+
+Fluid Spacing
+
+Use fluid variables for responsive spacing without media queries:
+```css
+.section {
+  padding-block: var(--section-space-l-fluid);
+}
+```
+
+Color Transparency
+
+Leverage transparency variants for overlays:
+```css
+.overlay {
+  background: var(--primary-trans-80);
+}
+```
+
+Grid Combinations
+
+Mix fixed and auto columns:
+```css
+<div class="grid--2-1 gap--l">
+  <main>Main content (2fr)</main>
+  <aside>Sidebar (1fr)</aside>
+</div>
+```
+
+Negative Spacing
+
+Use negative spacing for overlapping elements:
+```css
+.overlap {
+  margin-top: var(--space-l-negative);
+}
+```
+
+---
+
+SCSS Functions & Mixins
+
+Core Functions
+
+```scss
+// Convert pixels to rem
+rem(24)  // Returns 1.5rem
+
+// Fluid sizing
+fluid(16px, 24px)  // Fluid between min and max
+
+// Color variations
+color-variation($color, 'light')
+```
+
+Configuration
+
+Override defaults before importing:
+```scss
+$framework-config: (
+  'colors': (
+    'primary': #e74c3c,
+    'secondary': #3498db,
+  ),
+  'content-width': 1200px,
+  'type-scale': 1.25,
+);
+
+@import 'cascade-css/src/main';
+```
+
+---
+
+Performance Optimization
+
+1. Use Minified Version
+   - `framework.min.css` for production
+   - `framework.css` for development
+
+2. Consider Subset Loading
+   - `framework-vars.css` - Variables only
+   - `framework-utilities.css` - Utilities only
+
+3. Leverage CSS Custom Properties
+   - Browser-native, fast
+   - No JavaScript required
+
+4. Minimize Custom Overrides
+   - Work with the framework
+   - Reduces CSS bloat
+
+---
+
+Framework Independence Notice
+
+Cascade CSS is an independent CSS framework developed and maintained separately from any other project. While inspired by systematic CSS design concepts and modern architecture principles:
+
+- NOT affiliated with, endorsed by, or officially related to any other CSS framework
+- Independent implementation with its own architecture
+- May contain differences, limitations, or bugs
+- Developed and maintained as a separate open-source project
+
+For questions, issues, or contributions, visit the Cascade CSS repository.

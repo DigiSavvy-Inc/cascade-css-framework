@@ -1,8 +1,8 @@
-# Custom ACSS Framework Lite
+# Cascade CSS Framework
 
-A lightweight, variable-driven CSS framework inspired by [Automatic.css](https://automaticcss.com) philosophy, focusing on consistency, mathematical precision, and contextual design patterns.
+A lightweight, variable-driven CSS framework focused on consistency, mathematical precision, and contextual design patterns.
 
-> **Inspiration & Attribution**: This framework is built upon the foundational principles and architectural concepts pioneered by [Kevin Geary](https://geary.co/) and the [Automatic.css team](https://automaticcss.com/). Their tedious attention-detailed approach to systematic CSS architecture, T-shirt sizing methodology, and mathematical design principles serves as the inspiration for this implementation.
+> **Important Notice**: This is an independent CSS framework that is NOT affiliated with, endorsed by, or officially related to Automatic.css. While inspired by systematic CSS design concepts, Cascade CSS is a separate implementation with its own architecture and may contain differences, limitations, or bugs not present in other frameworks. This project is developed and maintained independently.
 
 ## Core Principles
 
@@ -25,15 +25,15 @@ A lightweight, variable-driven CSS framework inspired by [Automatic.css](https:/
 
 ```php
 // In your theme's functions.php
-function enqueue_custom_acss_framework_lite() {
+function enqueue_cascade_css() {
     wp_enqueue_style(
-        'custom-acss-framework-lite',
+        'cascade-css',
         get_template_directory_uri() . '/assets/css/framework.min.css',
         array(),
         '1.0.0'
     );
 }
-add_action('wp_enqueue_scripts', 'enqueue_custom_acss_framework_lite');
+add_action('wp_enqueue_scripts', 'enqueue_cascade_css');
 ```
 
 ### 3. SCSS Customization
@@ -158,31 +158,28 @@ npm run dev
 └── docs/                  # Additional documentation
 ```
 
-## Attribution & Inspiration
+## Design Philosophy
 
-This framework is deeply inspired by and built upon the architectural principles pioneered by:
+Cascade CSS is an independent CSS framework inspired by systematic CSS design concepts and modern CSS architecture principles.
 
-- **[Kevin Geary](https://geary.co)** - Visionary behind systematic CSS architecture
-- **[Automatic.css Team](https://automaticcss.com)** - Revolutionary CSS framework and methodology
-
-Their work in developing:
-- T-shirt sizing methodology
+**Core Design Principles:**
+- T-shirt sizing methodology for consistency
 - Mathematical design systems
 - Variable-first architecture
 - Contextual utility design
 - "Consistency over flexibility" philosophy
 
-...serves as the foundation for this implementation. This project aims to honor their principles while providing a standalone, framework-agnostic solution.
+**Important Clarifications:**
+- This is an independent implementation developed from scratch
+- Not affiliated with, endorsed by, or officially related to Automatic.css
+- May contain differences, limitations, or bugs not present in other frameworks
+- Developed and maintained as a separate open-source project
 
 ## Community & Support
 
 - **Issues**: Report bugs and request features via GitHub Issues
 - **Discussions**: Join community discussions for tips and best practices
 - **Contributing**: See CONTRIBUTING.md for development guidelines
-
-## Acknowledgments
-
-Special thanks to the Automatic.css community for their continued innovation in systematic CSS design and for inspiring developers to think differently about CSS architecture.
 
 ## License
 

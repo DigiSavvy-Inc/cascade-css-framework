@@ -30,7 +30,7 @@
   @return math.div(strip-unit($pixels), $base) * 1rem;
 }
 
-// Alias for rem() to match ACSS
+// Alias for rem() function
 @function ctr($pixels, $base: null) {
   @return rem($pixels, $base);
 }

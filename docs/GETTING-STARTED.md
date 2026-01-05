@@ -1,10 +1,12 @@
 # Getting Started
 
-Welcome to the Custom CSS Framework! This guide will help you understand the core concepts and get up and running quickly.
+Welcome to Cascade CSS! This guide will help you understand the core concepts and get up and running quickly.
+
+> **Important Notice**: This is an independent CSS framework that is NOT affiliated with, endorsed by, or officially related to Automatic.css or any other CSS framework. This is a separate implementation with its own architecture and may contain differences, limitations, or bugs.
 
 ## Philosophy
 
-This framework is inspired by [Automatic.css](https://automaticcss.com) and follows the principle of **"Consistency over Flexibility"**. Instead of infinite options, we provide a carefully curated set of utilities that work harmoniously together.
+Cascade CSS follows the principle of **"Consistency over Flexibility"**. Instead of infinite options, we provide a carefully curated set of utilities that work harmoniously together.
 
 ## Key Concepts
 
