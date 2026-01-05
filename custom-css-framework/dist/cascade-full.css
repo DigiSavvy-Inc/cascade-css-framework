@@ -1451,14 +1451,14 @@ sup {
 
 .content--full-safe {
   grid-column: full;
-  padding-inline: var(--gutter);
+  margin-inline: var(--gutter);
 }
 
 .content-grid:where(.content--full-safe) {
   padding-inline: var(--gutter);
 }
 
-:is(.content--feature, .content--feature-max, .content--full, .content--full-safe):not(.content-grid--off :is(.content--feature, .content--feature-max, .content--full, .content--full-safe)) {
+:is(.content--feature, .content--feature-max, .content--full):not(.content-grid--off :is(.content--feature, .content--feature-max, .content--full)) {
   width: 100% !important;
   max-width: 100%;
 }

@@ -94,10 +94,10 @@ $content-feature-max: 100px !default;
   grid-column: full;
 }
 
-// Full-bleed with safe gutters (padding on edges)
+// Full-width but respects gutters (element stops at gutter, doesn't touch viewport edge)
 .content--full-safe {
   grid-column: full;
-  padding-inline: var(--gutter);
+  margin-inline: var(--gutter);
 }
 
 // When content-grid itself needs full-safe behavior
@@ -109,9 +109,10 @@ $content-feature-max: 100px !default;
 // Breakout Width Enforcement
 // =============================================================================
 // Ensure breakout elements actually fill their grid area
+// Note: .content--full-safe is excluded because it uses margin-inline for gutters
 
-:is(.content--feature, .content--feature-max, .content--full, .content--full-safe):not(
-  .content-grid--off :is(.content--feature, .content--feature-max, .content--full, .content--full-safe)
+:is(.content--feature, .content--feature-max, .content--full):not(
+  .content-grid--off :is(.content--feature, .content--feature-max, .content--full)
 ) {
   width: 100% !important;
   max-width: 100%;
